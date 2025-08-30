@@ -271,7 +271,7 @@
 
 ２．RailsとReactは分けて、別々で実装予定です。（フロント分離型）
 
-３．全体構成：APIサーバー→ Rails（version7）、フロント→ React/Stimulus
+３．全体構成：APIサーバー→ Rails（version7）、フロント→ React/Stimulus/Tailwind CSS（RailsでもReactでも使用できるので、統一感がでる）
 
 <br>
 
