@@ -271,6 +271,8 @@
 - React … 会話画面など動的UIが複雑になる部分（MVP後に段階導入）
 - Stimulus … マイページ、規約、問い合わせ、ポップアップなど「軽いUI、アニメーションなど」
 
+<br>
+
 ２．MVP時点 → サーバー：Rails 7 / フロント：基本はRails内でStimulus + Tailwind CSS + CSSを使う（見た目をそろえやすい）  
 - サーバーとフロントは、Railsの中でまとめて作ります。（MVP時点）
 - Reactは、MVP後に少しずつ追加していく予定です。（RailsをAPIとして使って、React側で見た目や動きを担当させる）
