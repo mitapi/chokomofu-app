@@ -1,0 +1,25 @@
+services:
+  web:                
+    user: "${UID}:${GID}" 
+    build: .
+    command: bash -lc "bin/dev" 
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    tty: true
+    stdin_open: true
+    environment:
+      RAILS_ENV: development
+      NODE_ENV: development
+      HOME: /app
+      YARN_CACHE_FOLDER: /app/.yarn-cache
+      BUNDLE_PATH: /app/vendor/bundle
+      BUNDLE_BIN: /app/bin
+      BUNDLE_APP_CONFIG: /app/.bundle
+      BUNDLE_CONFIG: /app/.bundle/config
+      PATH: "/usr/local/bundle/bin:/app/bin:${PATH}"
+
+volumes:
+  node_modules: {}
