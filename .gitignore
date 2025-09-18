@@ -18,3 +18,8 @@
 .npm/
 npm-debug.log*
 yarn-error.log*
+/db/*.sqlite3
+/db/*.sqlite3-*
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
