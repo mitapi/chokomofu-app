@@ -1,0 +1,17 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@10.8.2
+2 info using node@v18.20.8
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/app/.npmrc
+5 silly config load:file:/usr/etc/npmrc
+6 verbose title npm pkg set scripts.build=esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets
+7 verbose argv "pkg" "set" "scripts.build=esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+8 verbose logfile logs-max:10 dir:/app/.npm/_logs/2025-09-18T13_53_21_048Z-
+9 verbose logfile /app/.npm/_logs/2025-09-18T13_53_21_048Z-debug-0.log
+10 silly logfile done cleaning log files
+11 verbose cwd /app
+12 verbose os Linux 5.15.167.4-microsoft-standard-WSL2
+13 verbose node v18.20.8
+14 verbose npm  v10.8.2
+15 verbose exit 0
+16 info ok
