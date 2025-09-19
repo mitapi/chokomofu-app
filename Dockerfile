@@ -17,8 +17,12 @@ RUN bundle config set without 'production' \
 COPY package.json yarn.lock ./
 RUN [ -f package.json ] && yarn install --frozen-lockfile || true
 
+RUN gem install foreman -N
+
 COPY . .
 
-RUN gem install foreman -N
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 
 #CMDは書かない（compose の command で bin/dev を実行）
