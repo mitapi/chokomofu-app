@@ -1,5 +1,15 @@
-<div>
-  <h1 class="font-bold text-4xl">Top#index</h1>
-  <p>Find me in app/views/top/index.html.erb</p>
-  <button id="js-test" type="button" style="position:fixed;right:16px;bottom:16px;">JSテスト</button>
+<div class="min-h-screen">
+  <section class="relative flex flex-col justify-center items-center pt-[30px] h-[300px] w-auto ">
+    <%= image_tag "top-logo.png", alt: "ちょこっと♪ もふたいむ トップ背景", class: "w-[450px]" %>
+  </section>
+
+  <section class="absolute justify-center items-center p-[10px]">
+    <a href="/play" class="btn-primary" aria-label="はじめる（メインページへ）">
+      はじめる
+    </a>
+  </section>
+
+    <div class="absolute bottom-2 right-4 text-white/90 text-sm drop-shadow">
+      © <%= Time.current.year %> もふたいむ
+    </div>
 </div>

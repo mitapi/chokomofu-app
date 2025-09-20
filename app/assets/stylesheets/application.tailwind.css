@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-2 rounded-full
+           bg-blue-600 text-white font-semibold shadow-md
+           focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300
+           active:scale-95 transition-transform;
+  }
+}
