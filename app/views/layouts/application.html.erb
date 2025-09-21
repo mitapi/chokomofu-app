@@ -20,9 +20,10 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="grid min-h-screen place-items-center">
+  <body class="bg-cats grid min-h-screen place-items-center">
     <main class="flex items-center justify-center max-w-[960px]">
       <%= yield %>
     </main>
