@@ -1,5 +1,34 @@
-<div>
-  <h1 class="font-bold text-4xl">Top#index</h1>
-  <p>Find me in app/views/top/index.html.erb</p>
-  <button id="js-test" type="button" style="position:fixed;right:16px;bottom:16px;">JSテスト</button>
+<div class="bg-slate-50 min-h-screen flex flex-col gap-[15px] w-[600px]">
+  <section class="flex justify-center items-center mt-[30px] relative h-[200px] w-auto ">
+    <%= image_tag "top-logo.png", alt: "ちょこっと♪ もふたいむ トップロゴ", class: "w-[450px]" %>
+  </section>
+
+  <section class="flex justify-center items-center relative h-[300px] w-auto ">
+    <%= image_tag "top-pic.png", alt: "ちょこっと♪ もふたいむ トップイラスト", class: "w-[450px]" %>
+  </section>
+
+  <section class="flex justify-center items-center mt-[15px] relative">
+    <a href="/play"
+      aria-label="はじめる（メインページへ）"
+      class="
+        group
+        flex h-10 items-center justify-center
+        rounded-md
+        border border-amber-300 border-[2px]
+        bg-gradient-to-b from-amber-100 via-amber-100 to-amber-100
+        px-4
+        text-amber-700 font-medium
+        hover:bg-gradient-to-b hover:from-amber-200 hover:via-amber-200 hover:to-amber-200
+        active:shadow-inner
+      "
+    >
+      <span class="block group-active:[transform:translate3d(0,1px,0)]">
+        はじめる
+      </span>
+    </a>
+  </section>
+
+    <section class="flex justify-center items-center text-amber/700 text-sm drop-shadow">
+      © <%= Time.current.year %> ChokoMofu Project
+    </div>
 </div>
