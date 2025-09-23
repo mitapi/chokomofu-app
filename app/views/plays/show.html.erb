@@ -1,8 +1,28 @@
-<div class="bg-slate-50 min-h-screen flex flex-col gap-[15px] w-[600px]">
-  <section class="flex justify-center items-center relative w-auto ">
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <div class="flex justify-center items-center relative w-auto ">
     <%= image_tag "play-bg.png", alt: "ちょこっと♪ もふたいむ /play 背景" %>
-  </section>
-
-
+    <div class="absolute flex gap-[5px] -translate-y-[-275px] ">
+      <%= link_to "#",
+                aria: { label: "おしゃべり" } do %>
+        <%= image_tag "button/btn-conv.png", alt: "おしゃべりボタン", class: "w-[100px]" %>
+      <% end %>
+      <%= link_to "#",
+                aria: { label: "おやつ" } do %>
+        <%= image_tag "button/btn-snack.png", alt: "おやつボタン", class: "w-[100px]" %>
+      <% end %>
+      <%= link_to "#",
+                aria: { label: "おもちゃ" } do %>
+        <%= image_tag "button/btn-toy.png", alt: "おもちゃボタン", class: "w-[100px]" %>
+      <% end %>
+      <%= link_to "#",
+                aria: { label: "好感度" } do %>
+        <%= image_tag "button/btn-affinity.png", alt: "好感度ボタン", class: "w-[100px]" %>
+      <% end %>
+      <%= link_to "#",
+                aria: { label: "マイページ" } do %>
+        <%= image_tag "button/btn-mypage.png", alt: "マイページボタン", class: "w-[100px]" %>
+      <% end %>
+    </div>
+  </div>
 
 </div>
