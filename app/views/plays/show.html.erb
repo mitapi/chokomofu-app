@@ -1,7 +1,14 @@
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
-  <div class="flex justify-center items-center relative w-auto ">
+  <div class="flex justify-center items-center relative w-auto z-0">
     <%= image_tag "play-bg.png", alt: "ちょこっと♪ もふたいむ /play 背景" %>
-    <div class="absolute flex gap-[5px] -translate-y-[-275px] ">
+
+    <section class="absolute flex h-[290px] inset-x-0 justify-center items-center pointer-events-none translate-y-[60px] z-10">
+      <div id="character" class="absolute flex translate-x-0 will-change-transform">
+        <%= image_tag "character/pomechi/idle.png", alt: "キャラクター /ぽめちー /基本立ち絵", class: "w-[250px]" %>
+      </div>
+    </section>
+
+    <section class="absolute flex gap-[5px] inset-x-0 justify-center mt-[20px] translate-y-[255px] z-20">
       <%= link_to "#",
                 aria: { label: "おしゃべり" } do %>
         <%= image_tag "button/btn-conv.png", alt: "おしゃべりボタン", class: "w-[100px]" %>
@@ -22,7 +29,7 @@
                 aria: { label: "マイページ" } do %>
         <%= image_tag "button/btn-mypage.png", alt: "マイページボタン", class: "w-[100px]" %>
       <% end %>
-    </div>
+    </section>
   </div>
 
 </div>

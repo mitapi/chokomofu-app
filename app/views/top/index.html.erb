@@ -1,5 +1,5 @@
 <div class="bg-slate-50 min-h-screen flex flex-col gap-[15px] w-[600px]">
-  <section class="flex justify-center items-center mt-[30px] relative h-[200px] w-auto ">
+  <section class="flex justify-center items-center mt-[40px] relative h-[200px] w-auto ">
     <%= image_tag "top-logo.png", alt: "ちょこっと♪ もふたいむ トップロゴ", class: "w-[450px]" %>
   </section>
 
@@ -25,7 +25,9 @@
     <% end %>
   </section>
 
-    <section class="flex justify-center items-center text-amber/700 text-sm drop-shadow">
-      © <%= Time.current.year %> ChokoMofu Project
-    </div>
+  <section class="flex justify-center items-center text-amber/700 text-sm">
+    © <%= Time.current.year %> ChokoMofu Project
+  </section>
+
+  <section aria-hidden="true" class="h-[56px]"></section>
 </div>
