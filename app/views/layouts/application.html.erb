@@ -24,8 +24,9 @@
   </head>
 
   <body class="bg-cats grid min-h-screen place-items-center">
-    <main class="flex items-center justify-center max-w-[960px]">
+    <main class="flex flex-col items-center justify-center max-w-[960px]">
       <%= yield %>
+      <%= render('shared/footer') unless controller_path == 'top' && action_name == 'index' %>
     </main>
   </body>
 </html>
