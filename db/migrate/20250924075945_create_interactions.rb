@@ -9,6 +9,6 @@ class CreateInteractions < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :user_characters, [:user_id, :kind, :happened_at]
+    add_index :interactions, [:user_id, :kind, :happened_at]
   end
 end
