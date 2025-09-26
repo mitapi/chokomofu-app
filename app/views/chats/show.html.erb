@@ -1,4 +1,16 @@
-<div class="mx-auto max-w-xl p-6">
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <div class="flex justify-center items-center relative w-auto z-0">
+    <% dir  = character_dir_for(@character) %>
+    <% expr = expression_for(@conv, character_dir: dir) %>
+
+    <%= image_tag(
+        expression_image_path(character_dir: dir, expression: expr),
+        alt: @character.name,
+        class: "w-[260px] h-[260px] md:w-[320px] md:h-[320px] object-contain drop-shadow-xl select-none",
+        draggable: false
+        ) %>
+  </div>
+
   <p class="mb-6 text-lg"><%= @conv.text %></p>
 
   <% if @choices.any? %>

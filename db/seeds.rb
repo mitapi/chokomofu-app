@@ -1,7 +1,7 @@
 ActiveRecord::Base.transaction do
   pomemaru = Character.find_or_create_by!(name: "ぽめまる")
 
-  greet = Conversation.find_or_initialize_by(code: "conv.greet.morning.default")
+  greet = Conversation.find_or_initialize_by(code: "conv.greet.morning.breakfast")
   greet.update!(
     character_id: pomemaru.id,
     kind: 0,          # talk
