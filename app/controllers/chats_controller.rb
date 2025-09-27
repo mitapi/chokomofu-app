@@ -12,6 +12,7 @@ class ChatsController < ApplicationController
       @conv = Conversation.find_by(id: params[:conversation_id]) || @conv
     end
 
+    @character = Character.find(@conv.character_id)
     @choices = ConversationChoice.where(conversation_id: @conv.id).order(:position)
   end
 end

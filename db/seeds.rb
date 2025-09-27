@@ -1,7 +1,7 @@
 ActiveRecord::Base.transaction do
   pomemaru = Character.find_or_create_by!(name: "ぽめまる")
 
-  greet = Conversation.find_or_initialize_by(code: "conv.greet.morning.default")
+  greet = Conversation.find_or_initialize_by(code: "conv.greet.morning.breakfast")
   greet.update!(
     character_id: pomemaru.id,
     kind: 0,          # talk
@@ -17,14 +17,20 @@ ActiveRecord::Base.transaction do
   branch_a.update!(
     character_id: pomemaru.id,
     kind: 0, time_slot: 0, weather_slot: 0, min_affinity: 0, weight: 1,
-    text: "一日のはじまりは朝ゴハンでしゅよね。ぽめも、カリカリを食べまちた！"
+    text: <<~TEXT
+      一日のはじまりは朝ゴハンでしゅよね。
+      ぽめも、カリカリを食べまちた！
+    TEXT
   )
 
   branch_b = Conversation.find_or_initialize_by(code: "conv.greet.morning.skipped_breakfast")
   branch_b.update!(
     character_id: pomemaru.id,
     kind: 0, time_slot: 0, weather_slot: 0, min_affinity: 0, weight: 1,
-    text: "そうなの！おなかが空かないように、ぽめが兵糧丸を分けてあげるね"
+    text: <<~TEXT
+      そうなの！
+      おなかが空かないように、ぽめが兵糧丸を分けてあげるね
+    TEXT
   )
 
   #ユーザー選択肢
