@@ -5,7 +5,7 @@ ActiveRecord::Base.transaction do
   greet.update!(
     character_id: pomemaru.id,
     kind: 0,          # talk
-    time_slot: 0,     # morning
+    time_slot: Conversation.time_slot[:morning],
     weather_slot: 0,  # any
     min_affinity: 0,
     weight: 1,
