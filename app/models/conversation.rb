@@ -1,4 +1,7 @@
 class Conversation < ApplicationRecord
+  belongs_to :character
+  has_many :conversation_choices
+
   enum time_slot: {
     morning:    0,
     noon:       1,

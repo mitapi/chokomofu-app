@@ -2,10 +2,11 @@ class ChatsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_empty
 
   def show
-    @time_slot = resolve_time_slot(params[:time_slot])
-    @conversation = Conversation.for_slot(slot).first
-    
-    default_conv = Conversation.find_by!(code: "conv.greet.morning.breakfast")
+    slot = resolve_time_slot(params[:time_slot]).to_sym
+    @time_slot = slot
+
+    # seed に合わせたフォールバック
+    fallback = Conversation.find_by!(code: "conv.greet.morning.breakfast")
 
     if params[:conversation_id].to_s.match?(/\A\d+\z/)
       @conv = Conversation.find_by!(id: params[:conversation_id])
