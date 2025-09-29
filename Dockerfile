@@ -12,7 +12,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle config set without 'development test'
-&& bundle install
+RUN bundle install
 
 COPY package.json yarn.lock ./
 RUN [ -f package.json ] && yarn install --frozen-lockfile || true
