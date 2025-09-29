@@ -11,7 +11,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle config set without 'production' \
+RUN bundle config set without 'development test'
 && bundle install
 
 COPY package.json yarn.lock ./
