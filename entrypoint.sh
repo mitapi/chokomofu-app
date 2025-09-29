@@ -1,19 +1,28 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 # Rails が残しがちな PID を掃除（再起動時に大事）
 mkdir -p tmp/pids log
 rm -f tmp/pids/server.pid
 
-# （必要になったら前処理をここに足せる）
-exec "$@"
+# production をデフォルトに
+export RAILS_ENV="${RAILS_ENV:-production}"
 
-# DB migrate & seed
-bundle exec rails db:migrate
-bundle exec rails db:seed
+echo "[boot] db:migrate..."
+bin/rails db:migrate
 
-# ここで本番用アセットをビルド
-bundle exec rails assets:precompile
+# 種データは冪等（find_or_create_by!/update!）と伺っているので毎回でも安全
+echo "[boot] db:seed..."
+bin/rails db:seed
 
-# Puma 起動
-exec bundle exec puma -C config/puma.rb
+echo "[boot] assets:precompile..."
+bin/rails assets:precompile
+
+# 最後にアプリを起動。CMD/引数があればそれを使い、無ければ Puma を起動
+if [ "$#" -gt 0 ]; then
+  echo "[boot] exec: $*"
+  exec "$@"
+else
+  echo "[boot] exec: bundle exec puma -C config/puma.rb"
+  exec bundle exec puma -C config/puma.rb
+fi
