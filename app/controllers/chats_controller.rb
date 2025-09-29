@@ -11,7 +11,7 @@ class ChatsController < ApplicationController
     if params[:conversation_id].to_s.match?(/\A\d+\z/)
       @conv = Conversation.find_by!(id: params[:conversation_id])
     else
-      @conv = default_conv
+      @conv = fallback
     end
 
     @character = Character.find(@conv.character_id)
