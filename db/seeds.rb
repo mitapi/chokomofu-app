@@ -5,7 +5,7 @@ ActiveRecord::Base.transaction do
   greet.update!(
     character_id: pomemaru.id,
     kind: 0,          # talk
-    time_slot: Conversation.time_slot[:morning],
+    time_slot: :morning,
     weather_slot: 0,  # any
     min_affinity: 0,
     weight: 1,
@@ -16,7 +16,7 @@ ActiveRecord::Base.transaction do
   branch_a = Conversation.find_or_initialize_by(code: "conv.greet.morning.ate_breakfast")
   branch_a.update!(
     character_id: pomemaru.id,
-    kind: 0, time_slot: 0, weather_slot: 0, min_affinity: 0, weight: 1,
+    kind: 0, time_slot: :morning, weather_slot: 0, min_affinity: 0, weight: 1,
     text: <<~TEXT
       一日のはじまりは朝ゴハンでしゅよね。
       ぽめも、カリカリを食べまちた！
@@ -26,7 +26,7 @@ ActiveRecord::Base.transaction do
   branch_b = Conversation.find_or_initialize_by(code: "conv.greet.morning.skipped_breakfast")
   branch_b.update!(
     character_id: pomemaru.id,
-    kind: 0, time_slot: 0, weather_slot: 0, min_affinity: 0, weight: 1,
+    kind: 0, time_slot: :morning, weather_slot: 0, min_affinity: 0, weight: 1,
     text: <<~TEXT
       そうなの！
       おなかが空かないように、ぽめが兵糧丸を分けてあげるね
