@@ -9,7 +9,7 @@ ActiveRecord::Base.transaction do
     weather_slot: 0,  # any
     min_affinity: 0,
     weight: 1,
-    text: "おはようでしゅ！朝ゴハンはたべまちたか？"
+    text: "おはよ～、朝ゴハンは食べた？"
   )
 
   #選択肢タップ後、分岐会話
@@ -18,8 +18,8 @@ ActiveRecord::Base.transaction do
     character_id: pomemaru.id,
     kind: 0, time_slot: :any, weather_slot: 0, min_affinity: 0, weight: 1,
     text: <<~TEXT
-      一日のはじまりは朝ゴハンでしゅよね。
-      ぽめも、カリカリを食べまちた！
+      一日のはじまりは朝ゴハンだよね。
+      ぽめもね、カリカリを食べたんだよ！
     TEXT
   )
 
@@ -29,7 +29,7 @@ ActiveRecord::Base.transaction do
     kind: 0, time_slot: :any, weather_slot: 0, min_affinity: 0, weight: 1,
     text: <<~TEXT
       そうなの！
-      おなかが空かないように、ぽめが兵糧丸を分けてあげるね
+      おなかが空かないように、ぽめが兵糧丸を分けてあげるからね！
     TEXT
   )
 
