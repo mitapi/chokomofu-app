@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   # 1日1回、ログインごとにスライド延長しましたというコメントを残す
   def refresh_cookie_once_per_day(uid)
     today = Time.zone.today.iso8601
-    if cookies[COOKIE_REFRESH_MARKER]! = today
+    if cookies[COOKIE_REFRESH_MARKER]!= today
       write_signed_uid(uid)
       cookies[COOKIE_REFRESH_MARKER] = {
         value: today,
