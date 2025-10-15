@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   def ensure_current_user
     uid = read_signed_uid
+    Rails.logger.debug(event: "whoami_current_uid", uid: uid) if Rails.env.development?
+
     if !uuid_valid?(uid)
       uid = SecureRandom.uuid
       Rails.logger.info(event: "cookie_missing_or_invalid", action: "issued_new_uid", path: request.path, request_id: request.request_id)
