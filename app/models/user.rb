@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   validates :guest_uid, uniqueness: true, presence: true
-  validates :nickname,
-            presence: true,
-            length: { maximum: 30 },
-            unless: :guest?
+  # validates :nickname,
+            # presence: true,
+            # length: { maximum: 30 },
+            # unless: :guest?
 
   has_many :user_characters
   has_many :interactions

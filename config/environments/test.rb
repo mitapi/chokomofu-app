@@ -50,4 +50,6 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+  # Request spec 用のホスト www.example.com を許可（config.hosts.clearは、全ホストを許可する）
+  config.hosts << "www.example.com"
 end
