@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
     Rails.logger.warn(event: "ensure_current_user_rescued", error: e.class.name, path: request.path, request_id: request.request_id)
   end
 
+  def current_user
+    @current_user
+  end
+
   # 値が空でなく、UUIDの正規表現にマッチするかを返す
   def uuid_valid?(uid)
     uid.present? && uid.match?(UUID_REGEX)
