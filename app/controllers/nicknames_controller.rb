@@ -5,9 +5,9 @@ class NicknamesController < ApplicationController
 
   def update
     @user = current_user
-    @name = nickname_params[:nickname]
+    @name = user_params[:nickname]
 
-    if name.blank?
+    if @name.blank?
       @user.errors.add(:nickname, "ニックネームを入力してください")
       return render :edit, status: :unprocessable_entity
     end
