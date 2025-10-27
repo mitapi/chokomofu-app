@@ -1,11 +1,9 @@
-<div class="bg-slate-50 min-h-screen flex flex-col gap-[15px] w-[600px]">
-  <section class="flex font-bold justify-center items-center mt-[40px] relative text-[30px] text-amber/700 h-[200px] w-auto ">
-    <%= "ニックネームを入力してね" %>
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <section class="bg-[#fcdf97] flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[80px] w-auto ">
+    <%= "ニックネーム登録" %>
   </section>
-
-  <section class="flex justify-center items-center text-amber/700 text-sm">
-    © <%= Time.current.year %> ChokoMofu Project
+  <section class="flex justify-center items-center relative h-[500px] w-auto ">
+    <%= render 'form', user: @user %>
   </section>
-
   <section aria-hidden="true" class="h-[56px]"></section>
 </div>
