@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   get "/nickname", to: "nicknames#edit"
   get "/account", to: "nicknames#edit"
+  get "/terms", to: "static#terms"
+  get "/privacy", to: "static#privacy"
   get "up" => "rails/health#show", as: :rails_health_check
 end
