@@ -1,9 +1,9 @@
 <% if object.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul class="mb-0">
-      <% object.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
+  <div class="flex justify-center items-center 
+              mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+    <% object.errors.each do |error| %>
+      <!-- ※ error.full_message だと「Nickname 〜」と出てしまうので対策 -->
+      <%= error.message %>
+    <% end %>
   </div>
 <% end %>
