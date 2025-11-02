@@ -17,13 +17,25 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+<<<<<<< HEAD
+=======
+    <!-- Zen Maru Gothic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+>>>>>>> nrc_backup
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
   </head>
 
+<<<<<<< HEAD
   <body class="bg-cats grid min-h-screen place-items-center">
+=======
+  <body class="antialiased bg-cats font-sans grid min-h-screen place-items-center">
+>>>>>>> nrc_backup
     <main class="flex flex-col items-center justify-center max-w-[960px]">
       <%= yield %>
       <%= render('shared/footer') unless controller_path == 'top' && action_name == 'index' %>
