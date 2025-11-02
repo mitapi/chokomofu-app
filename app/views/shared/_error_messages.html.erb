@@ -1,9 +1,9 @@
 <% if object.errors.any? %>
   <div class="flex justify-center items-center 
-              mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              text-sm text-red-700">
     <% object.errors.each do |error| %>
       <!-- ※ error.full_message だと「Nickname 〜」と出てしまうので対策 -->
-      <%= error.message %>
+      <%= object.errors[attribute].first %>
     <% end %>
   </div>
 <% end %>

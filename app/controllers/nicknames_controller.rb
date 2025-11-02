@@ -5,26 +5,29 @@ class NicknamesController < ApplicationController
 
   def update
     @user = current_user
-    name = user_params[:nickname]
     agreed = params[:terms] == "1"
+    name = user_params[:nickname]
+    @user.nickname = name
+
+    errors_added = false
+
+    unless agreed
+      @user.errors.add(:terms, "利用規約への同意が必要です")
+      errors_added = true
+    end
 
     if name.blank?
       @user.errors.add(:nickname, "ニックネームを入力してください")
-      return render :edit, status: :unprocessable_entity
-    end
-
-    if name.length > 10
+      errors_added = true
+    elsif name.length > 10
       @user.errors.add(:nickname, "ニックネームは10文字以内で入力してください")
-      return render :edit, status: :unprocessable_entity
-    end
-
-    unless name.match?(/\A[[:alnum:]\p{Hiragana}\p{Katakana}\p{Han}\p{Zs}]+\z/u)
+      errors_added = true
+    elsif !name.match?(/\A[[:alnum:]\p{Hiragana}\p{Katakana}\p{Han}\p{Zs}]+\z/u)
       @user.errors.add(:nickname, "使用できない文字が含まれています")
-      return render :edit, status: :unprocessable_entity
+      errors_added = true
     end
 
-    unless agreed
-      @user.errors.add(:base, "利用規約への同意が必要です")
+    if @user.errors.any?
       return render :edit, status: :unprocessable_entity
     end
 
