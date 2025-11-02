@@ -1,8 +1,4 @@
 class NicknamesController < ApplicationController
-<<<<<<< HEAD
-  def show; end
-  def create; end
-=======
   def edit
     @user = current_user
   end
@@ -49,5 +45,4 @@ class NicknamesController < ApplicationController
   def user_params
     params.require(:user).permit(:nickname)
   end
->>>>>>> nrc_backup
 end

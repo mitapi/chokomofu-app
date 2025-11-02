@@ -68,13 +68,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include RequestCookieHelpers, type: :request
-<<<<<<< HEAD
-=======
 
   Capybara.default_max_wait_time = 5
   Capybara.javascript_driver = :selenium_chrome_headless
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
->>>>>>> nrc_backup
 end

@@ -8,8 +8,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 && npm i -g yarn \
 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-<<<<<<< HEAD
-=======
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     chromium-driver \
@@ -19,7 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV CHROME_BIN=/usr/bin/chromium
 ENV CHROME_DRIVER_PATH=/usr/bin/chromedriver
 
->>>>>>> nrc_backup
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./

@@ -26,11 +26,8 @@ bun.lockb
 -e 
 # local shell history
 .bash_history
-<<<<<<< HEAD
-=======
 .cache/
 log/
 tmp/
 coverage/
 node_modules/
->>>>>>> nrc_backup
