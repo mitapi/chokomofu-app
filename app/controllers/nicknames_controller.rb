@@ -8,13 +8,7 @@ class NicknamesController < ApplicationController
     agreed = params[:terms] == "1"
     name = user_params[:nickname]
     @user.nickname = name
-
     errors_added = false
-
-    unless agreed
-      @user.errors.add(:terms, "利用規約への同意が必要です")
-      errors_added = true
-    end
 
     if name.blank?
       @user.errors.add(:nickname, "ニックネームを入力してください")
@@ -27,16 +21,17 @@ class NicknamesController < ApplicationController
       errors_added = true
     end
 
+    unless agreed
+      @user.errors.add(:terms, "利用規約への同意が必要です")
+      errors_added = true
+    end
+
     if @user.errors.any?
       return render :edit, status: :unprocessable_entity
     end
 
-    if agreed.present?
-      @user.terms_agreed_at = Time.current
-      @user.terms_version = "2025-10-30"
-    else
-      return render :edit, status: :unprocessable_entity
-    end
+    @user.terms_agreed_at = Time.current
+    @user.terms_version = "2025-10-30"
 
     if @user.save
       redirect_to main_path

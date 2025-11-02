@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: "Zen Maru Gothic",
+               "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo,
+               system-ui, ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+               "Apple Color Emoji", "Segoe UI Emoji";
+}
