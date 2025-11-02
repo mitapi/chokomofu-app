@@ -1,0 +1,54 @@
+<%= form_with model: user, url: nickname_path do |f| %>
+  <section class="flex font-medium justify-between items-center ml-[5px] mt-[50px] relative">
+    <%= f.label :nickname, 'ニックネーム' %>
+    <%= render "shared/field_error", object: f.object, attribute: :nickname %>
+  </section>
+
+  <section class="flex justify-center items-center mt-[10px] relative">
+    <%= f.text_field :nickname, 
+          class: "font-medium text-[17px] w-[450px]
+                  rounded border border-gray-300 bg-white p-2 outline-none focus:ring focus:ring-yellow-200",
+          maxlength: 10, autofocus: true, placeholder: "10文字以内で入力してね" %>
+  </section>
+
+  <h2 class="flex justify-between font-medium ml-[5px] mt-[35px]">
+    利用規約（抜粋）
+    <%= render "shared/field_error", object: f.object, attribute: :terms %>
+  </h2>
+
+  <section class="mt-[10px]">
+    <div role="region" aria-label="利用規約の抜粋" tabindex="0"
+         class="max-h-56 overflow-y-auto rounded-xl border border-amber-200 bg-white/90 p-4 text-sm w-[450px]">
+      <%= render "static/terms_body" %>
+    </div>
+
+    <p class="mt-2 text-xs">
+      くわしくは <%= link_to "利用規約全文", terms_path, class: "underline text-amber-700" %> をご確認ください。
+    </p>
+
+    <!-- 規約チェック（未同意のときだけ表示） -->
+    <% if @user.terms_agreed_at.present? %>
+      <p class="text-xs text-gray-500 mb-4 mt-[10px] ml-[5px]">
+        規約同意済み（<%= @user.terms_agreed_at.strftime("%Y/%m/%d") %>）
+      </p>
+    <% else %>
+      <div class="my-[20px] ml-[5px]">
+        <div class="flex justify-start gap-2">
+          <%= check_box_tag :terms, "1",
+                (params[:terms] == "1") || @user.terms_agreed_at?,
+                class: "align-middle flex scale-150"%>
+          <span class = "flex text-sm leading-none" >
+            <b>利用規約に同意します</b>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </section>
+
+  <section class="flex justify-center bottom-[300px] mt-[40px]">
+    <%= f.submit "登録する",
+          class: "group
+                  font-bold flex h-10 items-center justify-center 
+                  rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+  </section>
+<% end %>
