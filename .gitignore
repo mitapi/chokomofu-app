@@ -26,3 +26,8 @@ bun.lockb
 -e 
 # local shell history
 .bash_history
+.cache/
+log/
+tmp/
+coverage/
+node_modules/
