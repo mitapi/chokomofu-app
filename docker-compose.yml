@@ -2,8 +2,7 @@ services:
   web:                
     user: "${UID}:${GID}" 
     build: .
-    command: bash -lc "bin/dev" 
-    ports:
+    command: bash -lc "./bin/dev"
       - "3000:3000"
     volumes:
       - .:/app

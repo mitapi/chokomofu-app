@@ -3,25 +3,19 @@ ENV LANG=C.UTF-8
 ENV TZ=Asia/Tokyo
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-&& apt-get update -qq \
-&& apt-get install -y --no-install-recommends build-essential nodejs \
-&& npm i -g yarn \
-&& apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    chromium \
-    chromium-driver \
-    xvfb \
- && rm -rf /var/lib/apt/lists/*
-
-ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROME_DRIVER_PATH=/usr/bin/chromedriver
+ && apt-get update -qq \
+ && apt-get install -y --no-install-recommends build-essential nodejs \
+ && npm i -g yarn \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle config set without 'development test'
-RUN bundle install
+
+ARG BUNDLE_WITHOUT=""
+RUN bundle config unset without || true \
+ && if [ -n "$BUNDLE_WITHOUT" ]; then bundle config set without "$BUNDLE_WITHOUT"; fi \
+ && bundle install
 
 COPY package.json yarn.lock ./
 RUN [ -f package.json ] && yarn install --frozen-lockfile || true
