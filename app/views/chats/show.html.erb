@@ -20,24 +20,7 @@
 
       <section class="absolute flex h-[260px] inset-x-0 justify-center translate-y-[220px] z-20">
         <div id="bubbles" class="flex justify-center items-center">
-          <%= image_tag "bubbles.png", alt: "ちょこっと♪ もふたいむ /会話用ふきだし", class: "w-[580px]" %>
-          <div class="absolute flex flex-col translate-y-[10px] z-30">
-            <p class="mb-[30px] font-mono text-[7]xl whitespace-pre-line z-30"><%= @conv.text %></p>
-
-            <% if @choices.any? %>
-              <ul class="flex gap-[30px] justify-center mb-[10px]">
-                <% @choices.each do |c| %>
-                  <li>
-                    <%= link_to c.label, chat_path(conversation_id: c.next_conversation_id), class: "underline" %>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <div class="flex justify-end">
-                <%= link_to "会話をとじる", main_path, class: "underline" %>
-              </div>
-            <% end %>
-          </div>
+          <%= render "bubble"%>
         </div> 
       </section>
     </div>

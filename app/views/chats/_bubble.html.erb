@@ -1,0 +1,21 @@
+<section style="width:550px; height:200px; border-color:#ffc876;""
+         class="rounded-2xl border-[3px] bg-slate-50
+                grid [grid-template-rows:1fr_auto] p-4 shadow">
+    <p class="m-0 whitespace-pre-line leading-relaxed"><%= @conv.text %></p>
+
+  <% if @choices.any? %>
+    <ul class="flex justify-center gap-3 pt-2">
+      <% @choices.each do |c| %>
+        <li>
+          <%= link_to c.label, chat_path(conversation_id: c.next_conversation_id),
+                class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="flex justify-end pt-2">
+      <%= link_to "会話をとじる", main_path,
+            class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
+    </div>
+  <% end %>
+</section>
