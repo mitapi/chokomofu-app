@@ -17,7 +17,7 @@ RUN bundle config unset without || true \
  && if [ -n "$BUNDLE_WITHOUT" ]; then bundle config set without "$BUNDLE_WITHOUT"; fi \
  && bundle install
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock* ./
 RUN [ -f package.json ] && yarn install --frozen-lockfile || true
 
 RUN gem install foreman -N

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "./app/views/**/*.{erb,html}" "./app/javascript/**/*.{js,ts,jsx,tsx}" "./app/helpers/**/*.rb";
+
 @theme {
   --font-sans: "Zen Maru Gothic",
                "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo,

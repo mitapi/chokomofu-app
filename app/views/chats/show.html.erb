@@ -18,9 +18,18 @@
         </div>
       </section>
 
-      <section class="absolute flex h-[260px] inset-x-0 justify-center translate-y-[220px] z-20">
-        <div id="bubbles" class="flex justify-center items-center">
-          <%= render "bubble"%>
+      <section class="absolute flex h-[260px] inset-x-0 justify-center translate-y-[210px] z-20">
+        <div id="bubbles" class="flex flex-col justify-center items-center">
+          <div class="relative w-[550px]">
+          <section
+            style="width:130px;height:40px;border-color:#ffc876;"
+            class="flex justify-center items-center
+                   top-0 left-[16px] z-30
+                   rounded-2xl border-[3px] bg-slate-50 px-3 py-2 shadow">
+              <%= h(@character.name || "？") %>
+            </section>
+            <%= render "bubble"%>
+          </div> 
         </div> 
       </section>
     </div>
