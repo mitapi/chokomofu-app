@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :ensure_current_user
+  helper_method :current_user, :text
 
   COOKIE_NAME = :guest_uid
   COOKIE_REFRESH_MARKER = :guest_uid_refreshed_on
