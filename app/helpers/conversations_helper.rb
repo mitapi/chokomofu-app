@@ -38,4 +38,17 @@ module ConversationsHelper
   def expression_image_path(character_dir: "pomemaru", expression: :idle)
     "character/#{character_dir}/#{expression}.png"
   end
+
+  # ニックネーム反映のためのメソッド
+  def conversation_text_html(conv)
+    render_text_with_nickname(conv&.text, current_user)
+  end
+
+  def choice_label_html(choice)
+    render_text_with_nickname(choice&.label, current_user)
+  end
+
+  def render_text_with_nickname(text, user)
+    text.to_s % {nickname: user.nickname}
+  end
 end

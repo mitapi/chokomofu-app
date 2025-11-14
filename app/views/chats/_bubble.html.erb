@@ -1,13 +1,13 @@
 <section style="width:550px; height:180px; border-color:#ffc876;""
          class="rounded-2xl border-[3px] bg-slate-50 mt-2
                 grid [grid-template-rows:1fr_auto] p-6 shadow">
-  <p class="m-0 whitespace-pre-line leading-relaxed"><%= @conv.text %></p>
+  <%= conversation_text_html(@conv) %>
 
   <% if @choices.any? %>
     <ul class="flex justify-center pt-2 gap-6">
       <% @choices.each do |c| %>
         <li>
-          <%= link_to c.label, chat_path(conversation_id: c.next_conversation_id),
+          <%= link_to choice_label_html(c), chat_path(conversation_id: c.next_conversation_id),
                 class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
         </li>
       <% end %>
