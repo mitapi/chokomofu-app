@@ -2,7 +2,7 @@
   <% if @empty || @conv.blank? || @character.blank? %>
     <%= render "empty" %>
   <% else %>
-    <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[700px]">
+    <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden min-h-screen w-[600px] h-[700px]">
       <%= image_tag "chat-bg.png", alt: "ちょこっと♪ もふたいむ /chat 背景", class: "w-full h-full object-cover object-[50%_90%] " %>
     
       <section class="absolute flex h-[450px] inset-x-0 justify-center items-center pointer-events-none translate-y-[-55px] z-10">

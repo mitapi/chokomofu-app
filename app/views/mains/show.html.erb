@@ -1,5 +1,5 @@
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px] h-[700px]">
-  <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[700px]">
+  <div class="flex justify-center items-center relative w-auto z-0 min-h-screen overflow-hidden w-[600px] h-[700px]">
     <%= image_tag "main-bg.png", alt: "ちょこっと♪ もふたいむ /main 背景", class: "w-full h-full object-cover object-[50%_40%]" %>
 
     <section class="absolute flex h-[350px] inset-x-0 justify-center items-center pointer-events-none translate-y-[75px] z-10">
@@ -8,7 +8,7 @@
       </div>
     </section>
 
-    <section class="absolute flex gap-[5px] inset-x-0 justify-center mt-[20px] translate-y-[275px] z-20">
+    <section class="absolute flex gap-[5px] inset-x-0 justify-center mt-[20px] translate-y-[280px] z-20">
       <%= link_to chat_path,
                 aria: { label: "おしゃべり" } do %>
         <%= image_tag "button/btn-conv.png", alt: "おしゃべりボタン", class: "w-[100px]" %>
