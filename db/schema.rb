@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_10_29_093408) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_16_072736) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_29_093408) do
     t.datetime "updated_at", null: false
     t.datetime "terms_agreed_at"
     t.string "terms_version"
+    t.integer "region", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["guest_uid"], name: "index_users_on_guest_uid", unique: true
   end
