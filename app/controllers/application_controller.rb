@@ -77,4 +77,18 @@ class ApplicationController < ActionController::Base
       }
     end
   end
+
+  def current_weather_slot
+    coords = current_user.region_coords
+    result = Weather::FetchCurrentWeather.new(
+      lat: coords[:lat],
+      lon: coords[:lon]
+    ).call
+
+    result.slot
+
+  rescue => e
+    Rails.logger.error(event: "current_weather_slot_failed", error: e.message)
+    :any
+  end
 end
