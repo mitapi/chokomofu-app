@@ -10,7 +10,7 @@ greet = upsert_conversation(
     character_id: pomemaru.id,
     kind:         0,          # talk
     time_slot:    :any,
-    weather_slot: 0,          # any
+    weather_slot: :any,
     min_affinity: 0,
     weight:       1,
     text:         "%{nickname}、おはよ～！朝ゴハンは食べた？"
@@ -23,7 +23,7 @@ branch_a = upsert_conversation(
     character_id: pomemaru.id,
     kind:         0,
     time_slot:    :any,
-    weather_slot: 0,
+    weather_slot: :any,
     min_affinity: 0,
     weight:       1,
     text: <<~TEXT
@@ -39,7 +39,7 @@ branch_b = upsert_conversation(
     character_id: pomemaru.id,
     kind:         0,
     time_slot:    :any,
-    weather_slot: 0,
+    weather_slot: :any,
     min_affinity: 0,
     weight:       1,
     text: <<~TEXT

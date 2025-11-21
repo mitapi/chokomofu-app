@@ -4,6 +4,7 @@ class ChatsController < ApplicationController
   def show
     slot = resolve_time_slot(params[:time_slot]).to_sym
     @time_slot = slot
+    weather    = current_weather_slot
 
     # seed に合わせたフォールバック
     fallback = Conversation.find_by!(code: "conv.greet.morning.breakfast")
@@ -11,11 +12,19 @@ class ChatsController < ApplicationController
     if params[:conversation_id].to_s.match?(/\A\d+\z/)
       @conv = Conversation.find_by!(id: params[:conversation_id])
     else
-      @conv = fallback
-    end
+      @character = Character.find(@conv.character_id)
 
-    @character = Character.find(@conv.character_id)
-    @choices = ConversationChoice.where(conversation_id: @conv.id).order(:position)
+      @conv = Conversation
+        .where(character: @character, kind: :talk)  # kind が enum なら kind: :talk
+        .for_slot(slot)                             # time_slot: [slot, :any]
+        .for_weather(weather)                       # weather_slot: [weather, :any]
+        .order("RANDOM()")                          # 候補からランダム
+        .first
+
+      @conv ||= fallback
+
+      @choices = @conv.conversation_choices.order(:position)
+    end 
   end
 
   private
