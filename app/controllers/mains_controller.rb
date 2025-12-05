@@ -1,7 +1,9 @@
 class MainsController < ApplicationController
   before_action :require_onboarding, unless: -> { Rails.env.test? }
 
-  def show; end
+  def show
+    @character = Character.first!  #あとで選択したキャラを出せるように書き換える！
+  end
 
   private
 
