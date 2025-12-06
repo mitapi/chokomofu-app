@@ -1,10 +1,22 @@
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px] h-[700px]">
   <div class="flex justify-center items-center relative w-auto z-0 min-h-screen overflow-hidden w-[600px] h-[700px]">
-    <%= image_tag "main-bg.png", alt: "ちょこっと♪ もふたいむ /main 背景", class: "w-full h-full object-cover object-[50%_40%]" %>
+    <%= image_tag window_image_path(
+          weather_slot: @weather_slot,
+          time_slot: @time_slot
+        ),
+        alt: "ちょこっと♪ もふたいむ /main 窓背景",
+        class: "absolute top-[15px] left-[260px] object-cover object-top w-[250px] z-0" 
+    %>
+    <%= image_tag "main-bg.png", alt: "ちょこっと♪ もふたいむ /main 背景", class: "w-full h-full object-cover object-[50%_40%] z-10" %>
 
     <section class="absolute flex h-[350px] inset-x-0 justify-center items-center pointer-events-none translate-y-[75px] z-10">
       <div id="character" class="absolute flex translate-x-0 will-change-transform">
-        <%= image_tag "character/pomemaru/idle.png", alt: "キャラクター /ぽめまる /基本立ち絵", class: "w-[300px]" %>
+        <% dir  = character_dir_for(@character) %>
+        <%= image_tag(
+            expression_image_path(character_dir: dir),
+            alt: "キャラクター /ぽめまる /基本立ち絵", 
+            class: "w-[300px]"
+            ) %>
       </div>
     </section>
 
