@@ -6,3 +6,8 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+// stimulusをセット
+import ConversationStepController from "./conversation_step_controller"
+
+application.register("conversation-step", ConversationStepController)

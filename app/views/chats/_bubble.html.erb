@@ -1,7 +1,20 @@
 <section style="width:550px; height:190px; border-color:#ffc876;""
          class="rounded-2xl border-[3px] bg-slate-50 mt-2
                 grid [grid-template-rows:1fr_auto] p-6 shadow">
-  <%= conversation_text_html(@conv) %>
+  <div
+    data-controller="conversation-step"
+    data-action="click->conversation-step#next"
+    class="cursor-pointer"
+  >
+    <% conversation_lines(@conv).each_with_index do |block, index| %>
+      <div
+        data-conversation-step-target="line"
+        class="<%= index.zero? ? '' : 'hidden' %> mb-2"
+      >
+        <%= simple_format(h(block)) %>
+      </div>
+    <% end %>
+  </div>
 
   <% if @choices.any? %>
     <ul class="flex justify-center pt-2 gap-6">

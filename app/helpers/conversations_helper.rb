@@ -39,9 +39,21 @@ module ConversationsHelper
     "character/#{character_dir}/#{expression}.png"
   end
 
-  # ニックネーム反映のためのメソッド
-  def conversation_text_html(conv)
+  # ① ニックネームを差し込んだ「プレーンテキスト」を返す共通メソッド
+  def conversation_text_body(conv)
     render_text_with_nickname(conv&.text, current_user)
+  end
+
+  # ② ふつうに全部まとめて表示したいとき用（今までどおり）
+  def conversation_text_html(conv)
+    text = conversation_text_body(conv)
+    imple_format(h(text))
+  end
+
+  # ③ Stimulus用に文章を区切る　split(/\n{2,}/)は２行以上の改行で区切るという意味
+  def conversation_lines(conv)
+    text = conversation_text_body(conv)
+    text.split(/\n{2,}/).map(&:strip).reject(&:blank?)
   end
 
   def choice_label_html(choice)
@@ -49,6 +61,6 @@ module ConversationsHelper
   end
 
   def render_text_with_nickname(text, user)
-    text.to_s % {nickname: user.nickname}
+    text.to_s % { nickname: user.nickname }
   end
 end
