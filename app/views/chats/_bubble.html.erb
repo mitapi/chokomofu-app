@@ -1,11 +1,12 @@
-<section style="width:550px; height:190px; border-color:#ffc876;""
-         class="rounded-2xl border-[3px] bg-slate-50 mt-2
-                grid [grid-template-rows:1fr_auto] p-6 shadow">
-  <div
-    data-controller="conversation-step"
-    data-action="click->conversation-step#next"
-    class="cursor-pointer"
-  >
+<div
+  data-controller="conversation-step"
+  data-action="click->conversation-step#next"
+>
+  <section style="width:550px; height:190px; border-color:#ffc876;""
+           class="relative rounded-2xl border-[3px] bg-slate-50 mt-2
+                  grid [grid-template-rows:1fr_auto] p-6 shadow
+                  cursor-pointer">
+
     <% conversation_lines(@conv).each_with_index do |block, index| %>
       <div
         data-conversation-step-target="line"
@@ -14,21 +15,31 @@
         <%= simple_format(h(block)) %>
       </div>
     <% end %>
-  </div>
 
-  <% if @choices.any? %>
-    <ul class="flex justify-center pt-2 gap-6">
-      <% @choices.each do |c| %>
-        <li>
-          <%= link_to choice_label_html(c), chat_path(conversation_id: c.next_conversation_id),
-                class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <div class="flex justify-end pt-2">
-      <%= link_to "会話をとじる", main_path,
-            class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
+    <div 
+      data-conversation-step-target="nextIndicator"
+      class="absolute bottom-4 right-8 text-sm text-amber-400/80 select-none"
+    >
+      ▼
     </div>
-  <% end %>
-</section>
+
+    <% if @choices.any? %>
+      <ul class="flex justify-center pt-2 gap-6">
+        <% @choices.each do |c| %>
+          <li>
+            <%= link_to choice_label_html(c), chat_path(conversation_id: c.next_conversation_id),
+                  class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div 
+        data-conversation-step-target="closer"
+        class="flex justify-end pt-2 hidden"
+      >
+        <%= link_to "会話をとじる", main_path,
+              class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
+      </div>
+    <% end %>
+  </section>
+</div>

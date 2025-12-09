@@ -1,17 +1,18 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  // セリフの行 <p> を「targets」として扱う
-  static targets = ["line"]
+  static targets = ["line", "nextIndicator", "closer"]
 
   connect() {
     // 今どの行を表示しているか（0 = 最初の行）
     this.index = 0
+    this.total = this.lineTargets.length
+    this.updateUI()
   }
 
   next() {
     // もう次の行が無いときは何もしない
-    if (this.index >= this.lineTargets.length - 1) {
+    if (this.index >= this.total - 1) {
       return
     }
 
@@ -23,5 +24,21 @@ export default class extends Controller {
 
     // 次の行を表示する
     this.lineTargets[this.index].classList.remove("hidden")
+
+    this.updateUI()
+  }
+
+  updateUI() {
+   const isLast = this.index >= this.total - 1
+
+    // ▼ の表示／非表示（最後のページでは消す）
+    if (this.hasNextIndicatorTarget) {
+      this.nextIndicatorTarget.classList.toggle("hidden", isLast || this.total <= 1)
+    }
+
+    // 「会話をとじる」の表示／非表示（最後のページだけ出す）
+    if (this.hasCloserTarget) {
+      this.closerTarget.classList.toggle("hidden", !isLast)
+    }
   }
 }
