@@ -1,10 +1,10 @@
 #朝ごはん食べた？の会話（ぽめまる）
 
-puts "[seeds] greetings: start"  # ← デバッグ用ログ
+puts "[seeds] breakfast: start"  # ← デバッグ用ログ
 
 pomemaru = Character.find_or_create_by!(name: "ぽめまる")
 
-greet = upsert_conversation(
+breakfast_greet = upsert_conversation(
   code: "conv.greet.morning.breakfast",
   attrs: {
     character_id: pomemaru.id,
@@ -17,7 +17,7 @@ greet = upsert_conversation(
   }
 )
 
-branch_a = upsert_conversation(
+breakfast_branch_a = upsert_conversation(
   code: "conv.greet.morning.ate_breakfast",
   attrs: {
     character_id: pomemaru.id,
@@ -40,7 +40,7 @@ branch_a = upsert_conversation(
   }
 )
 
-branch_b = upsert_conversation(
+breakfast_branch_b = upsert_conversation(
   code: "conv.greet.morning.skipped_breakfast",
   attrs: {
     character_id: pomemaru.id,
@@ -65,17 +65,17 @@ branch_b = upsert_conversation(
 )
 
 upsert_choice(
-  conversation:      greet,
+  conversation:      breakfast_greet,
   position:          1,
   label:             "食べたよ！",
-  next_conversation: branch_a
+  next_conversation: breakfast_branch_a
 )
 
 upsert_choice(
-  conversation:      greet,
+  conversation:      breakfast_greet,
   position:          2,
   label:             "食べてないんだ",
-  next_conversation: branch_b
+  next_conversation: breakfast_branch_b
 )
 
-puts "[seeds] greetings: done (greet_id=#{greet.id})"
+puts "[seeds] greetings: done (greet_id=#{breakfast_greet.id})"
