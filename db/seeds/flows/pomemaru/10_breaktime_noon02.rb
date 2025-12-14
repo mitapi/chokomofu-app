@@ -1,10 +1,10 @@
 #休憩でもふもふ提供してくれる会話（ぽめまる）
 
-puts "[seeds] snack: start"  # ← デバッグ用ログ
+puts "[seeds] breaktime_noon02: start"  # ← デバッグ用ログ
 
 pomemaru = Character.find_or_create_by!(name: "ぽめまる")
 
-breaktime_greet = upsert_conversation(
+breaktime_noon02_greet = upsert_conversation(
   code: "conv.greet.noon_02.breaktime",
   attrs: {
     character_id: pomemaru.id,
@@ -20,7 +20,7 @@ breaktime_greet = upsert_conversation(
   }
 )
 
-breaktime_branch_a = upsert_conversation(
+breaktime_noon02_branch_a = upsert_conversation(
   code: "conv.greet.noon_02.mofumofu",
   attrs: {
     character_id: pomemaru.id,
@@ -44,7 +44,7 @@ breaktime_branch_a = upsert_conversation(
   }
 )
 
-breaktime_branch_b = upsert_conversation(
+breaktime_noon02_branch_b = upsert_conversation(
   code: "conv.greet.noon_02.get_treat",
   attrs: {
     character_id: pomemaru.id,
@@ -78,17 +78,17 @@ breaktime_branch_b = upsert_conversation(
 )
 
 upsert_choice(
-  conversation:      breaktime_greet,
+  conversation:      breaktime_noon02_greet,
   position:          1,
   label:             "撫でさせて〜",
-  next_conversation: breaktime_branch_a
+  next_conversation: breaktime_noon02_branch_a
 )
 
 upsert_choice(
-  conversation:      breaktime_greet,
+  conversation:      breaktime_noon02_greet,
   position:          2,
   label:             "おやつあげよっか！",
-  next_conversation: breaktime_branch_b
+  next_conversation: breaktime_noon02_branch_b
 )
 
-puts "[seeds] greetings: done (greet_id=#{breaktime_greet.id})"
+puts "[seeds] greetings: done (greet_id=#{breaktime_noon02_greet.id})"

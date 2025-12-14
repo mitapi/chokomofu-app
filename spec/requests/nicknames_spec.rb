@@ -31,4 +31,6 @@ RSpec.describe "Nicknames", type: :request do
     expect(response).to redirect_to(main_path)
     expect(user.reload.nickname).to eq("ぽめ")
   end
+
+  # ニックネームで使用不可の文字ははじかれるテストも作成
 end
