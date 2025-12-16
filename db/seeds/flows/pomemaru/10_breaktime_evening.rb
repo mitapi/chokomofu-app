@@ -8,8 +8,9 @@ breaktime_evening_greet = upsert_conversation(
   code: "conv.greet.evening.breaktime",
   attrs: {
     character_id: pomemaru.id,
-    kind:         0,          # talk
-    time_slot:    :any,
+    kind:         0,
+    role:         0,
+    time_slot:    :evening,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -28,7 +29,8 @@ breaktime_evening_branch_a = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :evening,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -60,7 +62,8 @@ breaktime_evening_branch_b = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :evening,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,

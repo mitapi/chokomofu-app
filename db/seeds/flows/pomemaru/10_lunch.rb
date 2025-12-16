@@ -5,11 +5,12 @@ puts "[seeds] lunch: start"  # ← デバッグ用ログ
 pomemaru = Character.find_or_create_by!(name: "ぽめまる")
 
 lunch_greet = upsert_conversation(
-  code: "conv.greet.noon.lunch",
+  code: "conv.greet.noon_01.lunch",
   attrs: {
     character_id: pomemaru.id,
-    kind:         0,          # talk
-    time_slot:    :any,
+    kind:         0,
+    role:         0,
+    time_slot:    :noon_01,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -18,11 +19,12 @@ lunch_greet = upsert_conversation(
 )
 
 lunch_branch_a = upsert_conversation(
-  code: "conv.greet.noon.ate_lunch",
+  code: "conv.greet.noon_01.ate_lunch",
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :noon_01,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -45,11 +47,12 @@ lunch_branch_a = upsert_conversation(
 )
 
 lunch_branch_b = upsert_conversation(
-  code: "conv.greet.noon.skipped_lunch",
+  code: "conv.greet.noon_01.skipped_lunch",
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :noon_01,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,

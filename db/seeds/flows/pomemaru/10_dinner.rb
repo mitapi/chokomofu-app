@@ -8,8 +8,9 @@ dinner_greet = upsert_conversation(
   code: "conv.greet.night.dinner",
   attrs: {
     character_id: pomemaru.id,
-    kind:         0,          # talk
-    time_slot:    :any,
+    kind:         0,
+    role:         0,
+    time_slot:    :night,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -22,7 +23,8 @@ dinner_branch_a = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :night,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
@@ -57,7 +59,8 @@ dinner_branch_b = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    time_slot:    :any,
+    role:         1,
+    time_slot:    :night,
     weather_slot: :any_weather,
     min_affinity: 0,
     weight:       1,
