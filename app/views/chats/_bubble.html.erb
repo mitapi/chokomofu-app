@@ -24,7 +24,10 @@
     </div>
 
     <% if @choices.any? %>
-      <ul class="flex justify-center pt-2 gap-6">
+      <ul 
+        data-conversation-step-target="choices"
+        class="flex justify-center pt-2 gap-6 hidden"
+      >
         <% @choices.each do |c| %>
           <li>
             <%= link_to choice_label_html(c), chat_path(conversation_id: c.next_conversation_id),

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["line", "nextIndicator", "closer"]
+  static targets = ["line", "nextIndicator", "closer", "choices"]
 
   connect() {
     // 今どの行を表示しているか（0 = 最初の行）
@@ -34,6 +34,10 @@ export default class extends Controller {
     // ▼ の表示／非表示（最後のページでは消す）
     if (this.hasNextIndicatorTarget) {
       this.nextIndicatorTarget.classList.toggle("hidden", isLast || this.total <= 1)
+    }
+
+    if (this.hasChoicesTarget) {
+      this.choicesTarget.classList.toggle("hidden", !isLast)
     }
 
     // 「会話をとじる」の表示／非表示（最後のページだけ出す）
