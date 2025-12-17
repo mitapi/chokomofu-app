@@ -1,11 +1,11 @@
 module WindowPicHelper
   def background_slot_for(time_slot)
     case time_slot.to_sym
-    when :morning, :noon
+    when :morning, :noon_01, :noon_02
       :morning_noon
     when :evening
       :evening
-    when :night, :late_night
+    when :night, :late_night, :early_morning
       :night
     else
       :morning_noon

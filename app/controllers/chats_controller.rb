@@ -4,7 +4,8 @@ class ChatsController < ApplicationController
   def show
     slot = resolve_time_slot(params[:time_slot]).to_sym
     @time_slot = slot
-    weather    = current_weather_slot
+    weather = current_weather_slot
+    @weather_slot = weather.presence || :any_weather
 
     # seed に合わせたフォールバック
     fallback = Conversation.find_by!(code: "conv.greet.morning.breakfast")
@@ -13,20 +14,24 @@ class ChatsController < ApplicationController
       if params[:conversation_id].to_s.match?(/\A\d+\z/)
         Conversation.find_by!(id: params[:conversation_id])
       else
-        character = Character.first!   # あとで選択キャラに置き換えメソッド作る
+        @character = Character.first!   # あとで選択キャラに置き換えメソッド作る
 
       Conversation
-        .where(character: @character, kind: :talk)  # kind が enum なら kind: :talk
-        .for_slot(slot)                             # time_slot: [slot, :any]
-        .for_weather(weather)                       # weather_slot: [weather, :any]
-        .order("RANDOM()")                          # 候補からランダム
+        .where(character: @character, kind: :talk, role: :entry)
+        .for_slot(@time_slot)
+        .for_weather(@weather_slot)
+        .order("RANDOM()")           # 候補からランダムに抽出
         .first
       end
 
     @conv ||= fallback
 
-    @character = Character.find(@conv.character_id)
+    @character ||= Character.find(@conv.character_id)
     @choices = @conv.conversation_choices.order(:position)
+
+    Rails.logger.info "[debug] slot=#{@time_slot.inspect} weather=#{@weather_slot.inspect} character_id=#{@character&.id.inspect}"
+    Rails.logger.info "[debug] picked_conv id=#{@conv&.id.inspect} code=#{@conv&.code.inspect} time_slot=#{@conv&.time_slot.inspect} kind=#{@conv&.kind.inspect}"
+    Rails.logger.info "[debug] fallback_used=#{@conv&.code == 'conv.greet.morning.breakfast'}"
   end
 
   private
@@ -46,11 +51,13 @@ class ChatsController < ApplicationController
   def real_time_slot
     h = Time.zone.now.hour
     case h
-    when 5..11  then "morning"    # 5:00-11:59
-    when 12..15 then "noon"       # 12:00-15:59
-    when 16..18 then "evening"    # 16:00-18:59
-    when 18..23 then "night"      # 18:00-23:59
-    else             "late_night" # 0:00-4:59
+    when 5..10      then "morning"        # 5:00-10:59
+    when 11..13     then "noon_01"        # 11:00-13:59
+    when 14..15     then "noon_02"        # 14:00-15:59
+    when 16..18     then "evening"        # 16:00-18:59
+    when 19..21     then "night"          # 19:00-21:59
+    when 22..23, 0  then "late_night"     # 22:00-0:59
+    else                 "early_morning"  # 1:00-4:59
     end
   end
 

@@ -18,7 +18,7 @@ class MainsController < ApplicationController
 
   # テストで時間固定する用の記述も残しておきます
   def resolve_time_slot(param)
-    valid = %w[morning noon night late_night]
+    valid = %w[morning noon_01 noon_02 evening night late_night early_morning]
     slot = param.to_s.strip.downcase
 
     if Rails.env.development? || Rails.env.test?
@@ -31,11 +31,13 @@ class MainsController < ApplicationController
   def real_time_slot
     h = Time.zone.now.hour
     case h
-    when 5..11  then "morning"    # 5:00-11:59
-    when 12..15 then "noon"       # 12:00-15:59
-    when 16..18 then "evening"    # 16:00-18:59
-    when 18..23 then "night"      # 18:00-23:59
-    else             "late_night" # 0:00-4:59
+    when 5..10      then "morning"        # 5:00-10:59
+    when 11..13     then "noon_01"        # 11:00-13:59
+    when 14..15     then "noon_02"        # 14:00-15:59
+    when 16..18     then "evening"        # 16:00-18:59
+    when 19..21     then "night"          # 19:00-21:59
+    when 22..23, 0  then "late_night"     # 22:00-0:59
+    else                 "early_morning"  # 1:00-4:59
     end
   end
 end
