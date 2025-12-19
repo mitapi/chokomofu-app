@@ -1,5 +1,5 @@
 class NicknamesController < ApplicationController
-  before_action :redirect_if_completed, only: :edit
+  before_action :redirect_if_onboarding_completed, only: :edit
 
   def edit
     @user = current_user
@@ -43,12 +43,6 @@ class NicknamesController < ApplicationController
   end
 
   private
-
-  def redirect_if_completed
-    if current_user.nickname.present? && current_user.terms_agreed_at.present?
-      redirect_to main_path
-    end
-  end
 
   def user_params
     params.require(:user).permit(:nickname)

@@ -91,4 +91,17 @@ class ApplicationController < ActionController::Base
     Rails.logger.error(event: "current_weather_slot_failed", error: e.message)
     :any
   end
+
+  # nicknameとtermsがあれば/mainへ
+  def onboarding_completed?
+    current_user.nickname.present? && current_user.terms_agreed_at.present?
+  end
+
+  def redirect_if_onboarding_completed
+    redirect_to main_path if onboarding_completed?
+  end
+
+  def redirect_unless_onboarding_completed
+    redirect_to welcome_path unless onboarding_completed?
+  end
 end

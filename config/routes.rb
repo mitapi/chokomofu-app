@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :chat, only: %i[show] 
   resource :nickname, only: [:edit, :update]
   resource :account, only: [:edit, :update]
+  resource :welcome, only: %i[show]
 
   get "/nickname", to: "nicknames#edit"
   get "/account", to: "nicknames#edit"
