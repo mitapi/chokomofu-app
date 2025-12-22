@@ -41,10 +41,15 @@ export default class extends Controller {
     }
 
     if (this.hasPrevButtonTarget) {
-      this.prevButtonTarget.disabled = (this.index === 0)
+      const prevOff = (this.index === 0)
+      this.prevButtonTarget.classList.toggle("invisible", prevOff)
+      this.prevButtonTarget.classList.toggle("pointer-events-none", prevOff)
     }
+
     if (this.hasNextButtonTarget) {
-      this.nextButtonTarget.disabled = (this.index === this.total - 1)
+      const nextOff = (this.index === this.total - 1)
+      this.nextButtonTarget.classList.toggle("invisible", nextOff)
+      this.nextButtonTarget.classList.toggle("pointer-events-none", nextOff)
     }
   }
 }
