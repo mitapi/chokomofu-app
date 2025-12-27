@@ -1,4 +1,4 @@
-<div class="flex items-start gap-3">
+<div class="flex flex-col items-start gap-3">
   <div class="rounded-2xl border bg-slate-50 px-6 pt-8 pb-60 h-[630px] w-[400px]">
     <p>そうそう！</p>
     <p>遊びにくるもふもふたちは、あなたのことを名前で呼びたがっているみたいですよ。</p>
@@ -8,5 +8,22 @@
     <p>それと、もふもふたちと安心して過ごしてもらうために、いくつかのお約束（利用規約）があります。</p>
     <br>
     <p>これにも、軽く目を通してもらえたらうれしいです。</p>
+
+    <div class="flex flex-col relative justify-center items-center gap-3 top-[15%]">
+      <div class="flex justify-center items-center mt-[15px] relative">
+        <%= link_to edit_nickname_path,
+          aria:  { label: "ニックネーム登録＋利用規約同意" },
+          class: "group
+                  font-bold flex h-10 items-center justify-center z-20
+                  rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
+          <span class="block group-active:[transform:translate3d(0,1px,0)]">
+            名前を決める！
+          </span>
+        <% end %>
+      </div>
+      <ul class="list-none list-inside mt-[5px] text-sm text-amber-600">
+        <li>※ この先でニックネームの登録と、利用規約の確認を行います。</li>
+      </ul>
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :welcome, only: %i[show]
 
   get "/nickname", to: "nicknames#edit"
+  get "welcome/guide", to: "welcomes#guide"
   get "/account", to: "nicknames#edit"
   get "/terms", to: "static#terms"
   get "/privacy", to: "static#privacy"

@@ -36,7 +36,7 @@ class NicknamesController < ApplicationController
     @user.terms_version = "2025-10-30"
 
     if @user.save
-      redirect_to main_path
+      redirect_to welcome_guide_path
     else
       render :edit, status: :unprocessable_entity
     end

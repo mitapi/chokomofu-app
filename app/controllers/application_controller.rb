@@ -98,6 +98,8 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_onboarding_completed
+    Rails.logger.info("[onboarding] redirect_if_onboarding_completed path=#{request.path} completed=#{onboarding_completed?}")
+    return if controller_name == "welcomes" && action_name == "guide"
     redirect_to main_path if onboarding_completed?
   end
 
