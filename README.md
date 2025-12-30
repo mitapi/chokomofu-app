@@ -4,7 +4,10 @@
 <br>
 
 ## ⭐projectURL
+github
 https://github.com/mitapi/chokomofu-app
+アプリURL
+https://chokomofu-app.onrender.com
 
 <br>
 
