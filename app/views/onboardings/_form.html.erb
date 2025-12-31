@@ -1,9 +1,9 @@
-<%= form_with model: user, url: nickname_path do |f| %>
-  <%= render "nicknames/fields_nickname", f: f %>
+<%= form_with model: user, url: onboarding_path do |f| %>
+  <%= render "onboardings/fields_nickname", f: f %>
 
-  <%= render "nicknames/fields_weather_region", f: f %>
+  <%= render "onboardings/fields_weather_region", f: f %>
 
-  <%= render "nicknames/fields_terms", f: f %>
+  <%= render "onboardings/fields_terms", f: f %>
 
   <section class="flex justify-center bottom-[300px] mt-[40px] mb-[30px]">
     <%= f.submit "登録する",

@@ -1,4 +1,4 @@
-class NicknamesController < ApplicationController
+class OnboardingsController < ApplicationController
   before_action :redirect_if_onboarding_completed, only: :edit
 
   def edit
@@ -10,21 +10,28 @@ class NicknamesController < ApplicationController
     agreed = params[:terms] == "1"
     name = user_params[:nickname]
     @user.nickname = name
+    region = user_params[:region]
+    @user.region = region
     errors_added = false
 
     if name.blank?
-      @user.errors.add(:nickname, "ニックネームを入力してください")
+      @user.errors.add(:nickname, "ニックネームを入力してね")
       errors_added = true
     elsif name.length > 10
-      @user.errors.add(:nickname, "ニックネームは10文字以内で入力してください")
+      @user.errors.add(:nickname, "ニックネームは10文字以内で入力してね")
       errors_added = true
     elsif !name.match?(/\A[[:alnum:]\p{Hiragana}\p{Katakana}\p{Han}\p{Zs}]+\z/u)
-      @user.errors.add(:nickname, "使用できない文字が含まれています")
+      @user.errors.add(:nickname, "使用できない文字が含まれているよ")
       errors_added = true
     end
 
     unless agreed
-      @user.errors.add(:terms, "利用規約への同意が必要です")
+      @user.errors.add(:terms, "利用規約への同意が必要だよ")
+      errors_added = true
+    end
+
+    if region.blank?
+      @user.errors.add(:region, "地域を選んでね")
       errors_added = true
     end
 
@@ -45,6 +52,6 @@ class NicknamesController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname)
+    params.require(:user).permit(:nickname, :region)
   end
 end

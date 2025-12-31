@@ -1,8 +1,6 @@
-<h2 class="
-  flex font-medium underline underline-offset-4 decoration-2 decoration-amber-400 text-[#5b2d00]
-  justify-between items-center ml-[5px] mt-[60px] relative
-">
-  お天気の地域を選ぼう
+<h2 class="font-medium flex justify-between items-center ml-[5px] mt-[60px] relative">
+  <b class = "underline underline-offset-4 decoration-2 decoration-amber-400 text-[#5b2d00]">お天気の地域を選ぼう</b>
+  <%= render "shared/field_error", object: f.object, attribute: :region %>
 </h2>
 
 <section class="flex flex-col justify-center items-center mt-[12px] relative">
@@ -21,10 +19,11 @@
       ["札幌", :sapporo]
     ] %>
 
+    <!-- エラーメッセージが出るとボタンが押せない状況を解決するため、以下のファイルを追加 -->
+    <!-- config/initializers/field_error_proc.rb -->
     <% regions.each do |label, key| %>
       <label class="cursor-pointer">
-        <%= f.radio_button :weather_region, key, class: "peer hidden" %>
-
+        <%= f.radio_button :region, key, class: "peer sr-only" %>
         <span class="
           block rounded-xl border px-4 py-2 text-center font-bold text-[#5b2d00]
           bg-white hover:bg-amber-200

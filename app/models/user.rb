@@ -8,12 +8,12 @@ class User < ApplicationRecord
   has_many :interactions
   has_many :inquiries
 
-  enum auth_kind: {
+  enum :auth_kind, {
     guest:     0,
     password:  1,
-  }, _default: :guest 
+  }, default: :guest 
 
-   enum region: {
+   enum :region, {
     tokyo:   0,
     osaka:   1,
     nagoya:  2,

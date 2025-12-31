@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
 
   # nicknameとtermsがあれば/mainへ
   def onboarding_completed?
-    current_user.nickname.present? && current_user.terms_agreed_at.present?
+    current_user.nickname.present? && current_user.terms_agreed_at.present? && current_user.region.present?
   end
 
   def redirect_if_onboarding_completed
