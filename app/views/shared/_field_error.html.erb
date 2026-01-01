@@ -1,5 +1,6 @@
 <% if object && object.errors[attribute].present? %>
-  <div class="flex justify-center items-center text-sm text-red-700">
+  <div class="flex justify-center items-center 
+              rounded-md border border-red-300 bg-red-50 px-3 py-1 text-sm text-red-700">
     <%= object.errors[attribute].first %>
   </div>
 <% end %>

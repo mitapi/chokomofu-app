@@ -1,0 +1,40 @@
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <section class="bg-[#fcdf97] shadow-sm flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[80px] w-auto ">
+    <%= "最後にちょこっとご案内♪" %>
+  </section>
+
+  <div class="flex relative h-[700px] w-[600px] px-4 justify-center">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="flex items-start gap-3">
+        <div class="text-[#4a2200] rounded-3xl border border-amber-200 bg-amber-50/60 shadow-sm px-9 pt-8 h-[660px] w-[430px]">
+          <div class="space-y-6 leading-relaxed text-[16px]">
+            <p>最後に……ちょこもふには、いろいろな楽しみ方があります。</p>
+
+            <div class="space-y-1">
+              <p>くわしい遊び方は『マイページ』から、いつでも確認できます。</p>
+            </div>
+
+            <div class="space-y-1">
+              <p>あとから、ゆっくり見てみてくださいね。</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col relative justify-center items-center gap-3 top-[55%]">
+            <div class="flex justify-center items-center mt-[15px] relative">
+              <%= link_to main_path,
+                aria:  { label: "mainページに遷移" },
+                class: "group
+                        font-bold flex h-10 items-center justify-center z-30
+                        rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
+                <span class="block group-active:[transform:translate3d(0,1px,0)]">
+                  さあ、もふもふに会いに行こう♪
+                </span>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

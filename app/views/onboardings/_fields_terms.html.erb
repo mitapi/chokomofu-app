@@ -1,0 +1,33 @@
+<h2 class="font-medium flex justify-between items-center ml-[5px] mt-[60px]">
+  <b class = "underline underline-offset-4 decoration-2 decoration-amber-400 text-[#5b2d00]">利用規約（抜粋）</b>
+  <%= render "shared/field_error", object: f.object, attribute: :terms %>
+</h2>
+
+<section class="mt-[12px]">
+  <div role="region" aria-label="利用規約の抜粋" tabindex="0"
+       class="h-[130px] overflow-y-auto rounded-xl border border-amber-200 bg-white/90 p-4 text-sm text-[#5b2d00] w-[450px]">
+    <%= render "static/terms_body" %>
+  </div>
+
+  <p class="mt-2 text-xs text-[#5b2d00]">
+    くわしくは <%= link_to "利用規約全文", terms_path, class: "underline text-amber-700" %> をご確認ください。
+  </p>
+
+  <!-- 規約チェック（未同意のときだけ表示） -->
+  <% if @user.terms_agreed_at.present? %>
+    <p class="text-xs text-gray-500 mb-4 mt-[10px] ml-[5px]">
+      規約同意済み（<%= @user.terms_agreed_at.strftime("%Y/%m/%d") %>）
+    </p>
+  <% else %>
+    <div class="my-[20px] ml-[5px]">
+      <div class="flex justify-start gap-2">
+        <%= check_box_tag :terms, "1",
+              (params[:terms] == "1") || @user.terms_agreed_at?,
+              class: "align-middle flex scale-150"%>
+        <span class = "flex text-sm text-[#5b2d00] leading-none" >
+          <b>利用規約に同意します</b>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</section>

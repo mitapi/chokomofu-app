@@ -1,0 +1,42 @@
+<div class="flex flex-col items-start gap-3">
+  <div class="text-[#4a2200] rounded-3xl border border-amber-200 bg-amber-50/60 shadow-sm px-9 pt-8 h-[660px] w-[430px]">
+    <div class="space-y-6 leading-relaxed text-[16px]">
+      <p>そうそう！</p>
+
+      <div class="space-y-1">
+        <p>遊びにくるもふもふたちは、あなたをもっと知りたいと思っているみたいですよ。</p>
+      </div>
+
+      <div class="space-y-1">
+        <p>これから過ごす時間のために、いくつかあなたのことを教えてあげましょう。</p>
+      </div>
+
+      <div class="space-y-1">
+        <p>それと、もふもふたちと安心して過ごしてもらうために、いくつかのお約束（利用規約）があります。</p>
+      </div>
+
+      <div class="space-y-1">
+        <p>これにも、軽く目を通してもらえたらうれしいです。</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col relative justify-center items-center gap-5 top-[2.5%]">
+      <div class="flex justify-center items-center mt-[15px] relative">
+        <%= link_to edit_onboarding_path,
+          aria:  { label: "ニックネーム登録＋利用規約同意" },
+          class: "group
+                  font-bold flex h-10 items-center justify-center z-20
+                  rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
+          <span class="block group-active:[transform:translate3d(0,1px,0)]">
+            もふもふに教える！
+          </span>
+        <% end %>
+      </div>
+      <ul class="list-none list-inside mt-[5px] text-sm text-amber-600">
+        <li class="mb-[5px]">※ この先では以下のことを行います。</li>
+        <li class="mb-[5px]">ニックネーム登録 / 地域登録 / 利用規約の確認</li>
+        <li class="mb-[5px]">※地域を登録すると、会話や背景に使われる天気が地域ごとに変化します</li>
+      </ul>
+    </div>
+  </div>
+</div>

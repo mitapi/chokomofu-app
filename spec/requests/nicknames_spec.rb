@@ -11,7 +11,7 @@ RSpec.describe "Nicknames", type: :request do
   it "nickname更新の際にユーザーは増えない" do
     host! "www.example.com" 
     # 編集画面にGETして CSRFトークン取得
-    get edit_nickname_path
+    get edit_onboarding_path
     expect(response).to have_http_status(:ok)
 
     doc   = Nokogiri::HTML.parse(response.body)
@@ -21,7 +21,7 @@ RSpec.describe "Nicknames", type: :request do
     user = User.order(created_at: :desc).first || User.create!(guest_uid: SecureRandom.uuid, auth_kind: :guest)
 
     expect {
-      patch nickname_path, params: {
+      patch onboarding_path, params: {
         authenticity_token: token,
         user:  { nickname: "ぽめ" },
         terms: "1"

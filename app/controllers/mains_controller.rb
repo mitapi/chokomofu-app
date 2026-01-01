@@ -1,5 +1,5 @@
 class MainsController < ApplicationController
-  before_action :require_onboarding, unless: -> { Rails.env.test? }
+  before_action :redirect_unless_onboarding_completed, unless: -> { Rails.env.test? }
 
   def show
     slot = resolve_time_slot(params[:time_slot]).to_sym
@@ -10,11 +10,6 @@ class MainsController < ApplicationController
   end
 
   private
-
-  def require_onboarding
-    return if @current_user&.nickname.present?
-    redirect_to nickname_path
-  end
 
   # テストで時間固定する用の記述も残しておきます
   def resolve_time_slot(param)

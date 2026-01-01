@@ -9,5 +9,7 @@ application.register("hello", HelloController)
 
 // stimulusをセット
 import ConversationStepController from "./conversation_step_controller"
-
 application.register("conversation-step", ConversationStepController)
+
+import WelcomeStepsController from "./welcome_steps_controller"
+application.register("welcome-steps", WelcomeStepsController)

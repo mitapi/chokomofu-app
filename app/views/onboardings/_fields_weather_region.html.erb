@@ -1,0 +1,38 @@
+<h2 class="font-medium flex justify-between items-center ml-[5px] mt-[60px] relative">
+  <b class = "underline underline-offset-4 decoration-2 decoration-amber-400 text-[#5b2d00]">お天気の地域を選ぼう</b>
+  <%= render "shared/field_error", object: f.object, attribute: :region %>
+</h2>
+
+<section class="flex flex-col justify-center items-center mt-[12px] relative">
+  <div class="ml-[5px] text-sm leading-relaxed text-[#5b2d00]/70 text-left w-[450px]">
+    <ul class="list-disc list-inside space-y-1">
+      <li>会話や背景に使われる天気が変わるよ</li>
+      <li>登録後に変更することもできるよ（準備中）</li>
+    </ul>
+  </div>
+
+  <div class="flex flex-row justify-start items-center mt-[15px] gap-6 text-[#5b2d00] w-[450px]">
+    <% regions = [
+      ["東京", :tokyo],
+      ["大阪", :osaka],
+      ["福岡", :fukuoka],
+      ["札幌", :sapporo]
+    ] %>
+
+    <!-- エラーメッセージが出るとボタンが押せない状況を解決するため、以下のファイルを追加 -->
+    <!-- config/initializers/field_error_proc.rb -->
+    <% regions.each do |label, key| %>
+      <label class="cursor-pointer">
+        <%= f.radio_button :region, key, class: "peer sr-only" %>
+        <span class="
+          block rounded-xl border px-4 py-2 text-center font-bold text-[#5b2d00]
+          bg-white hover:bg-amber-200
+          peer-checked:bg-amber-200
+          transition
+        ">
+          <%= label %>
+        </span>
+      </label>
+    <% end %>
+  </div>
+</section>
