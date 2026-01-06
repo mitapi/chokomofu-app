@@ -1,7 +1,7 @@
 .bg-cats{
   --tile:120px;
   background-color:#fff5d7;
-  background-image: url("bg-cats.png");
+  background-image: url("/assets/bg-cats-7501c798.png");
   background-repeat:repeat;
   background-size:var(--tile) var(--tile);
 }

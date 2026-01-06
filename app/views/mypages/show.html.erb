@@ -1,0 +1,77 @@
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <section class="bg-[#ffebb8] shadow-sm border-b border-yellow-300/40 flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[75px] w-auto">
+    <div class="w-15 pl-8 flex items-center justify-start">
+      <%= link_to "/main",
+          class: "flex items-center justify-center w-11 h-11" do %>
+        <%= render "shared/icon_close", class: "w-7 h-7" %>
+      <% end %>
+    </div>
+
+    <div class="flex-1 text-center">
+      <h1 class="text-[30px] font-bold text-[#5b2d00]">
+        マイページ
+      </h1>
+    </div>
+
+    <div class="w-15"></div>
+  </section>
+
+  <!-- 以下ボタン群 -->
+  <main class="max-w-md mx-auto px-4 py-6 space-y-8">
+
+    <!-- 設定 -->
+    <section>
+      <h2 class="text-sm font-semibold text-gray-600 mb-3">
+        設定
+      </h2>
+
+      <div class="space-y-3">
+        <!-- ニックネーム変更 -->
+        <%= link_to "ニックネーム変更",
+            "/mypage/nickname",
+            class: "block w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-left hover:border-orange-300 hover:bg-yellow-100" %>
+
+        <!-- キャラクター変更（準備中） -->
+        <button
+          disabled
+          class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
+          <span>キャラクター変更</span>
+          <span class="text-xs">準備中</span>
+        </button>
+
+        <!-- データをまもる（準備中） -->
+        <button
+          disabled
+          class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
+          <span>データをまもる</span>
+          <span class="text-xs">準備中</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- このアプリについて -->
+    <section>
+      <h2 class="text-sm font-semibold text-gray-600 mb-3">
+        このアプリについて
+      </h2>
+
+      <div class="space-y-3">
+        <!-- 遊び方 -->
+        <%= link_to "このゲームの遊び方",
+            "/mypage/how_to_play",
+            class: "block w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-left hover:border-orange-300 hover:bg-yellow-100" %>
+
+        <!-- 以下は準備中 -->
+        <% ["データの取り扱いについて", "利用規約", "プライバシーポリシー", "お問い合わせ"].each do |label| %>
+          <button
+            disabled
+            class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
+            <span><%= label %></span>
+            <span class="text-xs">準備中</span>
+          </button>
+        <% end %>
+      </div>
+    </section>
+
+  </main>
+</div>

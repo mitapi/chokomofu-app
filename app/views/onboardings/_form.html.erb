@@ -1,7 +1,7 @@
-<%= form_with model: user, url: onboarding_path do |f| %>
+<%= form_with model: user, url: onboarding_path, method: :patch do |f| %>
   <%= render "onboardings/fields_nickname", f: f %>
 
-  <%= render "onboardings/fields_weather_region", f: f %>
+  <%= render "onboardings/fields_region", f: f %>
 
   <%= render "onboardings/fields_terms", f: f %>
 
