@@ -8,10 +8,10 @@ class MypagesController < ApplicationController
 
   def update_nickname
     @user = current_user
+    @user.assign_attributes(user_params)
 
     if @user.save
-      flash[:notice] = "プロフィールを更新しました"
-      redirect_to mypage_nickname_path
+      redirect_to mypage_path, notice: "プロフィールを更新したよ"
     else
       render :edit_nickname, status: :unprocessable_entity
     end
