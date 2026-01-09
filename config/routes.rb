@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resource :welcome, only: %i[show]
 
   resource :mypage, only: :show do
-    get   :nickname, action: :edit_nickname
-    patch :nickname, action: :update_nickname
+    get   :profile, action: :edit_profile
+    patch :profile, action: :update_profile
     get   :how_to_play
   end
 

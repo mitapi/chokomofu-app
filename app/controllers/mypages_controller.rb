@@ -1,19 +1,20 @@
 class MypagesController < ApplicationController
   def show
-  end
-
-  def edit_nickname
     @user = current_user
   end
 
-  def update_nickname
+  def edit_profile
+    @user = current_user
+  end
+
+  def update_profile
     @user = current_user
     @user.assign_attributes(user_params)
 
     if @user.save
-      redirect_to mypage_path, notice: "プロフィールを更新したよ"
+      redirect_to mypage_path, notice: "更新したよ"
     else
-      render :edit_nickname, status: :unprocessable_entity
+      render :edit_profile, status: :unprocessable_entity
     end
   end
 

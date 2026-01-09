@@ -17,35 +17,36 @@
   </section>
 
   <!-- 以下ボタン群 -->
-  <main class="max-w-md mx-auto px-4 py-6 space-y-8">
+  <div class="max-w-md mx-auto px-4 pt-[30px] pb-[40px] space-y-8">
 
     <!-- 設定 -->
-    <section>
-      <h2 class="text-sm font-semibold text-gray-600 mb-3">
-        設定
-      </h2>
+    <!-- プロフィール -->
+    <section class="w-full max-w-[600px] mb-9">
+      <div class="flex items-center justify-between mb-2">
+        <!-- 左側 -->
+        <div class="flex items-center gap-5">
+          <h2 class="text-sm font-semibold text-gray-600">プロフィール</h2>
+          <%= render "shared/flash_notice" %>
+        </div>
 
-      <div class="space-y-3">
-        <!-- ニックネーム変更 -->
-        <%= link_to "ニックネーム変更",
-            "/mypage/nickname",
-            class: "block w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-left hover:border-orange-300 hover:bg-yellow-100" %>
+        <!-- 右側 -->
+        <%= link_to "編集", profile_mypage_path,
+            class: "rounded-lg border border-orange-300 bg-white px-3 py-1 text-sm hover:border-orange-300 hover:bg-yellow-100" %>
+      </div>
 
-        <!-- キャラクター変更（準備中） -->
-        <button
-          disabled
-          class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
-          <span>キャラクター変更</span>
-          <span class="text-xs">準備中</span>
-        </button>
+      <div class="flex items-center justify-start gap-6 rounded-xl border border-orange-300 bg-white p-4 w-[390px] h-[140px]">
+        <!-- キャラ画像スペース -->
+        <div class="w-30 h-24 rounded-xl bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+          キャラ画像
+        </div>
 
-        <!-- データをまもる（準備中） -->
-        <button
-          disabled
-          class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
-          <span>データをまもる</span>
-          <span class="text-xs">準備中</span>
-        </button>
+        <!-- プロフィール情報 -->
+        <div class="text-sm space-y-1">
+          <p>ニックネーム：<b><%= @user.nickname %></b></p>
+          <p>地域：<b><%= region_label(@user.region) %></b></p>
+          <p>キャラクター：<span class="text-gray-400">—</span></p>
+          <p>引き継ぎ設定：<span class="text-gray-400">未設定</span></p>
+        </div>
       </div>
     </section>
 
@@ -73,5 +74,5 @@
       </div>
     </section>
 
-  </main>
+  </div>
 </div>
