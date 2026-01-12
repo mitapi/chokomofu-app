@@ -28,10 +28,6 @@ class ChatsController < ApplicationController
 
     @character ||= Character.find(@conv.character_id)
     @choices = @conv.conversation_choices.order(:position)
-
-    Rails.logger.info "[debug] slot=#{@time_slot.inspect} weather=#{@weather_slot.inspect} character_id=#{@character&.id.inspect}"
-    Rails.logger.info "[debug] picked_conv id=#{@conv&.id.inspect} code=#{@conv&.code.inspect} time_slot=#{@conv&.time_slot.inspect} kind=#{@conv&.kind.inspect}"
-    Rails.logger.info "[debug] fallback_used=#{@conv&.code == 'conv.greet.morning.breakfast'}"
   end
 
   private

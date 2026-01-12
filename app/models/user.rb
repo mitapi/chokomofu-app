@@ -1,8 +1,33 @@
 class User < ApplicationRecord
   before_validation :normalize_nickname
 
+  attr_accessor :terms
+
   validates :guest_uid, uniqueness: true, presence: true
-  validates :nickname, length: { maximum: 10 }, allow_blank: true
+
+  validates :nickname,
+    presence: { message: "ニックネームを入力してね" },
+    length: { maximum: 10, message: "ニックネームは10文字以内で入力してね" },
+    on: :update
+
+  validates :nickname,
+    format: {
+      with: /\A[[:alnum:]\p{Hiragana}\p{Katakana}\p{Han}\p{Zs}]+\z/u,
+      message: "使用できない文字が含まれているよ"
+    },
+    allow_blank: true,
+    on: :update
+
+  validates :region, presence: { message: "地域を選んでね" },on: :update
+
+  validate :terms_must_be_agreed, on: :update
+
+  def terms_must_be_agreed
+    return if terms_agreed_at.present?
+    return if terms.to_s == "1"
+    errors.add(:terms, "利用規約への同意が必要だよ")
+  end
+
 
   has_many :user_characters
   has_many :interactions

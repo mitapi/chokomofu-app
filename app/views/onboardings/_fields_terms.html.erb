@@ -21,9 +21,7 @@
   <% else %>
     <div class="my-[20px] ml-[5px]">
       <div class="flex justify-start gap-2">
-        <%= check_box_tag :terms, "1",
-              (params[:terms] == "1") || @user.terms_agreed_at?,
-              class: "align-middle flex scale-150"%>
+        <%= f.check_box :terms, { class: "align-middle flex scale-150" }, "1", "0" %>
         <span class = "flex text-sm text-[#5b2d00] leading-none" >
           <b>利用規約に同意します</b>
         </span>

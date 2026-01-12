@@ -1,7 +1,7 @@
 <section class="font-medium flex justify-between items-center ml-[5px] mt-[30px] relative">
   <%= f.label :nickname, 'ニックネーム',
         class: "underline underline-offset-4 decoration-2 decoration-amber-400 text-[#5b2d00]" %>
-  <%= render "shared/field_error", object: f.object, attribute: :nickname %>
+  <%= render "shared/field_error", object: @user, attribute: :nickname %>
 </section>
 
 <section class="flex flex-col justify-center items-center mt-[12px] relative">

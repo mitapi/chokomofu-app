@@ -1,0 +1,25 @@
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <section class="bg-[#ffebb8] shadow-sm border-b border-yellow-300/40 flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[75px] w-auto ">
+    <%= "プロフィール変更" %>
+  </section>
+  <section class="flex justify-center items-center h-[800px] w-[600px] relative">
+    <%= form_with model: @user, url: profile_mypage_path, method: :patch do |f| %>
+      <%= render "onboardings/fields_nickname", f: f %>
+
+      <%= render "onboardings/fields_region", f: f %>
+
+      <section class="flex justify-center bottom-[300px] mt-[40px] mb-[30px]">
+        <%= f.submit "変更する",
+              class: "group
+                      font-bold flex h-10 items-center justify-center
+                      rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+
+        <%= link_to "キャンセル",
+              profile_mypage_path,
+              class: "group
+                      font-bold flex h-10 items-center justify-center
+                      rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+      </section>
+    <% end %>
+  </section>
+</div>
