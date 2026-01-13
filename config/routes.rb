@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     get   :how_to_play
   end
 
+  resource :snack, only: [] do
+    get  :picker   # 候補を出す
+    post :give     # 選んだおやつをあげる
+  end
+
   get "/onboarding", to: "onboardings#edit"
   get "welcome/guide", to: "welcomes#guide"
   get "/account", to: "onboardings#edit"
