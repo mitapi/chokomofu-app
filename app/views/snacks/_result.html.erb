@@ -1,0 +1,40 @@
+<div class="bg-white/80 backdrop-blur rounded-t-2xl shadow-lg p-4 space-y-3">
+  <%# 1) キャラ画像（食べてる絵） %>
+  <div class="flex items-end gap-3">
+    <div class="w-20 h-20 rounded-2xl bg-white shadow flex items-center justify-center overflow-hidden">
+      <%# 画像パスはあなたの資産に合わせて変更してね %>
+      <%= image_tag "app/assets/images/character/pomemaru/idle.png",
+            alt: snack_type,
+            class: "w-full h-full object-cover",
+            onerror: "this.style.display='none'" %>
+      <%# ↑ 画像ないとき崩れないように保険。不要なら消してOK %>
+    </div>
+
+    <%# 2) 吹き出し（複数行） %>
+    <div class="flex-1">
+      <div class="rounded-2xl bg-white shadow p-3 space-y-1">
+        <% Array(lines).each do |line| %>
+          <p class="text-sm text-neutral-800 leading-relaxed"><%= line %></p>
+        <% end %>
+
+        <% if defined?(limited) && limited %>
+          <p class="text-xs text-neutral-500 pt-1">今日はもうおなかいっぱいみたい…</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# 3) 戻る/もう一回（picker に戻す） %>
+  <div class="flex gap-2">
+    <%= button_to "別のおやつにする",
+          snacks_picker_path,
+          method: :get,
+          form: { data: { turbo_frame: "snack_panel" } },
+          class: "flex-1 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-sm py-2 shadow-sm" %>
+
+    <%= link_to "とじる",
+          main_path,
+          data: { turbo_frame: "snack_panel" },
+          class: "flex-1 text-center rounded-xl bg-orange-100 hover:bg-orange-200 text-sm py-2 shadow-sm" %>
+  </div>
+</div>

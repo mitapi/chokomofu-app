@@ -20,13 +20,18 @@
       </div>
     </section>
 
+    <%= turbo_frame_tag "snack_panel",
+          class: "absolute inset-x-0 -top-2 -translate-y-full flex justify-center z-40 h-[100px] w-[100px]" do %>
+    <% end %>
+
     <section class="absolute flex gap-[5px] inset-x-0 justify-center mt-[20px] translate-y-[280px] z-20">
       <%= link_to chat_path,
                 aria: { label: "おしゃべり" } do %>
         <%= image_tag "button/btn-conv.png", alt: "おしゃべりボタン", class: "w-[100px]" %>
       <% end %>
-      <%= link_to "#",
-                aria: { label: "おやつ" } do %>
+      <%= link_to picker_snack_path,
+            data: { turbo_frame: "snack_panel" },
+            aria: { label: "おやつ" } do %>
         <%= image_tag "button/btn-snack.png", alt: "おやつボタン", class: "w-[100px]" %>
       <% end %>
       <%= link_to "#",
@@ -42,5 +47,6 @@
         <%= image_tag "button/btn-mypage.png", alt: "マイページボタン", class: "w-[100px]" %>
       <% end %>
     </section>
+
   </div>
 </div>
