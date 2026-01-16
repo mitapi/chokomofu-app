@@ -1,0 +1,25 @@
+<%= link_to chat_path,
+      aria: { label: "おしゃべり" } do %>
+  <%= image_tag "button/btn-conv.png", alt: "おしゃべりボタン", class: "w-[100px]" %>
+<% end %>
+
+<div class="relative">
+  <%= link_to picker_snack_path,
+        data: { turbo_frame: "menu_panel" },
+        aria: { label: "おやつ" } do %>
+    <%= image_tag "button/btn-snacks.png", alt: "おやつボタン", class: "w-[100px]" %>
+  <% end %>
+</div>
+
+<%= link_to "#",
+      aria: { label: "おもちゃ" } do %>
+  <%= image_tag "button/btn-toy.png", alt: "おもちゃボタン", class: "w-[100px]" %>
+<% end %>
+<%= link_to "#",
+      aria: { label: "好感度" } do %>
+  <%= image_tag "button/btn-affinity.png", alt: "好感度ボタン", class: "w-[100px]" %>
+<% end %>
+<%= link_to mypage_path,
+      aria: { label: "マイページ" } do %>
+  <%= image_tag "button/btn-mypage.png", alt: "マイページボタン", class: "w-[100px]" %>
+<% end %>

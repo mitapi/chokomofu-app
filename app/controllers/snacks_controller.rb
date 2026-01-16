@@ -1,7 +1,7 @@
 class SnacksController < ApplicationController
   def picker
     @snacks = Interaction.snack_types.keys
-    render partial: "snacks/picker", locals: { snacks: @snacks }
+    render :picker
   end
 
   def give

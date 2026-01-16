@@ -1,23 +1,28 @@
-<div class="bg-white/80 backdrop-blur rounded-t-2xl shadow-lg p-4 space-y-3">
-  <div class="rounded-2xl bg-white shadow p-3">
-    <p class="text-sm text-neutral-800">
-      おやつをあげる？
-    </p>
+<div class="w-full flex flex-col items-center gap-3">
+  <div class="flex justify-center gap-2 mb-3">
+    <%= link_to menu_main_path,
+          data: { turbo_frame: "menu_panel" },
+          class: "rounded-xl bg-neutral-100 hover:bg-neutral-200 text-sm px-4 py-2 shadow-sm" do %>
+      もどる
+    <% end %>
   </div>
 
-  <div class="grid grid-cols-3 gap-2">
-    <%# snack_type の値は、あなたの enum/定数に合わせてね %>
-    <% snacks = [
-      { key: "cookie",  label: "クッキー" },
-      { key: "jerky",   label: "ジャーキー" },
-    ] %>
-
-    <% snacks.each do |s| %>
-      <%= button_to s[:label],
-            give_snack_path(snack_type: s[:key]),
-            method: :post,
-            form: { data: { turbo_frame: "snack_panel" } },
-            class: "rounded-xl bg-orange-100 hover:bg-orange-200 text-sm py-2 px-2 shadow-sm" %>
-    <% end %>
+  <div class="flex justify-center">
+    <div class="border border-[#bc9858] bg-[#d6bc8e] rounded-2xl shadow-lg pt-1 px-2 pb-8">
+      <div class="grid grid-cols-2 gap-2">
+        <% snacks.each do |snack| %>
+          <%= button_to give_snack_path(snack_type: snack),
+                method: :post,
+                form: { data: { turbo_frame: "snack_result" } },
+                class: "p-0 border-0 bg-transparent" do %>
+            <div class="flex flex-col items-center gap-1">
+              <%= image_tag "snacks/icon-#{snack}.png",
+                    alt: snack,
+                    class: "w-[100px] h-[100px]" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

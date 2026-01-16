@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'top#index'
-  resource :main, only: %i[show] 
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
   resource :account, only: [:edit, :update]
   resource :welcome, only: %i[show]
 
+  resource :main, only: [:show] do
+    get :menu
+  end
   resource :mypage, only: :show do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile

@@ -7,8 +7,8 @@ class SnackMessageBuilder
     case @snack_type
     when :cookie
       cookie_variations.sample
-    when :jerky
-      jerky_variations.sample
+    when :sasami
+      sasami_variations.sample
     else
       ["……？"]
     end
@@ -38,7 +38,7 @@ class SnackMessageBuilder
     ]
   end
 
-  def jerky_variations
+  def sasami_variations
     [
       [
         "ささみジャーキー！？🐔",

@@ -9,6 +9,6 @@ class Interaction < ApplicationRecord
 
   enum snack_type: {
     cookie: 0,
-    jerky: 1
+    sasami: 1
   }
 end
