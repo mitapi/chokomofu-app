@@ -1,14 +1,17 @@
-<div class="w-full flex flex-col items-center gap-3">
-  <div class="flex justify-center gap-2 mb-3">
-    <%= link_to menu_main_path,
-          data: { turbo_frame: "menu_panel" },
-          class: "rounded-xl bg-neutral-100 hover:bg-neutral-200 text-sm px-4 py-2 shadow-sm" do %>
-      もどる
-    <% end %>
-  </div>
-
+<div class="w-full flex flex-col items-center gap-3 -translate-y-[50px]">
   <div class="flex justify-center">
-    <div class="border border-[#bc9858] bg-[#d6bc8e] rounded-2xl shadow-lg pt-1 px-2 pb-8">
+    <div class="relative border border-[#bc9858] bg-[#d6bc8e] rounded-2xl shadow-lg px-5 pb-4 pt-4">
+      <%# ★戻るを枠の左上へ %>
+      <%= link_to menu_main_path,
+            data: { turbo_frame: "menu_panel" },
+            class: "absolute left-[-20px] top-2" do %>
+
+        <div class="rounded-full bg-[#fffbf5] hover:bg-[#f5efe6] p-1 shadow-sm">
+          <%= render "shared/icon_close",
+                class: "w-7 h-7 text-[#a58855]" %>
+        </div>
+      <% end %>
+
       <div class="grid grid-cols-2 gap-2">
         <% snacks.each do |snack| %>
           <%= button_to give_snack_path(snack_type: snack),
@@ -19,6 +22,9 @@
               <%= image_tag "snacks/icon-#{snack}.png",
                     alt: snack,
                     class: "w-[100px] h-[100px]" %>
+              <div class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
+                あげる
+              </div>
             </div>
           <% end %>
         <% end %>
