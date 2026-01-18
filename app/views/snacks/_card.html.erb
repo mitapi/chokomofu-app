@@ -1,0 +1,30 @@
+<div class="relative">
+  <%# ★吹き出し（最初は空） %>
+  <%= turbo_frame_tag "snack_tip_#{snack}",
+        class: "absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full z-30" do %>
+  <% end %>
+
+  <%# ★詳細ボタン（giveとは別） %>
+  <%= link_to tip_snack_path(snack_type: snack, frame_id: "snack_tip_#{snack}"),
+        data: { turbo_frame: "snack_detail_panel" },
+        class: "absolute flex items-center justify-center right-[-3px] z-40
+                rounded-full border border-[#a58855] bg-[#fffbf5] hover:bg-[#f5efe6] shadow-sm w-7 h-7",
+        aria: { label: "詳細" } do %>
+    <span class="text-[#a58855] text-sm">？</span>
+  <% end %>
+
+  <%# ★あげる（カード全体クリック） %>
+  <%= button_to give_snack_path(snack_type: snack),
+        method: :post,
+        form: { data: { turbo_frame: "snack_result" } },
+        class: "p-0 border-0 bg-transparent" do %>
+    <div class="flex flex-col items-center gap-1">
+      <%= image_tag "snacks/icon-#{snack}.png",
+            alt: snack,
+            class: "w-[100px] h-[100px]" %>
+      <div class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
+        あげる
+      </div>
+    </div>
+  <% end %>
+</div>

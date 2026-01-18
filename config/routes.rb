@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resource :snack, only: [] do
     get  :picker   # 候補を出す
     post :give     # 選んだおやつをあげる
+    get  :tip      # 説明吹き出し
+    get  :tip_close
   end
 
   get "/onboarding", to: "onboardings#edit"

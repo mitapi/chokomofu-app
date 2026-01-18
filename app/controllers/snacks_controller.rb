@@ -43,4 +43,40 @@ class SnacksController < ApplicationController
              limited: false
            }
   end
+
+  def tip
+    snack_type = params[:snack_type].to_s
+
+    title, text =
+      case snack_type
+      when "cookie"
+        [
+          "くまさんクッキーサンド",
+          <<~TEXT
+            くまさんのお顔をかたどったクッキーに、
+            あまさ控えめなクリームをサンド。
+            「モフスタ映えする」と、流行に敏感な
+            もふもふたちから好評のおやつ。
+          TEXT
+        ]
+      when "sasami"
+        [
+          "お野菜とささみのおやつ",
+          <<~TEXT
+            もふもふたちが大好きなささみに、
+            お野菜をブレンドしたヘルシーおやつ。
+            お野菜苦手な子でも、意外とおいしく食べてくれると好評。
+          TEXT
+        ]
+      else
+        ["おやつ", "おいしいよ。"]
+      end
+
+    render partial: "snacks/detail_panel", locals: { title: title, text: text, snack_type: snack_type }
+  end
+
+  def tip_close
+    render inline: "<turbo-frame id='snack_detail_panel'></turbo-frame>"
+  end
+
 end

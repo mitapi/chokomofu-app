@@ -1,32 +1,24 @@
-<div class="w-full flex flex-col items-center gap-3 -translate-y-[50px]">
+<div class="w-full flex flex-col items-center gap-3 -translate-y-[40px]">
   <div class="flex justify-center">
-    <div class="relative border border-[#bc9858] bg-[#d6bc8e] rounded-2xl shadow-lg px-5 pb-4 pt-4">
+    <div class="relative border border-[#bc9858] bg-[#d6bc8e] rounded-2xl shadow-lg pl-11 pr-6 pb-4 pt-3">
+      <%= turbo_frame_tag "snack_detail_panel",
+            class: "absolute left-0 right-0 top-0 z-50 flex justify-center" do %>
+      <% end %>
+
       <%# ★戻るを枠の左上へ %>
       <%= link_to menu_main_path,
             data: { turbo_frame: "menu_panel" },
-            class: "absolute left-[-20px] top-2" do %>
+            class: "absolute left-[10px] top-[12px]" do %>
 
         <div class="rounded-full bg-[#fffbf5] hover:bg-[#f5efe6] p-1 shadow-sm">
           <%= render "shared/icon_close",
-                class: "w-7 h-7 text-[#a58855]" %>
+                class: "w-5 h-5 text-[#a58855]" %>
         </div>
       <% end %>
 
       <div class="grid grid-cols-2 gap-2">
         <% snacks.each do |snack| %>
-          <%= button_to give_snack_path(snack_type: snack),
-                method: :post,
-                form: { data: { turbo_frame: "snack_result" } },
-                class: "p-0 border-0 bg-transparent" do %>
-            <div class="flex flex-col items-center gap-1">
-              <%= image_tag "snacks/icon-#{snack}.png",
-                    alt: snack,
-                    class: "w-[100px] h-[100px]" %>
-              <div class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
-                あげる
-              </div>
-            </div>
-          <% end %>
+          <%= render "snacks/card", snack: snack %>
         <% end %>
       </div>
     </div>
