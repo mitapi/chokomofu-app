@@ -13,3 +13,6 @@ application.register("conversation-step", ConversationStepController)
 
 import WelcomeStepsController from "./welcome_steps_controller"
 application.register("welcome-steps", WelcomeStepsController)
+
+import SnackReactionController from "./snack_reaction_controller"
+application.register("snack-reaction", SnackReactionController)

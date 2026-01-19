@@ -6,23 +6,25 @@ class SnacksController < ApplicationController
 
   def give
     snack_key = params[:snack_type].to_s
-
     unless Interaction.snack_types.key?(snack_key)
       return render plain: "invalid snack", status: :unprocessable_entity
     end
 
     user = current_user
-    character = Character.first!  # 後で選択中キャラに差し替え
- 
+    character = Character.first! # 後で選択中キャラに差し替え
+
     today_count = Interaction
       .where(user: user, character_id: character.id, kind: :snack)
       .where(happened_at: Time.zone.today.all_day)
       .count
 
     if today_count >= 3
-      message = "今日のおやつはおしまいだよ"
-      return render partial: "snacks/result",
-                    locals: { snack_type: snack_key, message: message, limited: true }
+      lines = ["今日のおやつはおしまいだよ"]
+      return render turbo_stream: turbo_stream.replace(
+        "snack_result",
+        partial: "snacks/result",
+        locals: { character: character, snack_type: snack_key, lines: lines, limited: true }
+      )
     end
 
     Interaction.create!(
@@ -33,15 +35,13 @@ class SnacksController < ApplicationController
       happened_at: Time.current
     )
 
-    builder = SnackMessageBuilder.new(snack_type: snack_key)
-    lines   = builder.lines
+    lines = SnackMessageBuilder.new(user: user, character: character, snack_type: snack_key).lines
 
-    render partial: "snacks/result",
-           locals: {
-             snack_type: snack_key,
-             lines: lines,
-             limited: false
-           }
+    render turbo_stream: turbo_stream.replace(
+      "snack_result",
+      partial: "snacks/result",
+      locals: { character: character, snack_type: snack_key, lines: lines, limited: false }
+    )
   end
 
   def tip

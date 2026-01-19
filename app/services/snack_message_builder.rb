@@ -1,6 +1,6 @@
 class SnackMessageBuilder
-  def initialize(snack_type:)
-    @snack_type = snack_type.to_sym
+  def initialize(snack_type)
+    @snack_type = snack_type
   end
 
   def lines

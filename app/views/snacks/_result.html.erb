@@ -1,40 +1,23 @@
-<div class="bg-white/80 backdrop-blur rounded-t-2xl shadow-lg p-4 space-y-3">
-  <%# 1) キャラ画像（食べてる絵） %>
-  <div class="flex items-end gap-3">
-    <div class="w-20 h-20 rounded-2xl bg-white shadow flex items-center justify-center overflow-hidden">
-      <%# 画像パスはあなたの資産に合わせて変更してね %>
-      <%= image_tag "app/assets/images/character/pomemaru/idle.png",
-            alt: snack_type,
-            class: "w-full h-full object-cover",
-            onerror: "this.style.display='none'" %>
-      <%# ↑ 画像ないとき崩れないように保険。不要なら消してOK %>
-    </div>
-
-    <%# 2) 吹き出し（複数行） %>
-    <div class="flex-1">
-      <div class="rounded-2xl bg-white shadow p-3 space-y-1">
-        <% Array(lines).each do |line| %>
-          <p class="text-sm text-neutral-800 leading-relaxed"><%= line %></p>
-        <% end %>
-
-        <% if defined?(limited) && limited %>
-          <p class="text-xs text-neutral-500 pt-1">今日はもうおなかいっぱいみたい…</p>
-        <% end %>
-      </div>
-    </div>
+<div data-controller="snack-reaction"
+     data-snack-reaction-duration-value="2500"
+     class="relative">
+  <%# アニメ（最初に見える） %>
+  <div data-snack-reaction-target="animation" class="flex items-center justify-center gap-3">
+    <%= image_tag "character/pomemaru/idle.png", class: "w-[140px] h-[140px]", data: { snack_reaction_target: "frame1" } %>
+    <%= image_tag "character/pomemaru/smile.png", class: "w-[140px] h-[140px] hidden", data: { snack_reaction_target: "frame2" } %>
   </div>
 
-  <%# 3) 戻る/もう一回（picker に戻す） %>
-  <div class="flex gap-2">
-    <%= button_to "別のおやつにする",
-          snacks_picker_path,
-          method: :get,
-          form: { data: { turbo_frame: "snack_panel" } },
-          class: "flex-1 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-sm py-2 shadow-sm" %>
+  <%# セリフ（最初は hidden、数秒後に表示） %>
+  <div data-snack-reaction-target="message" class="hidden mt-3">
+    <%# ここは「前のchat表示」を流用しやすい形にしてある %>
+    <div data-controller="conversation-step">
+      <% lines.each_with_index do |line, i| %>
+        <p data-conversation-step-target="line" class="<%= i == 0 ? "" : "hidden" %>">
+          <%= line %>
+        </p>
+      <% end %>
 
-    <%= link_to "とじる",
-          main_path,
-          data: { turbo_frame: "snack_panel" },
-          class: "flex-1 text-center rounded-xl bg-orange-100 hover:bg-orange-200 text-sm py-2 shadow-sm" %>
+      <%# 次へUIが要るならここに。時間なければ最初の1行だけでも成立する %>
+    </div>
   </div>
 </div>
