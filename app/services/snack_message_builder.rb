@@ -1,13 +1,13 @@
 class SnackMessageBuilder
-  def initialize(snack_type)
-    @snack_type = snack_type
+  def initialize(snack_type:)
+    @snack_type = snack_type.to_s
   end
 
   def lines
     case @snack_type
-    when :cookie
+    when "cookie"
       cookie_variations.sample
-    when :sasami
+    when "sasami"
       sasami_variations.sample
     else
       ["……？"]

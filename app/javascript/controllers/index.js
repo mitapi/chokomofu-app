@@ -16,3 +16,6 @@ application.register("welcome-steps", WelcomeStepsController)
 
 import SnackReactionController from "./snack_reaction_controller"
 application.register("snack-reaction", SnackReactionController)
+
+import SnackBaseController from "./snack_base_controller"
+application.register("snack-base", SnackBaseController)
