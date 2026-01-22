@@ -1,12 +1,16 @@
-<section class="absolute flex h-[350px] inset-x-0 justify-center items-center pointer-events-none translate-y-[75px] z-30">
+<section class="fixed inset-0 flex h-[350px] justify-center items-center translate-y-[75px] z-30">
   <div class="absolute flex translate-x-0 will-change-transform pointer-events-auto"
        data-controller="snack-reaction"
-       data-snack-reaction-duration-value="2500">
+       data-snack-reaction-duration-value="4000">
 
     <%# アニメ（最初に見える） %>
     <div data-snack-reaction-target="animation" class="flex items-center justify-center gap-3">
       <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame1" } %>
       <%= image_tag "character/pomemaru/smile.png", class: "w-[260px] hidden", data: { snack_reaction_target: "frame2" } %>
+    </div>
+    <div class="flex justify-center hidden"
+         data-snack-reaction-target="frame3Wrapper">
+      <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame3" } %>
     </div>
 
     <%# セリフ（最初は hidden、数秒後に表示） %>

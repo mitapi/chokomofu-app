@@ -15,23 +15,34 @@ export default class extends Controller {
       this._tick = !this._tick
       this.frame1Target.classList.toggle("hidden", this._tick)
       this.frame2Target.classList.toggle("hidden", !this._tick)
-      this.frame3Target.classList.remove("hidden")
     }, 400)
 
     // 数秒後にセリフへ
-    const ms = this.durationValue || 8000
+    const ms = this.durationValue || 4000
     this._timeoutId = setTimeout(() => {
       clearInterval(this._intervalId)
-      this.animationTarget.classList.add("hidden")
+      this.frame1Target.classList.add("hidden")
+      this.frame2Target.classList.add("hidden")
+      this.frame3Target.classList.remove("hidden")
       this.messageTarget.classList.remove("hidden")
     }, ms)
   }
 
-  close() {
+  close(event) {
+    event?.preventDefault()
+    event?.stopPropagation()
+
+    console.log("[snack-reaction] close clicked")
     window.dispatchEvent(new Event("snack:show-base"))
 
     const frame = document.getElementById("snack_result")
-    if (frame) frame.innerHTML = ""
+    if (frame) {
+      frame.replaceChildren()
+      return
+    }
+
+    // 保険：frameが無い/取れない場合は自分を消す
+    this.element.remove()
   }
 
   disconnect() {

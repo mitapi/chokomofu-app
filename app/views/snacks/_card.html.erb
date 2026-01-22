@@ -14,17 +14,16 @@
   <% end %>
 
   <%# ★あげる（カード全体クリック） %>
-  <%= button_to give_snack_path(snack_type: snack),
-        method: :post,
-        form: { data: { turbo_frame: "snack_result" } },
-        class: "p-0 border-0 bg-transparent" do %>
-    <div class="flex flex-col items-center gap-1">
-      <%= image_tag "snacks/icon-#{snack}.png",
-            alt: snack,
-            class: "w-[100px] h-[100px]" %>
+  <div class="flex flex-col items-center gap-1">
+    <%= image_tag "snacks/icon-#{snack}.png",
+          alt: snack,
+          class: "w-[100px] h-[100px]" %>
+    <%= button_to give_snack_path(snack_type: snack),
+          method: :post,
+          class: "p-0 border-0 bg-transparent" do %>
       <div class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
         あげる
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
