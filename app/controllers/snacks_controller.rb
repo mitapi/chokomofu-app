@@ -5,8 +5,6 @@ class SnacksController < ApplicationController
   end
 
   def give
-    Rails.logger.debug "[snack] params=#{params.to_unsafe_h}"
-    Rails.logger.debug "[snack] snack_type_param=#{params[:snack_type].inspect}"
     snack_key = params[:snack_type].to_s
     unless Interaction.snack_types.key?(snack_key)
       return render plain: "invalid snack", status: :unprocessable_entity
@@ -25,7 +23,7 @@ class SnacksController < ApplicationController
 
     lines = SnackMessageBuilder.new(snack_type: snack_key).lines
 
-    render turbo_stream: turbo_stream.replace(
+    render turbo_stream: turbo_stream.update(
       "snack_result",
       partial: "snacks/result",
       locals: { character: character, snack_type: snack_key, lines: lines, limited: false }
