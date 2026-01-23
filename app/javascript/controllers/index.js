@@ -19,3 +19,6 @@ application.register("snack-reaction", SnackReactionController)
 
 import SnackBaseController from "./snack_base_controller"
 application.register("snack-base", SnackBaseController)
+
+import SnackLoadingController from "./snack_loading_controller"
+application.register("snack-loading", SnackLoadingController)

@@ -16,13 +16,24 @@ export default class extends Controller {
     window.removeEventListener("snack:show-base", this.showBase)
   }
 
+  // snack_result（演出）を出す時：メインぽめ＆メニューを無効化
   hideBase() {
-    if (this.hasBaseTarget) this.baseTarget.classList.add("opacity-0")
-    if (this.hasMenuTarget) this.menuTarget.classList.add("opacity-0")
+    if (this.hasBaseTarget) {
+      this.baseTarget.classList.add("opacity-0", "pointer-events-none")
+    }
+    if (this.hasMenuTarget) {
+      this.menuTarget.classList.add("opacity-0", "pointer-events-none")
+    }
   }
 
+  // 演出を閉じる時：元に戻す
   showBase() {
-    if (this.hasBaseTarget) this.baseTarget.classList.remove("opacity-0")
-    if (this.hasMenuTarget) this.menuTarget.classList.remove("opacity-0")
+    if (this.hasBaseTarget) {
+      this.baseTarget.classList.remove("opacity-0", "pointer-events-none")
+    }
+
+    if (this.hasMenuTarget) {
+      this.menuTarget.classList.remove("opacity-0", "pointer-events-none")
+    }
   }
 }

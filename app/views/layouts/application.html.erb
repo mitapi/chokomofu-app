@@ -29,10 +29,6 @@
   </head>
 
   <body class="antialiased bg-cats font-sans grid min-h-screen place-items-center">
-    <%# snack_resultがDOMに出ないので、ここに置いてどの画面にも存在するようにしました%>
-    <%= turbo_frame_tag "snack_result",
-          class: "fixed inset-0 pointer-events-none z-[999]" do %>
-    <% end %>
     <main class="flex flex-col items-center justify-center max-w-[960px]">
       <%= yield %>
     </main>

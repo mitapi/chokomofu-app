@@ -22,12 +22,17 @@
             ) %>
       </div>
     </section>
+    <%= turbo_frame_tag "snack_result",
+          class: "absolute inset-0 flex justify-center items-center z-30 pointer-events-none" do %>
+    <% end %>
 
     <%= turbo_frame_tag "menu_panel",
-          data: { snack_base_target: "menu" },
+          data: {
+            snack_base_target: "menu",
+            action: "snack:hide-base@window->snack-base#hideBase snack:show-base@window->snack-base#showBase"
+          },
           class: "absolute flex gap-[5px] inset-x-0 justify-center mt-[20px] translate-y-[280px] z-20" do %>
       <%= render "mains/menu_buttons" %>
     <% end %>
-
   </div>
 </div>

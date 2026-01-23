@@ -1,4 +1,3 @@
-console.log("[snack-reaction] file loaded")
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -33,7 +32,18 @@ export default class extends Controller {
     event?.stopPropagation()
 
     console.log("[snack-reaction] close clicked")
-    window.dispatchEvent(new Event("snack:show-base"))
+
+    // ★先に止める（安全）
+    if (this._intervalId) {
+      window.clearInterval(this._intervalId)
+      this._intervalId = null
+    }
+    if (this._timeoutId) {
+      window.clearTimeout(this._timeoutId)
+      this._timeoutId = null
+    }
+
+    window.dispatchEvent(new CustomEvent("snack:show-base"))
 
     const frame = document.getElementById("snack_result")
     if (frame) {
@@ -41,7 +51,6 @@ export default class extends Controller {
       return
     }
 
-    // 保険：frameが無い/取れない場合は自分を消す
     this.element.remove()
   }
 

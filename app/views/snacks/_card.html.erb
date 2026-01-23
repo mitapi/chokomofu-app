@@ -20,8 +20,16 @@
           class: "w-[100px] h-[100px]" %>
     <%= button_to give_snack_path(snack_type: snack),
           method: :post,
+          form: {
+            data: {
+              controller: "snack-loading",
+              action: "turbo:submit-start->snack-loading#start turbo:submit-end->snack-loading#end snack:show-base@window->snack-loading#end"
+            }
+          },
           class: "p-0 border-0 bg-transparent" do %>
-      <div class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
+      <div
+        data-snack-loading-target="text"
+        class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
         あげる
       </div>
     <% end %>
