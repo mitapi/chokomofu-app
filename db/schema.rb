@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_31_081923) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_12_130544) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_31_081923) do
     t.datetime "happened_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "snack_type"
     t.index ["character_id"], name: "index_interactions_on_character_id"
     t.index ["user_id", "kind", "happened_at"], name: "index_interactions_on_user_id_and_kind_and_happened_at"
     t.index ["user_id"], name: "index_interactions_on_user_id"

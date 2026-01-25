@@ -1,0 +1,30 @@
+<section class="absolute flex h-[350px] inset-x-0 justify-center items-center pointer-events-none translate-y-[75px] z-30">
+  <div class="absolute flex translate-x-0 will-change-transform pointer-events-auto"
+       data-controller="snack-reaction"
+       data-snack-reaction-duration-value="4000">
+
+    <div data-snack-reaction-target="animation" class="flex items-center justify-center gap-3">
+      <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame1" } %>
+      <%= image_tag "character/pomemaru/smile.png", class: "w-[260px] hidden", data: { snack_reaction_target: "frame2" } %>
+    </div>
+
+    <div class="flex justify-center hidden" data-snack-reaction-target="frame3Wrapper">
+      <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame3" } %>
+    </div>
+
+    <div data-snack-reaction-target="message"
+         class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[340px]">
+      <div data-controller="conversation-step" class="pointer-events-auto">
+        <% lines.each_with_index do |line, i| %>
+          <p data-conversation-step-target="line" class="<%= i == 0 ? "" : "hidden" %>"><%= line %></p>
+        <% end %>
+
+        <button type="button"
+                class="mt-3 px-3 py-1 rounded-full bg-white/80 shadow"
+                data-action="click->snack-reaction#close">
+          とじる
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

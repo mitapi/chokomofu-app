@@ -1,5 +1,8 @@
 class MainsController < ApplicationController
   before_action :redirect_unless_onboarding_completed, unless: -> { Rails.env.test? }
+  def menu
+    render :menu
+  end
 
   def show
     slot = resolve_time_slot(params[:time_slot]).to_sym

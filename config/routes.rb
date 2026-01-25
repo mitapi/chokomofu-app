@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
   root 'top#index'
-  resource :main, only: %i[show] 
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
   resource :account, only: [:edit, :update]
   resource :welcome, only: %i[show]
 
+  resource :main, only: [:show] do
+    get :menu
+  end
   resource :mypage, only: :show do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile
     get   :how_to_play
+  end
+
+  resource :snack, only: [] do
+    get  :picker   # 候補を出す
+    post :give     # 選んだおやつをあげる
+    get  :tip      # 説明吹き出し
+    get  :tip_close
   end
 
   get "/onboarding", to: "onboardings#edit"

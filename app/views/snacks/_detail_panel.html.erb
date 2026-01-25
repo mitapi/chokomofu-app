@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "snack_detail_panel" do %>
+  <div class="absolute inset-0 z-50 pointer-events-auto">
+    <%# パネル本体：茶色枠を覆う大きさ %>
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[20px]
+                h-[200px] w-[500px]
+                rounded-2xl bg-[#fffbf5] shadow-xl px-7 py-4 text-sm text-gray-700">
+
+      <div class="flex gap-6 items-start">
+        <%= image_tag "snacks/icon-#{snack_type}.png",
+              alt: snack_type,
+              class: "w-[150px]" %>
+        <div class="min-w-0">
+          <div class="font-bold text-[#5b2d00] text-[16px] mt-3 mb-2"><%= title %></div>
+          <div class="whitespace-pre-line leading-[1.8]"><%= text %></div>
+        </div>
+      </div>
+
+      <%= link_to tip_close_snack_path,
+            data: { turbo_frame: "snack_detail_panel" },
+            class: "absolute left-4 top-3" do %>
+        <div class="rounded-full bg-[#5b2d00] p-1 shadow-sm">
+          <%= render "shared/icon_close", class: "w-4 h-4 text-[#fffbf5]" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
