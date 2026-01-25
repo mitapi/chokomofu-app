@@ -3,27 +3,40 @@
        data-controller="snack-reaction"
        data-snack-reaction-duration-value="4000">
 
-    <div data-snack-reaction-target="animation" class="flex items-center justify-center gap-3">
-      <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame1" } %>
-      <%= image_tag "character/pomemaru/smile.png", class: "w-[260px] hidden", data: { snack_reaction_target: "frame2" } %>
+    <!-- ✅ 前段：受け取るポメ + おやつがふわん -->
+    <div data-snack-reaction-target="pre"
+         class="relative flex items-center justify-center">
+      <%= image_tag "character/pomemaru/eat_02.png", class: "w-[310px]" %>
+
+      <div class="absolute -top-[100px] left-1/2 -translate-x-1/2">
+        <%= image_tag "snacks/give-#{snack_type}.png", class: "w-[130px] snack-float" %>
+      </div>
     </div>
 
-    <div class="flex justify-center hidden" data-snack-reaction-target="frame3Wrapper">
-      <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame3" } %>
-    </div>
+    <!-- ✅ 本編：いままでの結果UI（最初は hidden） -->
+    <div data-snack-reaction-target="main" class="hidden">
+      <div data-snack-reaction-target="animation" class="flex items-center justify-center gap-3">
+        <%= image_tag "character/pomemaru/eat_01.png", class: "w-[260px]", data: { snack_reaction_target: "frame1" } %>
+        <%= image_tag "character/pomemaru/eat_02.png", class: "w-[310px] hidden", data: { snack_reaction_target: "frame2" } %>
+      </div>
 
-    <div data-snack-reaction-target="message"
-         class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[340px]">
-      <div data-controller="conversation-step" class="pointer-events-auto">
-        <% lines.each_with_index do |line, i| %>
-          <p data-conversation-step-target="line" class="<%= i == 0 ? "" : "hidden" %>"><%= line %></p>
-        <% end %>
+      <div class="flex justify-center hidden" data-snack-reaction-target="frame3Wrapper">
+        <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame3" } %>
+      </div>
 
-        <button type="button"
-                class="mt-3 px-3 py-1 rounded-full bg-white/80 shadow"
-                data-action="click->snack-reaction#close">
-          とじる
-        </button>
+      <div data-snack-reaction-target="message"
+           class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[340px]">
+        <div data-controller="conversation-step" class="pointer-events-auto">
+          <% lines.each_with_index do |line, i| %>
+            <p data-conversation-step-target="line" class="<%= i == 0 ? "" : "hidden" %>"><%= line %></p>
+          <% end %>
+
+          <button type="button"
+                  class="mt-3 px-3 py-1 rounded-full bg-white/80 shadow"
+                  data-action="click->snack-reaction#close">
+            とじる
+          </button>
+        </div>
       </div>
     </div>
   </div>

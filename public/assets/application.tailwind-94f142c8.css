@@ -28,5 +28,5 @@ textarea:-webkit-autofill:focus {
 }
 
 .snack-float {
-  animation: snackFloat 1200ms ease-out forwards;
+  animation: snackFloat 1000ms ease-out forwards;
 }

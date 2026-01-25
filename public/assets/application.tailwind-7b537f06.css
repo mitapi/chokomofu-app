@@ -23,10 +23,10 @@ textarea:-webkit-autofill:focus {
 /* おやつアニメーション前に、おやつがふんわり出るコード */
 @keyframes snackFloat {
   0%   { transform: translateY(0) scale(1); opacity: 1; }
-  70%  { transform: translateY(150px) scale(1.05); opacity: 1; }
-  100% { transform: translateY(160px) scale(0.9); opacity: 0; }
+  70%  { transform: translateY(80px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(150px) scale(0.9); opacity: 0; }
 }
 
 .snack-float {
-  animation: snackFloat 1200ms ease-out forwards;
+  animation: snackFloat 1000ms ease-out forwards;
 }
