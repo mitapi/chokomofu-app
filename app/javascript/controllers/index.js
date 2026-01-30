@@ -11,6 +11,9 @@ application.register("hello", HelloController)
 import ConversationStepController from "./conversation_step_controller"
 application.register("conversation-step", ConversationStepController)
 
+import BubbleFadeController from "./bubble_fade_controller"
+application.register("bubble-fade", BubbleFadeController)
+
 import WelcomeStepsController from "./welcome_steps_controller"
 application.register("welcome-steps", WelcomeStepsController)
 

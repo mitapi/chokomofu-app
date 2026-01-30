@@ -1,0 +1,25 @@
+<div data-controller="conversation-step" data-action="click->conversation-step#next">
+  <%= render "shared/speech_bubble", class: "w-[450px] mt-2", style: "" do %>
+    <% lines.each_with_index do |line, i| %>
+      <p data-conversation-step-target="line"
+         class="<%= i == 0 ? '' : 'hidden' %> mb-1">
+        <%= h(line) %>
+      </p>
+    <% end %>
+
+    <div data-conversation-step-target="nextIndicator"
+         class="mt-2 text-right text-sm text-amber-400/80 select-none">
+      ▼
+    </div>
+
+    <div data-conversation-step-target="closer"
+         class="flex justify-end pt-2 hidden">
+      <button type="button"
+              class="inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2
+                     hover:bg-amber-400/20 transition"
+              data-action="click->snack-reaction#close">
+        とじる
+      </button>
+    </div>
+  <% end %>
+</div>

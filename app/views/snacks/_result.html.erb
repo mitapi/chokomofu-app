@@ -20,22 +20,22 @@
         <%= image_tag "character/pomemaru/eat_02.png", class: "w-[310px] hidden", data: { snack_reaction_target: "frame2" } %>
       </div>
 
-      <div class="flex justify-center hidden" data-snack-reaction-target="frame3Wrapper">
-        <%= image_tag "character/pomemaru/idle.png", class: "w-[260px]", data: { snack_reaction_target: "frame3" } %>
-      </div>
+      <%= image_tag "character/pomemaru/idle.png",
+        class: "w-[260px] hidden",
+        data: { snack_reaction_target: "frame3" } %>
 
       <div data-snack-reaction-target="message"
-           class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[340px]">
-        <div data-controller="conversation-step" class="pointer-events-auto">
-          <% lines.each_with_index do |line, i| %>
-            <p data-conversation-step-target="line" class="<%= i == 0 ? "" : "hidden" %>"><%= line %></p>
-          <% end %>
+           class="hidden absolute left-1/2 -translate-x-1/2 top-[200px] mt-3">
+        <div data-snack-reaction-target="messageUnit"
+             class="opacity-0 translate-y-2 scale-95 transition-all duration-800 ease-in-out">
+          <section
+            style="width:130px;height:40px;border-color:#ffc876;"
+            class="flex justify-center items-center
+                   rounded-2xl border-[3px] bg-slate-50 px-3 py-2 shadow">
+            <%= h(character.name || "？") %>
+          </section>
 
-          <button type="button"
-                  class="mt-3 px-3 py-1 rounded-full bg-white/80 shadow"
-                  data-action="click->snack-reaction#close">
-            とじる
-          </button>
+          <%= render "snacks/bubble", lines: lines %>
         </div>
       </div>
     </div>

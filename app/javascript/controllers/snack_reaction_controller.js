@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["pre", "main", "message", "frame1", "frame2", "frame3"]
+  static targets = ["pre", "main", "message", "messageUnit", "frame1", "frame2", "frame3"]
   static values = { duration: Number }
 
   connect() {
@@ -29,6 +29,7 @@ export default class extends Controller {
     this.frame2Target.classList.add("hidden")
     this.frame3Target.classList.add("hidden")
     this.messageTarget.classList.add("hidden")
+    this.messageUnitTarget?.classList.add("opacity-0", "translate-y-3", "scale-95")
 
     // frame1/frame2 の切替開始
     this._intervalId = window.setInterval(() => {
@@ -37,7 +38,7 @@ export default class extends Controller {
       this.frame2Target.classList.toggle("hidden", !this._tick)
     }, 400)
 
-    // ms 後に idle + message へ
+    // ms 後に おやつ食べ後のぽめ + message へ
     const ms = this.durationValue || 2800
     this._timeoutId = window.setTimeout(() => {
       if (this._intervalId) {
@@ -48,7 +49,16 @@ export default class extends Controller {
       this.frame1Target.classList.add("hidden")
       this.frame2Target.classList.add("hidden")
       this.frame3Target.classList.remove("hidden")
+
       this.messageTarget.classList.remove("hidden")
+
+      const unit = this.messageUnitTarget
+
+      unit.classList.add("opacity-0", "translate-y-3", "scale-95")
+      unit.getBoundingClientRect()
+      requestAnimationFrame(() => {
+        unit.classList.remove("opacity-0", "translate-y-3", "scale-95")
+      })
     }, ms)
   }
 
