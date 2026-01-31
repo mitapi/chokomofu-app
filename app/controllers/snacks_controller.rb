@@ -21,7 +21,7 @@ class SnacksController < ApplicationController
       happened_at: Time.current
     )
 
-    lines = SnackMessageBuilder.new(snack_type: snack_key).lines
+    lines = SnackMessageBuilder.new(user: current_user, snack_type: snack_key).lines
 
     render turbo_stream: turbo_stream.update(
       "snack_result",

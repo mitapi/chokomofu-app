@@ -1,10 +1,10 @@
 <div data-controller="conversation-step" data-action="click->conversation-step#next">
-  <%= render "shared/speech_bubble", class: "w-[450px] mt-2", style: "" do %>
+  <%= render "shared/speech_bubble", class: "w-[480px] mt-2", style: "" do %>
     <% lines.each_with_index do |line, i| %>
-      <p data-conversation-step-target="line"
-         class="<%= i == 0 ? '' : 'hidden' %> mb-1">
-        <%= h(line) %>
-      </p>
+      <div data-conversation-step-target="line"
+           class="<%= i == 0 ? '' : 'hidden' %> mb-1">
+        <%= simple_format(h(line), {}, wrapper_tag: "div") %>
+      </div>
     <% end %>
 
     <div data-conversation-step-target="nextIndicator"
