@@ -1,0 +1,36 @@
+shared: &shared
+  pomemaru:
+    face_idle:
+      src: "character/pomemaru/idle.png"
+      width: 260
+    face_happy:
+      src: "character/pomemaru/happy.png"
+      width: 260
+    face_kirakira:
+      src: "character/pomemaru/kirakira.png"
+      width: 260
+    face_hmm:
+      src: "character/pomemaru/hmm.png"
+      width: 260
+    face_surprise:
+      src: "character/pomemaru/surprise.png"
+      width: 260
+    face_memo_normal:
+      src: "character/pomemaru/memo_normal.png"
+      width: 260
+    face_memo_smile:
+      src: "character/pomemaru/memo_smile.png"
+      width: 260
+    face_eat_01:
+      src: "character/pomemaru/eat_01.png"
+      width: 260
+    face_eat_02:
+      src: "character/pomemaru/eat_02.png"
+      width: 310
+
+development:
+  <<: *shared
+test:
+  <<: *shared
+production:
+  <<: *shared

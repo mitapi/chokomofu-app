@@ -8,13 +8,13 @@ export default class extends Controller {
     this.index = 0
     this.total = this.lineTargets.length
     this.updateUI()
+    this.emitStepChange()
   }
 
   next() {
-    // もう次の行が無いときは何もしない
-    if (this.index >= this.total - 1) {
-      return
-    }
+    console.log("[conversation-step] next called")
+
+    if (this.index >= this.total - 1) return
 
     // 今の行を隠す
     this.lineTargets[this.index].classList.add("hidden")
@@ -22,8 +22,19 @@ export default class extends Controller {
     // 次の行へ
     this.index += 1
 
-    // 次の行を表示する
+    // 次の行を表示する（←先に表示！）
     this.lineTargets[this.index].classList.remove("hidden")
+
+    // いま表示中の行から expressionKey を取って通知
+    const currentLine = this.lineTargets[this.index]
+    const expressionKey = currentLine?.dataset?.expressionKey
+
+    this.element.dispatchEvent(
+      new CustomEvent("conversation-step:change", {
+        bubbles: true,
+        detail: { expressionKey }
+      })
+    )
 
     this.updateUI()
   }
@@ -44,5 +55,14 @@ export default class extends Controller {
     if (this.hasCloserTarget) {
       this.closerTarget.classList.toggle("hidden", !isLast)
     }
+  }
+
+  emitStepChange() {
+    this.element.dispatchEvent(
+      new CustomEvent("conversation-step:change", {
+        bubbles: true,
+        detail: { expressionKey: this.lineTargets.find(el => !el.classList.contains("hidden"))?.dataset?.expressionKey }
+      })
+    )
   }
 }

@@ -2,10 +2,9 @@
   data-controller="conversation-step"
   data-action="click->conversation-step#next"
 >
-  <section style="width:550px; height:190px; border-color:#ffc876;""
-           class="relative rounded-2xl border-[3px] bg-slate-50 mt-2
-                  grid [grid-template-rows:1fr_auto] p-6 shadow
-                  cursor-pointer">
+  <%= render "shared/speech_bubble",
+        class: "mt-2 grid [grid-template-rows:1fr_auto] cursor-pointer
+                relative w-[550px]" do %>
 
     <% conversation_lines(@conv).each_with_index do |block, index| %>
       <div
@@ -26,7 +25,7 @@
     <% if @choices.any? %>
       <ul 
         data-conversation-step-target="choices"
-        class="flex justify-center pt-2 gap-6 hidden"
+        class="flex justify-center pt-6 gap-6 hidden"
       >
         <% @choices.each do |c| %>
           <li>
@@ -44,5 +43,5 @@
               class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
       </div>
     <% end %>
-  </section>
+  <% end %>
 </div>

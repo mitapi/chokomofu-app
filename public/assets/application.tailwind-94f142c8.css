@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@source "./app/views/**/*.{erb,html}" "./app/javascript/**/*.{js,ts,jsx,tsx}" "./app/helpers/**/*.rb";
+
+@theme {
+  --font-sans: "Zen Maru Gothic",
+               "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo,
+               system-ui, ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+               "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Chrome/Safari: autofillで文字色が変わるのを防ぐコード */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #5b2d00 !important;
+  caret-color: #5b2d00;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* おやつアニメーション前に、おやつがふんわり出るコード */
+@keyframes snackFloat {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  70%  { transform: translateY(150px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(160px) scale(0.9); opacity: 0; }
+}
+
+.snack-float {
+  animation: snackFloat 1000ms ease-out forwards;
+}

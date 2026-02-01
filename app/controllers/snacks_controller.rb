@@ -13,7 +13,6 @@ class SnacksController < ApplicationController
     user = current_user
     character = Character.first! # 後で選択中キャラに差し替え
 
-    sleep 1.0 if Rails.env.development?
     Interaction.create!(
       user: user,
       character_id: character.id,
@@ -22,7 +21,7 @@ class SnacksController < ApplicationController
       happened_at: Time.current
     )
 
-    lines = SnackMessageBuilder.new(snack_type: snack_key).lines
+    lines = SnackMessageBuilder.new(user: current_user, snack_type: snack_key).lines
 
     render turbo_stream: turbo_stream.update(
       "snack_result",
