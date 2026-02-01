@@ -1,9 +1,11 @@
 <div data-controller="conversation-step" data-action="click->conversation-step#next">
   <%= render "shared/speech_bubble", class: "w-[480px] mt-2", style: "" do %>
-    <% lines.each_with_index do |line, i| %>
+    <% lines.each_with_index do |item, i| %>
       <div data-conversation-step-target="line"
+           data-expression-key="<%= item[:image] %>"
            class="<%= i == 0 ? '' : 'hidden' %> mb-1">
-        <%= simple_format(h(line), {}, wrapper_tag: "div") %>
+
+        <%= simple_format(h(item[:text]), {}, wrapper_tag: "div") %>
       </div>
     <% end %>
 

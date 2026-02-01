@@ -1,6 +1,11 @@
+<% expr_map = expression_map_for(character) %>
+<% width_map = expression_width_map_for(character) %>
+
 <section class="absolute flex h-[350px] inset-x-0 justify-center items-center pointer-events-none translate-y-[75px] z-30">
   <div class="absolute flex translate-x-0 will-change-transform pointer-events-auto"
        data-controller="snack-reaction"
+       data-snack-reaction-expression-map-value='<%= json_escape(expr_map.to_json) %>'
+       data-snack-reaction-expression-width-map-value='<%= json_escape(width_map.to_json) %>'
        data-snack-reaction-duration-value="4000">
 
     <!-- ✅ 前段：受け取るポメ + おやつがふわん -->
@@ -20,14 +25,17 @@
         <%= image_tag "character/pomemaru/eat_02.png", class: "w-[310px] hidden", data: { snack_reaction_target: "frame2" } %>
       </div>
 
-      <%= image_tag "character/pomemaru/idle.png",
-        class: "w-[260px] hidden",
-        data: { snack_reaction_target: "frame3" } %>
+      <%= image_tag(
+        default_expression_src(@character) || asset_path("character/pomemaru/eat_01.png"),
+        data: { snack_reaction_target: "frame3" },
+        class: "hidden"
+        ) %>
 
       <div data-snack-reaction-target="message"
            class="hidden absolute left-1/2 -translate-x-1/2 top-[160px] mt-3">
         <div data-snack-reaction-target="messageUnit"
              class="opacity-0 translate-y-2 scale-95 transition-all duration-800 ease-in-out">
+
           <section
             style="width:130px;height:40px;border-color:#ffc876;"
             class="flex justify-center items-center
