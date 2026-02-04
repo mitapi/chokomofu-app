@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_01_131424) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_03_065744) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_01_131424) do
     t.integer "kind", null: false
     t.integer "time_slot", null: false
     t.integer "weather_slot", null: false
-    t.integer "min_affinity", default: 0, null: false
     t.integer "weight", default: 1
     t.text "text", null: false
     t.datetime "created_at", null: false
@@ -67,10 +66,24 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_01_131424) do
     t.index ["user_id"], name: "index_interactions_on_user_id"
   end
 
+  create_table "mofu_diaries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "date"
+    t.string "title"
+    t.string "line1"
+    t.string "line2"
+    t.integer "weather_slot"
+    t.integer "time_slot"
+    t.string "character_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "date"], name: "index_mofu_diaries_on_user_id_and_date", unique: true
+    t.index ["user_id"], name: "index_mofu_diaries_on_user_id"
+  end
+
   create_table "user_characters", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "character_id", null: false
-    t.integer "affinity", default: 0, null: false
     t.boolean "is_selected", default: false, null: false
     t.datetime "last_interacted_at"
     t.datetime "created_at", null: false
@@ -101,6 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_01_131424) do
   add_foreign_key "conversations", "characters"
   add_foreign_key "interactions", "characters"
   add_foreign_key "interactions", "users"
+  add_foreign_key "mofu_diaries", "users"
   add_foreign_key "user_characters", "characters"
   add_foreign_key "user_characters", "users"
 end

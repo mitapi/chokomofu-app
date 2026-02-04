@@ -12,7 +12,6 @@ lunch_greet = upsert_conversation(
     role:         0,
     time_slot:    :noon_01,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text:         "%{nickname}しゃん、こんにちは〜！ お昼ゴハンは食べた？"
   }
@@ -26,7 +25,6 @@ lunch_branch_a = upsert_conversation(
     role:         1,
     time_slot:    :noon_01,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       そなの！おなかいっぱいになった〜？
@@ -54,7 +52,6 @@ lunch_branch_b = upsert_conversation(
     role:         1,
     time_slot:    :noon_01,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       食べてないの……！おなか、すいちゃうよね。
