@@ -30,5 +30,9 @@ Rails.application.routes.draw do
   get "/account", to: "onboardings#edit"
   get "/terms", to: "static#terms"
   get "/privacy", to: "static#privacy"
+
   get "up" => "rails/health#show", as: :rails_health_check
+
+  get "mofu_diaries/share/:share_token", to: "mofu_diaries#share", as: :share_mofu_diary
+  get "mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
 end

@@ -1,4 +1,6 @@
 class MofuDiariesController < ApplicationController
+  skip_before_action :ensure_current_user, only: [:share, :og]
+
   def show
     @mofu_diary = current_user.mofu_diaries.find(params[:id])
   end
@@ -23,5 +25,18 @@ class MofuDiariesController < ApplicationController
     end
 
     redirect_to mofu_diary_path(diary)
+  end
+
+  def share
+    @mofu_diary = MofuDiary.find_by!(share_token: params[:share_token])
+  end
+
+  def og
+    diary = MofuDiary.find_by!(share_token: params[:share_token])
+
+    path = Rails.root.join("tmp", "og_mofu_diary_#{diary.id}.png")
+    OgImageGenerator.new(diary).generate_to!(path)
+
+    send_file path, type: "image/png", disposition: "inline"
   end
 end
