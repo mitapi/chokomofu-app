@@ -12,7 +12,6 @@ late_night_greet = upsert_conversation(
     role:         0,
     time_slot:    :late_night,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT        
       ふわわ～……はっ！
@@ -33,7 +32,6 @@ late_night_branch_a = upsert_conversation(
     role:         1,
     time_slot:    :late_night,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       うん……いっしょに寝たいな。
@@ -56,7 +54,6 @@ late_night_branch_b = upsert_conversation(
     role:         1,
     time_slot:    :late_night,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       そなのね、じゃあぽめは……

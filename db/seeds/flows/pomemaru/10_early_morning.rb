@@ -12,7 +12,6 @@ early_morning_greet = upsert_conversation(
     role:         0,
     time_slot:    :early_morning,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       すや……むにゃ……
@@ -28,7 +27,6 @@ early_morning_branch_a = upsert_conversation(
     role:         0,
     time_slot:    :early_morning,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       ぽめまるは気持ちよさそうに眠っています。
@@ -45,7 +43,6 @@ early_morning_branch_b = upsert_conversation(
     role:         0,
     time_slot:    :early_morning,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       むにゃ……きょうのカリカリは、

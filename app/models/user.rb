@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :user_characters
   has_many :interactions
   has_many :inquiries
+  has_many :mofu_diaries, dependent: :destroy
 
   enum :auth_kind, {
     guest:     0,

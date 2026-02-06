@@ -21,10 +21,18 @@ Rails.application.routes.draw do
     get  :tip_close
   end
 
+  resources :mofu_diaries, only: [:show] do
+    post :create_today, on: :collection
+  end
+
   get "/onboarding", to: "onboardings#edit"
   get "welcome/guide", to: "welcomes#guide"
   get "/account", to: "onboardings#edit"
   get "/terms", to: "static#terms"
   get "/privacy", to: "static#privacy"
+
   get "up" => "rails/health#show", as: :rails_health_check
+
+  get "mofu_diaries/share/:share_token", to: "mofu_diaries#share", as: :share_mofu_diary
+  get "mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
 end

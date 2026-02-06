@@ -12,7 +12,6 @@ breaktime_evening_greet = upsert_conversation(
     role:         0,
     time_slot:    :evening,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       おひさまが沈んできたの。
@@ -32,7 +31,6 @@ breaktime_evening_branch_a = upsert_conversation(
     role:         1,
     time_slot:    :evening,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       やった〜！じゃあ、ぽめが伸びの先生するの。
@@ -65,7 +63,6 @@ breaktime_evening_branch_b = upsert_conversation(
     role:         1,
     time_slot:    :evening,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       わん……とってもお疲れなのね。

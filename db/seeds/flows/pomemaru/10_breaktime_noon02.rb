@@ -12,7 +12,6 @@ breaktime_noon02_greet = upsert_conversation(
     role:         0,
     time_slot:    :noon_02,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       %{nickname}しゃん、ぽめがきましたよ〜。
@@ -29,7 +28,6 @@ breaktime_noon02_branch_a = upsert_conversation(
     role:         1,
     time_slot:    :noon_02,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       ぽめのこと、なでなでしてくれるの？
@@ -54,7 +52,6 @@ breaktime_noon02_branch_b = upsert_conversation(
     role:         1,
     time_slot:    :noon_02,
     weather_slot: :any_weather,
-    min_affinity: 0,
     weight:       1,
     text: <<~TEXT
       えっ！！おやつ！？おやつくれるの～！？
