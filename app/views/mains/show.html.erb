@@ -26,6 +26,8 @@
           class: "absolute inset-0 flex justify-center items-center z-30 pointer-events-none" do %>
     <% end %>
 
+    <%= turbo_frame_tag "diary_modal", class: "pointer-events-none" %>
+
     <%= turbo_frame_tag "menu_panel",
           data: {
             snack_base_target: "menu",

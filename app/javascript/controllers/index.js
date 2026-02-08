@@ -25,3 +25,6 @@ application.register("snack-base", SnackBaseController)
 
 import SnackLoadingController from "./snack_loading_controller"
 application.register("snack-loading", SnackLoadingController)
+
+import DiaryModalController from "./diary_modal_controller"
+application.register("diary-modal", DiaryModalController)

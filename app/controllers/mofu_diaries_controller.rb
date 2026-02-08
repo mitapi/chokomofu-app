@@ -7,12 +7,12 @@ class MofuDiariesController < ApplicationController
 
   def create_today
     today = Time.zone.today
-    diary = current_user.mofu_diaries.find_or_initialize_by(date: today)
+    @mofu_diary = current_user.mofu_diaries.find_or_initialize_by(date: today)
 
-    if diary.new_record?
+    if @mofu_diary.new_record?
       built = MofuDiaryBuilder.new(user: current_user, date: today).build
 
-      diary.assign_attributes(
+      @mofu_diary.assign_attributes(
         title: "#{today.strftime('%-m/%-d')} のもふ日記",
         line1: built.line1,
         line2: built.line2,
@@ -21,11 +21,14 @@ class MofuDiariesController < ApplicationController
         character_key: built.character_key,
         pose: built.pose
       )
-      diary.save!
-    end
-
-    redirect_to mofu_diary_path(diary)
+    @mofu_diary.save!
   end
+
+  respond_to do |format|
+    format.turbo_stream
+    format.html { redirect_to mofu_diary_path(@mofu_diary) }
+  end
+end
 
   def share
     @mofu_diary = MofuDiary.find_by!(share_token: params[:share_token])
