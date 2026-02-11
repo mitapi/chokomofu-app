@@ -51,9 +51,9 @@ class OgImageGenerator
   def absolute_pose_path(pose)
     rel =
       case (pose.presence || "idle")
-      when "snack" then "diary/pomemaru_snack.png"
-      when "talk"  then "diary/pomemaru_talk.png"
-      else              "diary/pomemaru_idle.png"
+      when "snack" then "diary/pomemaru_snack03.png"
+      when "talk"  then "diary/pomemaru_talk03.png"
+      else              "diary/pomemaru_nomal.png"
       end
 
     Rails.root.join("app/assets/images", rel).to_s
