@@ -21,14 +21,21 @@ class MofuDiariesController < ApplicationController
         character_key: built.character_key,
         pose: built.pose
       )
-    @mofu_diary.save!
+      @mofu_diary.save!
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to mofu_diary_path(@mofu_diary) }
+   end
   end
 
-  respond_to do |format|
-    format.turbo_stream
-    format.html { redirect_to mofu_diary_path(@mofu_diary) }
+  def confirm_today
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to main_path }
+    end
   end
-end
 
   def share
     @mofu_diary = MofuDiary.find_by!(share_token: params[:share_token])

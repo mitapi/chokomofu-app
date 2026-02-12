@@ -21,8 +21,11 @@ Rails.application.routes.draw do
     get  :tip_close
   end
 
-  resources :mofu_diaries, only: [:show] do
-    post :create_today, on: :collection
+  resource :mofu_diaries, only: [] do
+    collection do
+      get  :confirm_today
+      post :create_today
+    end
   end
 
   get "/onboarding", to: "onboardings#edit"

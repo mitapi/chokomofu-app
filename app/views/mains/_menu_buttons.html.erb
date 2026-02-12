@@ -24,8 +24,8 @@
   <%= image_tag "button/btn-mypage.png", alt: "マイページボタン", class: "w-[100px]" %>
 <% end %>
 
-<%= link_to create_today_mofu_diaries_path(format: :turbo_stream),
-      data: { turbo_frame: "diary_modal", turbo_method: :post },
+<%= link_to confirm_today_mofu_diaries_path(format: :turbo_stream),
+      data: { turbo_frame: "diary_modal", turbo_prefetch: false },
       aria: { label: "もふ日記" } do %>
   <%= image_tag "button/btn-diary.png", alt: "もふ日記ボタン", class: "w-[100px]" %>
 <% end %>
