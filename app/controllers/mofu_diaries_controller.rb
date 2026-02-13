@@ -19,7 +19,7 @@ class MofuDiariesController < ApplicationController
         weather_slot: built.weather_slot,
         time_slot: built.time_slot,
         character_key: built.character_key,
-        pose: built.pose
+        illust: built.illust
       )
       @mofu_diary.save!
     end

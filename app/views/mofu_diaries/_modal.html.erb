@@ -23,7 +23,7 @@
 
           <div class="absolute flex flex-col items-center justify-center px-4 pb-3">
             <div class="flex justify-center">
-              <%= image_tag diary_pose_image_path(mofu_diary),
+              <%= image_tag diary_illust_image_path(mofu_diary),
                     alt: "ぽめまる",
                     class: "w-[400px]" %>
             </div>
@@ -40,9 +40,11 @@
                 <%= mofu_diary.date %>
               </div>
 
-              <!-- スタンプ予定 -->
+              <!-- スタンプ -->
               <div class="flex gap-2">
-                <!-- ここに、スタンプ画像おく -->
+                <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
+                  <%= image_tag p, alt: "天気", class: "w-[30px] h-[16px] drop-shadow-sm" %>
+                <% end %>
               </div>
             </div>
           </div>
