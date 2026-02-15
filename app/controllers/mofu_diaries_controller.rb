@@ -50,3 +50,9 @@ class MofuDiariesController < ApplicationController
     send_file path, type: "image/png", disposition: "inline"
   end
 end
+
+#日記の文章・画像出し分けチェック（railsコンソール）
+#user = User.last
+#today = Time.zone.today
+#user.mofu_diaries.where(date: today).destroy_all
+#↑で、今日の日記を消す→作り直す、で確認する。

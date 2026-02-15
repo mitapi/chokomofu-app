@@ -4,7 +4,7 @@ class Interaction < ApplicationRecord
 
   enum kind: {
     snack: 0,
-    toy: 1
+    talk: 1
   }
 
   enum snack_type: {

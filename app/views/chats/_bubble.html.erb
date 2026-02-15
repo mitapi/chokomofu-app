@@ -25,11 +25,16 @@
     <% if @choices.any? %>
       <ul 
         data-conversation-step-target="choices"
+        data-action="click->conversation-step#stop"
         class="flex justify-center pt-6 gap-6 hidden"
       >
         <% @choices.each do |c| %>
           <li>
-            <%= link_to choice_label_html(c), chat_path(conversation_id: c.next_conversation_id),
+            <%= button_to choice_label_html(c),
+                  "/chat/choose",
+                  method: :post,
+                  params: { next_conversation_id: c.next_conversation_id },
+                  form_class: "inline-block",
                   class: "inline-block rounded-xl border-2 border-amber-400 bg-white px-3 py-2 hover:bg-amber-400/20 transition" %>
           </li>
         <% end %>

@@ -11,7 +11,10 @@ export default class extends Controller {
     this.emitStepChange()
   }
 
-  next() {
+  next(event) {
+    // 選択肢（a / button / form）を押した時は、会話送り処理をしない
+    if (event?.target?.closest("a, button, form")) return
+
     console.log("[conversation-step] next called")
 
     if (this.index >= this.total - 1) return
@@ -39,6 +42,7 @@ export default class extends Controller {
     this.updateUI()
   }
 
+
   updateUI() {
    const isLast = this.index >= this.total - 1
 
@@ -65,4 +69,8 @@ export default class extends Controller {
       })
     )
   }
+
+  stop(event) {
+    event.stopPropagation()
+  }  
 }

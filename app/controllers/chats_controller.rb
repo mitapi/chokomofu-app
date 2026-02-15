@@ -30,6 +30,22 @@ class ChatsController < ApplicationController
     @choices = @conv.conversation_choices.order(:position)
   end
 
+  def choose
+    next_conv = Conversation.find(params[:next_conversation_id])
+
+    interaction = current_user.interactions.new(
+      kind: :talk,
+      happened_at: Time.current,
+      character_id: next_conv.character_id
+    )
+
+    unless interaction.save
+      Rails.logger.warn("[chat choose] #{interaction.errors.full_messages}")
+    end
+
+    redirect_to chat_path(conversation_id: next_conv.id)
+  end
+
   private
 
   # テストで時間固定する用の記述も残しておきます

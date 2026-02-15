@@ -4,9 +4,10 @@ class MofuDiaryBuilder
     keyword_init: true
   )
 
-  def initialize(user:, date: Time.zone.today)
+  def initialize(user:, date: Time.zone.today, debug_counts: nil)
     @user = user
     @date = date
+    @debug_counts = debug_counts
   end
 
   def build
@@ -20,7 +21,7 @@ class MofuDiaryBuilder
     # 日記文章とイラスト出し分けのためのカテゴリ
     category =
       if snack_count.zero? && talk_count.zero?
-        :rest
+        :nomal
       elsif talk_count.zero? && snack_count <= 2
         :snack_light
       elsif talk_count.zero? && snack_count >= 3
@@ -35,10 +36,10 @@ class MofuDiaryBuilder
         :both_heavy
       end
 
-    # イラスト出し分け（★イラスト作る！）
+    # イラスト出し分け（app/helpers/mofu_diaries_helper.rbで使用）
     illust =
       case category
-      when :rest        then "idle"
+      when :nomal       then "nomal"
       when :snack_light then "snack_light"
       when :snack_heavy then "snack_heavy"
       when :talk_light  then "talk_light"
@@ -54,15 +55,15 @@ class MofuDiaryBuilder
       elsif talk_count.zero? && snack_count <= 2
         ["おいしい おやつを もらったよ。", "もっと たくさん、たべたい おいしさ……♪"]
       elsif talk_count.zero? && snack_count >= 3
-        ["ちょこっと おしゃべり。", "おはなしできて、とっても うれしい～！"]
-      elsif snack_count.zero? && talk_count <= 4
         ["たくさん おやつを もらえちゃった！", "おなか いっぱい、しあわせ～♪"]
+      elsif snack_count.zero? && talk_count <= 4
+        ["ちょこっと おしゃべり。", "おはなしできて、とっても うれしい～！"]
       elsif snack_count.zero? && talk_count >= 5
         ["きょうは いっぱい おしゃべりデー！", "あしたも たくさん おしゃべり したいな♪ わくわく。"]
       elsif snack_count <= 2 && talk_count <= 4
-        ["おやつを たべて、おしゃべりも したよ！", "たのしいこと たくさん、うれしいきもち♪"]
+        ["おやつを たべて、おしゃべりも したよ！", "たのしい たくさん、うれしいきもち♪"]
       else
-        ["おやついっぱい、おしゃべりもいっぱい！！", "さいこうすぎて、もふもふが さらに もふもふに なる～♪"]
+        ["おやついっぱい、おしゃべりもいっぱい！！", "さいこうすぎて、もふもふが もっと もふもふに なる～♪"]
       end
 
     Result.new(
