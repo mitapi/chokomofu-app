@@ -4,9 +4,10 @@ class MofuDiaryBuilder
     keyword_init: true
   )
 
-  def initialize(user:, date: Time.zone.today, debug_counts: nil)
+  def initialize(user:, date: Time.zone.today, weather_slot: nil, time_slot: nil, debug_counts: nil)
     @user = user
     @date = date
+    @weather_slot = weather_slot
     @debug_counts = debug_counts
   end
 
@@ -70,8 +71,8 @@ class MofuDiaryBuilder
       line1: line1,
       line2: line2,
       illust: illust,
-      weather_slot: 0,   # ここは後で既存の天気スロットを差し込む
-      time_slot: 0,      # ここも後で
+      weather_slot: @weather_slot,
+      time_slot: @time_slot,
       character_key: "pomemaru"
     )
   end

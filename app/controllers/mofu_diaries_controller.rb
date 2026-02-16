@@ -10,7 +10,11 @@ class MofuDiariesController < ApplicationController
     @mofu_diary = current_user.mofu_diaries.find_or_initialize_by(date: today)
 
     if @mofu_diary.new_record?
-      built = MofuDiaryBuilder.new(user: current_user, date: today).build
+      built = MofuDiaryBuilder.new(
+        user: current_user,
+        date: today,
+        weather_slot: current_weather_slot
+      ).build
 
       @mofu_diary.assign_attributes(
         title: "#{today.strftime('%-m/%-d')} のもふ日記",
