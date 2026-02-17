@@ -14,12 +14,12 @@ class Conversation < ApplicationRecord
   }, default: :morning
 
   enum :weather_slot, {
-    any:   0,
+    any_weather:   0,
     clear: 1,
     cloudy: 2,
     rain:  3,
     snow:  4
-  }, default: :any
+  }, default: :any_weather
 
   enum :kind, { talk: 0, whisper: 1 }, prefix: true
 
@@ -27,5 +27,5 @@ class Conversation < ApplicationRecord
   enum :role, { entry: 0, followup: 1 }, prefix: true
 
   scope :for_slot,    ->(slot)    { where(time_slot: [slot, :any]) }
-  scope :for_weather, ->(w_slot)  { where(weather_slot: [w_slot, :any]) }
+  scope :for_weather, ->(w_slot)  { where(weather_slot: [w_slot, :any_weather]) }
 end

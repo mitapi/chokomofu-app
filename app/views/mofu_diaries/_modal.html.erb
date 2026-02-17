@@ -11,47 +11,9 @@
       data-action="click->diary-modal#stop">
 
       <div class="relative w-full max-w-[520px] mx-auto mt-2">
-        <!-- タイトル -->
-        <div class="text-base font-bold">
-          <%= mofu_diary.title %>
-        </div>
+        <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
 
-        <div class="flex items-center justify-center">
-          <!-- フレーム画像 -->
-          <%= image_tag "diary/frame.png",
-                class: "relative w-full h-[450px] select-none pointer-events-none block" %>
-
-          <div class="absolute flex flex-col items-center justify-center px-4 pb-3">
-            <div class="flex justify-center">
-              <%= image_tag diary_illust_image_path(mofu_diary),
-                    alt: "ぽめまる",
-                    class: "w-[400px]" %>
-            </div>
-
-            <!-- テキスト -->
-            <div class="text-[15px] leading-relaxed mt-8">
-              <%= mofu_diary.line1 %><br>
-              <%= mofu_diary.line2 %>
-            </div>
-
-            <!-- 下部情報 -->
-            <div class="flex items-center justify-between mt-3 text-xs opacity-70">
-              <div>
-                <!-- diary_id=<%= mofu_diary.id %> -->
-                <!-- user_id=<%= mofu_diary.user_id %> -->
-                <%= mofu_diary.date %>
-              </div>
-
-              <!-- スタンプ -->
-              <div class="flex gap-2">
-                <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
-                  <%= image_tag p, alt: "天気", class: "w-[30px] h-[16px] drop-shadow-sm" %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% share_url = share_mofu_diary_url(mofu_diary.share_token) %>
+        <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
         <% text = "#{mofu_diary.title}｜#ちょこもふ" %>
         <div class="my-4 flex gap-2">
           <%= link_to "Xに投稿",
@@ -67,8 +29,8 @@
             閉じる
           </button>
         </div>
-
       </div>
+
     </div>
   </div>
 </div>
