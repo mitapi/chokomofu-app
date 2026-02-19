@@ -11,6 +11,10 @@
       data-action="click->diary-modal#stop">
 
       <div class="relative w-full max-w-[520px] mx-auto mt-2">
+        <!-- タイトル -->
+        <div class="text-base font-bold">
+          <%= mofu_diary.title %>
+        </div>
         <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
 
         <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
