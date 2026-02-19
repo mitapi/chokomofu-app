@@ -1,12 +1,14 @@
 class MofuDiaryBuilder
   Result = Struct.new(
-    :line1, :line2, :pose, :weather_slot, :time_slot, :character_key,
+    :line1, :line2, :illust, :weather_slot, :time_slot, :character_key,
     keyword_init: true
   )
 
-  def initialize(user:, date: Time.zone.today)
+  def initialize(user:, date: Time.zone.today, weather_slot: nil, time_slot: nil, debug_counts: nil)
     @user = user
     @date = date
+    @weather_slot = weather_slot
+    @debug_counts = debug_counts
   end
 
   def build
@@ -17,33 +19,60 @@ class MofuDiaryBuilder
     snack_count = base.where(kind: :snack).count
     talk_count  = base.where(kind: :talk).count
 
-    pose =
-      if snack_count > talk_count
-        "snack"
-      elsif talk_count > snack_count
-        "talk"
+    # 日記文章とイラスト出し分けのためのカテゴリ
+    category =
+      if snack_count.zero? && talk_count.zero?
+        :nomal
+      elsif talk_count.zero? && snack_count <= 2
+        :snack_light
+      elsif talk_count.zero? && snack_count >= 3
+        :snack_heavy
+      elsif snack_count.zero? && talk_count <= 4
+        :talk_light
+      elsif snack_count.zero? && talk_count >= 5
+        :talk_heavy
+      elsif snack_count <= 2 && talk_count <= 4
+        :both_light
       else
-        "idle"
+        :both_heavy
+      end
+
+    # イラスト出し分け（app/helpers/mofu_diaries_helper.rbで使用）
+    illust =
+      case category
+      when :nomal       then "nomal"
+      when :snack_light then "snack_light"
+      when :snack_heavy then "snack_heavy"
+      when :talk_light  then "talk_light"
+      when :talk_heavy  then "talk_heavy"
+      when :both_light  then "snack_talk_light"
+      when :both_heavy  then "snack_talk_heavy"
       end
 
     # 文章は「2行固定」でテンプレ出し分け（MVP）
     line1, line2 =
       if snack_count.zero? && talk_count.zero?
-        ["きょうは ひとやすみ したよ", "ゆっくり もふもふ 🐾"]
-      elsif snack_count >= 3
-        ["おやつを #{snack_count} かい もらったよ", "おなか いっぱい もふ〜"]
-      elsif talk_count >= 3
-        ["たくさん おしゃべり したよ", "きいてくれて ありがとう 🐶"]
+        ["きょうは ゆっくり ひとやすみデー。", "もふもふなでなで、してもらったよ♪"]
+      elsif talk_count.zero? && snack_count <= 2
+        ["おいしい おやつを もらったよ。", "もっと たくさん、たべたい おいしさ……♪"]
+      elsif talk_count.zero? && snack_count >= 3
+        ["たくさん おやつを もらえちゃった！", "おなか いっぱい、しあわせ～♪"]
+      elsif snack_count.zero? && talk_count <= 4
+        ["ちょこっと おしゃべり。", "おはなしできて、とっても うれしい～！"]
+      elsif snack_count.zero? && talk_count >= 5
+        ["きょうは いっぱい おしゃべりデー！", "あしたも たくさん おしゃべり したいな♪ わくわく。"]
+      elsif snack_count <= 2 && talk_count <= 4
+        ["おやつを たべて、おしゃべりも したよ！", "たのしい たくさん、うれしいきもち♪"]
       else
-        ["おやつ: #{snack_count} / おしゃべり: #{talk_count}", "きょうも えらいぞ〜 🐾"]
+        ["おやついっぱい、おしゃべりもいっぱい！！", "さいこうすぎて、もふもふが もっと もふもふに なる～♪"]
       end
 
     Result.new(
       line1: line1,
       line2: line2,
-      pose: pose,
-      weather_slot: 0,   # ここは後で既存の天気スロットを差し込む
-      time_slot: 0,      # ここも後で
+      illust: illust,
+      weather_slot: @weather_slot,
+      time_slot: @time_slot,
       character_key: "pomemaru"
     )
   end

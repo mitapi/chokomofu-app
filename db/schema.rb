@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_05_151421) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_13_141347) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_05_151421) do
     t.string "character_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "pose"
+    t.string "illust"
     t.string "share_token", null: false
     t.index ["share_token"], name: "index_mofu_diaries_on_share_token", unique: true
     t.index ["user_id", "date"], name: "index_mofu_diaries_on_user_id_and_date", unique: true

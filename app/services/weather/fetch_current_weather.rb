@@ -18,7 +18,7 @@ class Weather::FetchCurrentWeather
 
   rescue => e
     Rails.logger.error(event: "weather_fetch_failed", error: e.message)
-    Result.new(slot: :any)
+    Result.new(slot: :any_weather)
   end
 
   private
@@ -59,7 +59,7 @@ class Weather::FetchCurrentWeather
 
   #天気コード → アプリの区分に変換
   def map_weather_slot(data)
-    return :any unless data
+    return :any_weather unless data
 
     code = extract_weather_code(data)
 
@@ -73,7 +73,7 @@ class Weather::FetchCurrentWeather
     when 71, 73, 75, 77, 85, 86
       :snow
     else
-      :any
+      :any_weather
     end
   end
 

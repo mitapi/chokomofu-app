@@ -1,0 +1,35 @@
+<div class="flex items-center justify-center">
+  <!-- フレーム画像 -->
+  <%= image_tag "diary/frame.png",
+    class: "relative w-full h-[450px] select-none pointer-events-none block" %>
+
+  <div class="absolute flex flex-col items-center justify-center px-4 pb-3">
+    <div class="flex justify-center">
+      <%= image_tag diary_illust_image_path(mofu_diary),
+            alt: "ぽめまる",
+            class: "w-[400px]" %>
+    </div>
+
+    <!-- テキスト -->
+    <div class="text-[15px] leading-relaxed mt-8">
+      <%= mofu_diary.line1 %><br>
+      <%= mofu_diary.line2 %>
+    </div>
+
+    <!-- 下部情報 -->
+    <div class="flex items-center justify-between mt-3 text-xs opacity-70">
+      <div>
+        <!-- diary_id=<%= mofu_diary.id %> -->
+        <!-- user_id=<%= mofu_diary.user_id %> -->
+        <%= mofu_diary.date %>
+      </div>
+
+      <!-- スタンプ -->
+      <div class="flex gap-2">
+        <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
+          <%= image_tag p, alt: "天気", class: "w-[30px] h-[16px] drop-shadow-sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

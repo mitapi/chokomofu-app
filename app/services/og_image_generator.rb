@@ -18,9 +18,9 @@ class OgImageGenerator
     image = MiniMagick::Image.open(path.to_s)
 
     # 2) ぽめまる合成（ファイルがあれば）
-    pose_path = absolute_pose_path(@diary.pose)
-    if pose_path && File.exist?(pose_path)
-      char = MiniMagick::Image.open(pose_path)
+    illust_path = absolute_illust_path(@diary.illust)
+    if illust_path && File.exist?(illust_path)
+      char = MiniMagick::Image.open(illust_path)
       char.resize "520x520"
 
       image = image.composite(char) do |c|
@@ -48,12 +48,12 @@ class OgImageGenerator
 
   private
 
-  def absolute_pose_path(pose)
+  def absolute_illust_path(illust)
     rel =
-      case (pose.presence || "idle")
-      when "snack" then "diary/pomemaru_snack.png"
-      when "talk"  then "diary/pomemaru_talk.png"
-      else              "diary/pomemaru_idle.png"
+      case (illust.presence || "idle")
+      when "snack" then "diary/pomemaru_snack03.png"
+      when "talk"  then "diary/pomemaru_talk03.png"
+      else              "diary/pomemaru_nomal.png"
       end
 
     Rails.root.join("app/assets/images", rel).to_s

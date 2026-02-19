@@ -7,34 +7,54 @@ class ChatsController < ApplicationController
     weather = current_weather_slot
     @weather_slot = weather.presence || :any_weather
 
-    # seed に合わせたフォールバック
+    # キャラを先に確定（※暫定）
+    @character = Character.first!
+
     fallback = Conversation.find_by!(code: "conv.greet.morning.breakfast")
+
+    scope = Conversation
+      .where(character: @character, kind: :talk, role: :entry)
+      .for_slot(@time_slot)
+      .for_weather(@weather_slot)
 
     @conv =
       if params[:conversation_id].to_s.match?(/\A\d+\z/)
         Conversation.find_by!(id: params[:conversation_id])
       else
-        @character = Character.first!   # あとで選択キャラに置き換えメソッド作る
-
-      Conversation
-        .where(character: @character, kind: :talk, role: :entry)
-        .for_slot(@time_slot)
-        .for_weather(@weather_slot)
-        .order("RANDOM()")           # 候補からランダムに抽出
-        .first
+        scope
+          .left_joins(:conversation_choices)
+          .group("conversations.id")
+          .order(Arel.sql("COUNT(conversation_choices.id) DESC, RANDOM()"))
+          .first
       end
 
     @conv ||= fallback
-
     @character ||= Character.find(@conv.character_id)
     @choices = @conv.conversation_choices.order(:position)
+  end
+
+
+  def choose
+    next_conv = Conversation.find(params[:next_conversation_id])
+
+    interaction = current_user.interactions.new(
+      kind: :talk,
+      happened_at: Time.current,
+      character_id: next_conv.character_id
+    )
+
+    unless interaction.save
+      Rails.logger.warn("[chat choose] #{interaction.errors.full_messages}")
+    end
+
+    redirect_to chat_path(conversation_id: next_conv.id)
   end
 
   private
 
   # テストで時間固定する用の記述も残しておきます
   def resolve_time_slot(param)
-    valid = %w[morning noon night late_night]
+    valid = %w[morning noon_01 noon_02 evening night late_night early_morning]
     slot = param.to_s.strip.downcase
 
     if Rails.env.development? || Rails.env.test?

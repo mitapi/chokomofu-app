@@ -21,8 +21,11 @@ Rails.application.routes.draw do
     get  :tip_close
   end
 
-  resources :mofu_diaries, only: [:show] do
-    post :create_today, on: :collection
+  resource :mofu_diaries, only: [] do
+    collection do
+      get  :confirm_today
+      post :create_today
+    end
   end
 
   get "/onboarding", to: "onboardings#edit"
@@ -35,4 +38,6 @@ Rails.application.routes.draw do
 
   get "mofu_diaries/share/:share_token", to: "mofu_diaries#share", as: :share_mofu_diary
   get "mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
+
+  post "/chat/choose", to: "chats#choose"
 end

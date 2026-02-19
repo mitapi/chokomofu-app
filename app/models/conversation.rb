@@ -19,7 +19,7 @@ class Conversation < ApplicationRecord
     cloudy: 2,
     rain:  3,
     snow:  4
-  }, default: :any
+  }, default: :any_weather
 
   enum :kind, { talk: 0, whisper: 1 }, prefix: true
 
