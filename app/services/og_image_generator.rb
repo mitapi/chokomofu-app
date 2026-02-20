@@ -74,7 +74,7 @@ class OgImageGenerator
         "diary/pomemaru_snack_talk_heavy.png"
       end
 
-    Rails.root.join("app/assets/images", rel).to_s
+    Rails.root.join("public", "ogp", rel).to_s
   end
 
   def escape_for_draw(str)
