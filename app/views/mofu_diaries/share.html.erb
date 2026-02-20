@@ -1,17 +1,13 @@
 <% content_for :head do %>
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="<%= share_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta property="og:title" content="<%= @mofu_diary.title %>">
-  <meta property="og:description" content="…">
-  <meta property="og:image" content="<%= og_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
   <meta name="twitter:card" content="summary_large_image">
+
   <meta name="twitter:title" content="<%= @mofu_diary.title %>">
   <meta name="twitter:description" content="…">
-  <meta name="twitter:image" content="<%= og_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta name="twitter:url" content="<%= share_mofu_diary_url(@mofu_diary.share_token) %>">
+  <meta name="twitter:image" content="<%= og_mofu_diary_url(share_token: @mofu_diary.share_token) %>">
+
+  <meta property="og:image" content="<%= og_mofu_diary_url(share_token: @mofu_diary.share_token) %>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 <% end %>
 
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
