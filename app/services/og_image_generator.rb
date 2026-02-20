@@ -24,11 +24,11 @@ class OgImageGenerator
 
     if illust_path && File.exist?(illust_path)
       char = MiniMagick::Image.open(illust_path)
-      char.resize "520x520"
+      char.resize "760x760"
 
       image = image.composite(char) do |c|
-        c.gravity "West"
-        c.geometry "+80+0"
+        c.gravity "Center"
+        c.geometry "+0+40"
       end
     end
 
