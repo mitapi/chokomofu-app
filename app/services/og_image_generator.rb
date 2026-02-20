@@ -46,6 +46,12 @@ class OgImageGenerator
     path
   end
 
+  def generate
+  Tempfile.create(["og_mofu_diary_#{@diary.id}_", ".png"]) do |f|
+    generate_to!(f.path)
+    File.binread(f.path)
+  end
+
   private
 
   def absolute_illust_path(illust)

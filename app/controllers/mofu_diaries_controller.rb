@@ -48,10 +48,8 @@ class MofuDiariesController < ApplicationController
   def og
     diary = MofuDiary.find_by!(share_token: params[:share_token])
 
-    path = Rails.root.join("tmp", "og_mofu_diary_#{diary.id}.png")
-    OgImageGenerator.new(diary).generate_to!(path)
-
-    send_file path, type: "image/png", disposition: "inline"
+    png = OgImageGenerator.new(diary).generate # ← bytesを返す
+    send_data png, type: "image/png", disposition: "inline"
   end
 end
 
