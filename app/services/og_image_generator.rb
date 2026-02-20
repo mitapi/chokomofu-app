@@ -30,17 +30,17 @@ class OgImageGenerator
     end
 
     # 3) 2行テキスト（まずは英数字でもOK、日本語が□なら次でフォント指定）
-    line1 = escape_for_draw(@diary.line1.to_s)
-    line2 = escape_for_draw(@diary.line2.to_s)
+    #line1 = escape_for_draw(@diary.line1.to_s)
+    #line2 = escape_for_draw(@diary.line2.to_s)
 
-    image.combine_options do |c|
-      c.font font_path if font_path # ← これが肝
-      c.fill "black"
-      c.pointsize "48"
-      c.gravity "SouthWest"
-      c.draw "text 80,170 '#{line1}'"
-      c.draw "text 80,110 '#{line2}'"
-    end
+    #image.combine_options do |c|
+      #c.font font_path if font_path # ← これが肝
+      #c.fill "black"
+      #c.pointsize "48"
+      #c.gravity "SouthWest"
+      #c.draw "text 80,170 '#{line1}'"
+      #c.draw "text 80,110 '#{line2}'"
+    #end
 
     image.write(path.to_s)
     path
