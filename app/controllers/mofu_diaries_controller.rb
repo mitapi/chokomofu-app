@@ -48,14 +48,22 @@ class MofuDiariesController < ApplicationController
   def og
     diary = MofuDiary.find_by!(share_token: params[:share_token])
 
-    Tempfile.create(["og_", ".png"]) do |f|
-      OgImageGenerator.new(diary).generate_to!(f.path)
+    dir  = Rails.root.join("tmp", "og_mofu_diaries")
+    FileUtils.mkdir_p(dir)
+    path = dir.join("mofu_diary_#{diary.id}.png")
 
-      expires_in 5.minutes, public: true
-      response.headers["Content-Disposition"] = "inline; filename=\"og.png\""
+    OgImageGenerator.new(diary).generate_to!(path) unless File.exist?(path)
 
-      return send_file f.path, type: "image/png", disposition: "inline"
-    end
+    expires_in 1.hour, public: true
+    response.headers["Content-Disposition"] = "inline; filename=\"og.png\""
+
+    # ★HEADでもContent-Lengthを正しく返す
+    response.headers["Content-Type"] = "image/png"
+    response.headers["Content-Length"] = File.size(path).to_s
+
+    return head :ok if request.head?
+
+    send_file path, type: "image/png", disposition: "inline"
   end
 end
 
