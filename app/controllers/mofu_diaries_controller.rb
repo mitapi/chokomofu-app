@@ -48,13 +48,14 @@ class MofuDiariesController < ApplicationController
   def og
     diary = MofuDiary.find_by!(share_token: params[:share_token])
 
-    png = OgImageGenerator.new(diary).generate
+    Tempfile.create(["og_", ".png"]) do |f|
+      OgImageGenerator.new(diary).generate_to!(f.path)
 
-    response.headers["Content-Type"] = "image/png"
-    response.headers["Content-Length"] = png.bytesize.to_s
-    response.headers["Cache-Control"] = "public, max-age=300"
+      expires_in 5.minutes, public: true
+      response.headers["Content-Disposition"] = "inline; filename=\"og.png\""
 
-    send_data png, disposition: "inline"
+      return send_file f.path, type: "image/png", disposition: "inline"
+    end
   end
 end
 
