@@ -63,7 +63,7 @@ class OgImageGenerator
     rel =
       case (illust.presence || "normal")
       when "normal"
-        "diary/pomemaru_nomal.png"
+        "diary/pomemaru_normal.png"
       when "snack_light"
         "diary/pomemaru_snack_light.png"
       when "snack_heavy"
