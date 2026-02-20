@@ -1,13 +1,7 @@
 <% content_for :head do %>
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:image" content="<%= og_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta property="og:url" content="<%= share_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta property="og:type" content="article">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:title" content="<%= @mofu_diary.title %>">
+  <meta name="twitter:description" content="…">
   <meta name="twitter:image" content="<%= og_mofu_diary_url(@mofu_diary.share_token) %>">
   <meta name="twitter:url" content="<%= share_mofu_diary_url(@mofu_diary.share_token) %>">
 <% end %>
