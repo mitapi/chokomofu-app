@@ -19,6 +19,9 @@ class OgImageGenerator
 
     # 2) ぽめまる合成（ファイルがあれば）
     illust_path = absolute_illust_path(@diary.illust)
+
+    Rails.logger.info("[OGP] illust=#{@diary.illust.inspect} path=#{illust_path.inspect} exist=#{File.exist?(illust_path)}")
+
     if illust_path && File.exist?(illust_path)
       char = MiniMagick::Image.open(illust_path)
       char.resize "520x520"
@@ -43,6 +46,7 @@ class OgImageGenerator
     #end
 
     image.write(path.to_s)
+    Rails.logger.info("[OGP] wrote #{path} size=#{File.size(path.to_s)}")
     path
   end
 
