@@ -47,9 +47,10 @@ class OgImageGenerator
   end
 
   def generate
-  Tempfile.create(["og_mofu_diary_#{@diary.id}_", ".png"]) do |f|
-    generate_to!(f.path)
-    File.binread(f.path)
+    Tempfile.create(["og_mofu_diary_#{@diary.id}_", ".png"]) do |f|
+      generate_to!(f.path)
+      File.binread(f.path)
+    end
   end
 
   private
