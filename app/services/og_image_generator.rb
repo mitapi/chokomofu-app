@@ -50,10 +50,21 @@ class OgImageGenerator
 
   def absolute_illust_path(illust)
     rel =
-      case (illust.presence || "idle")
-      when "snack" then "diary/pomemaru_snack03.png"
-      when "talk"  then "diary/pomemaru_talk03.png"
-      else              "diary/pomemaru_nomal.png"
+      case (illust.presence || "normal")
+      when "normal"
+        "diary/pomemaru_nomal.png"
+      when "snack_light"
+        "diary/pomemaru_snack_light.png"
+      when "snack_heavy"
+        "diary/pomemaru_snack_heavy.png"
+      when "talk_light"
+        "diary/pomemaru_talk_light.png"
+      when "talk_heavy"
+        "diary/pomemaru_talk_heavy.png"
+      when "snack_talk_light"
+        "diary/pomemaru_snack_talk_light.png"
+      else
+        "diary/pomemaru_snack_talk_heavy.png"
       end
 
     Rails.root.join("app/assets/images", rel).to_s
