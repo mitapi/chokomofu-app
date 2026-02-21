@@ -28,7 +28,7 @@ class OgImageGenerator
 
       image = image.composite(char) do |c|
         c.gravity "Center"
-        c.geometry "+0-40"
+        c.geometry "+0-30"
       end
     end
 
