@@ -52,17 +52,15 @@ class MofuDiariesController < ApplicationController
     FileUtils.mkdir_p(dir)
     path = dir.join("mofu_diary_#{diary.id}.png")
 
+    # 画像ファイルが無ければ生成（都度生成しない）
     OgImageGenerator.new(diary).generate_to!(path) unless File.exist?(path)
 
-    expires_in 1.hour, public: true
-    response.headers["Content-Disposition"] = "inline; filename=\"og.png\""
+    # X(Twitterbot)向け：一度取れた画像を長くキャッシュしてもらう
+    expires_in 1.year, public: true
+    response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+    response.headers["Content-Disposition"] = 'inline; filename="og.png"'
 
-    # ★HEADでもContent-Lengthを正しく返す
-    response.headers["Content-Type"] = "image/png"
-    response.headers["Content-Length"] = File.size(path).to_s
-
-    return head :ok if request.head?
-
+    # HEAD/GETどちらも send_file に任せる（Content-Length / Content-Type も任せる）
     send_file path, type: "image/png", disposition: "inline"
   end
 end
