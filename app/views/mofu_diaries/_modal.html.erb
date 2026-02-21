@@ -17,7 +17,7 @@
         </div>
         <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
 
-        <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
+        <% share_url = share_mofu_diary_url(token: @mofu_diary.share_token) %>
         <% text = "#{mofu_diary.title}｜#ちょこもふ" %>
         <div class="my-4 flex gap-2">
           <%= link_to "Xに投稿",
