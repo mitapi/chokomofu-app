@@ -1,10 +1,12 @@
 <% content_for :head do %>
   <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:image" content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png">
+  <meta property="og:image"
+        content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png?v=<%= @mofu_diary.updated_at.to_i %>">
+  <meta name="twitter:image"
+        content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png?v=<%= @mofu_diary.updated_at.to_i %>">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
-  <meta name="twitter:image" content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png">
 <% end %>
 
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
