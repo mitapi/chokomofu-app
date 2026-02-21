@@ -47,9 +47,7 @@ class MofuDiariesController < ApplicationController
     dir  = Rails.root.join("tmp", "og_mofu_diaries")
     FileUtils.mkdir_p(dir)
 
-    # 「更新されたら別ファイル」方式でキャッシュを安定させる
-    stamp = @mofu_diary.updated_at.to_i
-    path  = dir.join("mofu_diary_#{@mofu_diary.id}_#{stamp}.png")
+    path = dir.join("mofu_diary_#{@mofu_diary.id}.png")
 
     OgImageGenerator.new(@mofu_diary).generate_to!(path) unless File.exist?(path)
   end
