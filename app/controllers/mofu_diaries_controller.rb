@@ -52,6 +52,7 @@ class MofuDiariesController < ApplicationController
     OgImageGenerator.new(@mofu_diary).generate_to!(path) unless File.exist?(path)
   end
 
+  
   def og
     diary = MofuDiary.find_by!(share_token: params[:share_token])
 
