@@ -38,8 +38,8 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "mofu_diaries/share/:share_token", to: "mofu_diaries#share", as: :share_mofu_diary
-  get "mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
+  get "/mofu_diaries/share/:token", to: "mofu_diaries#share", as: :share_mofu_diary
+  get "/mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
 
   post "/chat/choose", to: "chats#choose"
 end

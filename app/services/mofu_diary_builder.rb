@@ -22,7 +22,7 @@ class MofuDiaryBuilder
     # 日記文章とイラスト出し分けのためのカテゴリ
     category =
       if snack_count.zero? && talk_count.zero?
-        :nomal
+        :normal
       elsif talk_count.zero? && snack_count <= 2
         :snack_light
       elsif talk_count.zero? && snack_count >= 3
@@ -40,7 +40,7 @@ class MofuDiaryBuilder
     # イラスト出し分け（app/helpers/mofu_diaries_helper.rbで使用）
     illust =
       case category
-      when :nomal       then "nomal"
+      when :normal       then "normal"
       when :snack_light then "snack_light"
       when :snack_heavy then "snack_heavy"
       when :talk_light  then "talk_light"

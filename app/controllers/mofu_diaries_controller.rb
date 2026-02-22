@@ -1,5 +1,6 @@
 class MofuDiariesController < ApplicationController
   skip_before_action :ensure_current_user, only: [:share, :og]
+  before_action :skip_session!, only: [:share, :og]
 
   def show
     @mofu_diary = current_user.mofu_diaries.find(params[:id])
@@ -42,16 +43,41 @@ class MofuDiariesController < ApplicationController
   end
 
   def share
-    @mofu_diary = MofuDiary.find_by!(share_token: params[:share_token])
+    @mofu_diary = MofuDiary.find_by!(share_token: params[:token])
+
+    dir  = Rails.root.join("tmp", "og_mofu_diaries")
+    FileUtils.mkdir_p(dir)
+    path = dir.join("mofu_diary_#{@mofu_diary.id}.png")
+    OgImageGenerator.new(@mofu_diary).generate_to!(path) unless File.exist?(path)
+
+    expires_in 10.minutes, public: true
+    response.headers["Cache-Control"] = "public, max-age=600"
   end
 
+  
   def og
     diary = MofuDiary.find_by!(share_token: params[:share_token])
 
-    path = Rails.root.join("tmp", "og_mofu_diary_#{diary.id}.png")
-    OgImageGenerator.new(diary).generate_to!(path)
+    dir  = Rails.root.join("tmp", "og_mofu_diaries")
+    FileUtils.mkdir_p(dir)
+    path = dir.join("mofu_diary_#{diary.id}.png")
 
+    # 画像ファイルが無ければ生成（都度生成しない）
+    OgImageGenerator.new(diary).generate_to!(path) unless File.exist?(path)
+
+    # X(Twitterbot)向け：一度取れた画像を長くキャッシュしてもらう
+    expires_in 1.year, public: true
+    response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+    response.headers["Content-Disposition"] = 'inline; filename="og.png"'
+
+    # HEAD/GETどちらも send_file に任せる（Content-Length / Content-Type も任せる）
     send_file path, type: "image/png", disposition: "inline"
+  end
+
+  private
+
+  def skip_session!
+    request.session_options[:skip] = true
   end
 end
 

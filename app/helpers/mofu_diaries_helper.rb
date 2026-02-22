@@ -1,11 +1,11 @@
 module MofuDiariesHelper
   def diary_illust_image_path(diary)
-    illust = diary.illust.presence || "nomal"
+    illust = diary.illust.presence || "normal"
 
     # もふ日記画像
     case illust
-    when "nomal"
-      "diary/pomemaru_nomal.png"
+    when "normal"
+      "diary/pomemaru_normal.png"
     when "snack_light"
       "diary/pomemaru_snack_light.png"
     when "snack_heavy"

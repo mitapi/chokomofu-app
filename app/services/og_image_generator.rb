@@ -19,44 +19,66 @@ class OgImageGenerator
 
     # 2) ぽめまる合成（ファイルがあれば）
     illust_path = absolute_illust_path(@diary.illust)
+
+    Rails.logger.info("[OGP] illust=#{@diary.illust.inspect} path=#{illust_path.inspect} exist=#{File.exist?(illust_path)}")
+
     if illust_path && File.exist?(illust_path)
       char = MiniMagick::Image.open(illust_path)
-      char.resize "520x520"
+      char.resize "880x880"
 
       image = image.composite(char) do |c|
-        c.gravity "West"
-        c.geometry "+80+0"
+        c.gravity "Center"
+        c.geometry "+0-10"
       end
     end
 
     # 3) 2行テキスト（まずは英数字でもOK、日本語が□なら次でフォント指定）
-    line1 = escape_for_draw(@diary.line1.to_s)
-    line2 = escape_for_draw(@diary.line2.to_s)
+    #line1 = escape_for_draw(@diary.line1.to_s)
+    #line2 = escape_for_draw(@diary.line2.to_s)
 
-    image.combine_options do |c|
-      c.font font_path if font_path # ← これが肝
-      c.fill "black"
-      c.pointsize "48"
-      c.gravity "SouthWest"
-      c.draw "text 80,170 '#{line1}'"
-      c.draw "text 80,110 '#{line2}'"
-    end
+    #image.combine_options do |c|
+      #c.font font_path if font_path # ← これが肝
+      #c.fill "black"
+      #c.pointsize "48"
+      #c.gravity "SouthWest"
+      #c.draw "text 80,170 '#{line1}'"
+      #c.draw "text 80,110 '#{line2}'"
+    #end
 
     image.write(path.to_s)
+    Rails.logger.info("[OGP] wrote #{path} size=#{File.size(path.to_s)}")
     path
+  end
+
+  def generate
+    Tempfile.create(["og_mofu_diary_#{@diary.id}_", ".png"]) do |f|
+      generate_to!(f.path)
+      File.binread(f.path)
+    end
   end
 
   private
 
   def absolute_illust_path(illust)
     rel =
-      case (illust.presence || "idle")
-      when "snack" then "diary/pomemaru_snack03.png"
-      when "talk"  then "diary/pomemaru_talk03.png"
-      else              "diary/pomemaru_nomal.png"
+      case (illust.presence || "normal")
+      when "normal"
+        "diary/pomemaru_normal.png"
+      when "snack_light"
+        "diary/pomemaru_snack_light.png"
+      when "snack_heavy"
+        "diary/pomemaru_snack_heavy.png"
+      when "talk_light"
+        "diary/pomemaru_talk_light.png"
+      when "talk_heavy"
+        "diary/pomemaru_talk_heavy.png"
+      when "snack_talk_light"
+        "diary/pomemaru_snack_talk_light.png"
+      else
+        "diary/pomemaru_snack_talk_heavy.png"
       end
 
-    Rails.root.join("app/assets/images", rel).to_s
+    Rails.root.join("public", "ogp", rel).to_s
   end
 
   def escape_for_draw(str)

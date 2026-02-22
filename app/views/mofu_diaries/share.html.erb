@@ -1,9 +1,17 @@
 <% content_for :head do %>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>">
+  <meta property="og:title" content="<%= "#{@mofu_diary.title}、見てみる？" %>">
+  <meta property="og:description" content="<%= "#{@mofu_diary.line1} / #{@mofu_diary.line2}" %>">
+
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<%= @mofu_diary.title %>">
-  <meta name="twitter:description" content="<%= @mofu_diary.line1 %> / <%= @mofu_diary.line2 %>">
-  <meta name="twitter:image" content="<%= og_mofu_diary_url(@mofu_diary.share_token) %>">
-  <meta name="twitter:url" content="<%= share_mofu_diary_url(@mofu_diary.share_token) %>">
+  <meta name="twitter:title" content="<%= "#{@mofu_diary.title}、見てみる？" %>">
+  <meta name="twitter:description" content="<%= "#{@mofu_diary.line1} / #{@mofu_diary.line2}" %>">
+  <meta name="twitter:image" content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png">
+  <meta property="og:image" content="https://chokomofu-app.onrender.com/mofu_diaries/share/<%= @mofu_diary.share_token %>/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
 <% end %>
 
 <div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
