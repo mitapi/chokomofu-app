@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resource :mypage, only: :show do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile
-    get   :how_to_play
+    get   :howto
   end
 
   resource :snack, only: [] do
