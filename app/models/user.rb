@@ -2,6 +2,7 @@ class User < ApplicationRecord
   before_validation :normalize_nickname
 
   attr_accessor :terms
+  before_save :stamp_terms_agreement, if: -> { terms.to_s == "1" && terms_agreed_at.blank? }
 
   validates :guest_uid, uniqueness: true, presence: true
 
@@ -22,10 +23,17 @@ class User < ApplicationRecord
 
   validate :terms_must_be_agreed, on: :update
 
+  # terms用メソッド１
   def terms_must_be_agreed
     return if terms_agreed_at.present?
     return if terms.to_s == "1"
     errors.add(:terms, "利用規約への同意が必要だよ")
+  end
+
+  # terms用メソッド２
+  def stamp_terms_agreement
+    self.terms_agreed_at = Time.current
+    self.terms_version   = "2025-10-30"
   end
 
 
