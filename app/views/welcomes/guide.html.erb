@@ -11,23 +11,37 @@
             <p>最後に……ちょこもふには、いろいろな楽しみ方があります。</p>
 
             <div class="space-y-1">
-              <p>くわしい遊び方は『マイページ』から、いつでも確認できます。</p>
+              <p>くわしい遊び方については、このページ下にある『遊び方ガイドを見てみる！』ボタンから確認できます。</p>
             </div>
 
             <div class="space-y-1">
-              <p>あとから、ゆっくり見てみてくださいね。</p>
+              <p>あとから確認したいときは、『マイページ』からもガイドを見ることができますよ。</p>
+            </div>
+
+            <div class="space-y-1">
+              <p>それでは、もふもふたちとの時間をゆっくりとお楽しみください♪。</p>
             </div>
           </div>
 
-          <div class="flex flex-col relative justify-center items-center gap-3 top-[55%]">
-            <div class="flex justify-center items-center mt-[15px] relative">
+          <div class="flex relative justify-center top-[25%]">
+            <div class="flex flex-col gap-5 justify-center items-center mt-[15px] relative">
               <%= link_to main_path,
                 aria:  { label: "mainページに遷移" },
                 class: "group
                         font-bold flex h-10 items-center justify-center z-30
                         rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
                 <span class="block group-active:[transform:translate3d(0,1px,0)]">
-                  さあ、もふもふに会いに行こう♪
+                  『さあ、もふもふに会いに行こう♪』
+                </span>
+              <% end %>
+
+              <%= link_to howto_path(from: "welcome"),
+                aria:  { label: "遊び方説明（howto)ページに遷移" },
+                class: "group
+                        font-bold flex h-10 items-center justify-center z-30
+                        rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
+                <span class="block group-active:[transform:translate3d(0,1px,0)]">
+                  遊び方ガイドを見てみる！
                 </span>
               <% end %>
             </div>

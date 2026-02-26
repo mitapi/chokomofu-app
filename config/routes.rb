@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   get "/onboarding", to: "onboardings#edit"
   get "welcome/guide", to: "welcomes#guide"
   get "/account", to: "onboardings#edit"
+  get "/howto", to: "howtos#show", as: :howto
+
   get "/terms", to: "static#terms"
   get "/privacy", to: "static#privacy"
 

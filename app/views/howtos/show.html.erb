@@ -1,0 +1,21 @@
+<!-- welcomeページ用howto -->
+<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
+  <section class="bg-[#ffebb8] shadow-sm border-b border-yellow-300/40 flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[75px] w-auto">
+    <div class="w-15 pl-8 flex items-center justify-start">
+      <%= link_to "/main",
+          class: "flex items-center justify-center w-11 rounded-full bg-[#fffbf5] hover:bg-[#f5efe6] p-1 shadow-sm" do %>
+        <%= render "shared/icon_close", class: "w-7 h-7" %>
+      <% end %>
+    </div>
+
+    <div class="flex-1 text-center">
+      <h1 class="text-[30px] font-bold text-[#5b2d00]">
+        マイページ
+      </h1>
+    </div>
+
+    <div class="w-15"></div>
+  </section>
+
+  <%= render "_steps"%>
+</div>
