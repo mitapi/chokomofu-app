@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile
     get   :howto
+    get   :account
+    patch :account, action: :update_account
   end
 
   resource :snack, only: [] do
@@ -28,9 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/onboarding", to: "onboardings#edit"
   get "welcome/guide", to: "welcomes#guide"
-  get "/account", to: "onboardings#edit"
   get "/howto", to: "howtos#show", as: :howto
 
   get "/terms", to: "static#terms"
