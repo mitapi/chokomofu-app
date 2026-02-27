@@ -36,6 +36,9 @@ class User < ApplicationRecord
     self.terms_version   = "2025-10-30"
   end
 
+  # Rails標準のhas_secure_passwordを使用。
+  # ゲストユーザーが存在するため、password必須バリデーションは条件付きで別途定義する。
+  has_secure_password validations: false
 
   has_many :user_characters
   has_many :interactions
