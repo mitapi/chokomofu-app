@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :ensure_current_user
   helper_method :current_user, :text
+  helper_method :logged_in?
+  helper_method :onboarding_completed?
 
   COOKIE_NAME = :guest_uid
   COOKIE_REFRESH_MARKER = :guest_uid_refreshed_on
@@ -11,17 +13,14 @@ class ApplicationController < ActionController::Base
 
   def ensure_current_user
     uid = read_signed_uid
-    Rails.logger.debug(event: "whoami_current_uid", uid: uid) if Rails.env.development?
 
     if !uuid_valid?(uid)
       uid = SecureRandom.uuid
-      Rails.logger.info(event: "cookie_missing_or_invalid", action: "issued_new_uid", path: request.path, request_id: request.request_id)
     end
 
     user = User.find_by(guest_uid: uid)
     unless user
     user = User.create!(guest_uid: uid, auth_kind: :guest)
-    Rails.logger.info(event: "user_missing_in_db", action: "recreated_user", path: request.path, request_id: request.request_id)
     end
 
     refresh_cookie_once_per_day(uid)
@@ -37,6 +36,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user
+  end
+
+  def logged_in?
+    current_user&.auth_kind.to_s == "password"
   end
 
   # 値が空でなく、UUIDの正規表現にマッチするかを返す

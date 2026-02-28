@@ -42,4 +42,8 @@ Rails.application.routes.draw do
   get "/mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
 
   post "/chat/choose", to: "chats#choose"
+
+  get    "/login",  to: "sessions#new"
+  post   "/login",  to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end

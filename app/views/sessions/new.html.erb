@@ -1,0 +1,19 @@
+<h2>アカウント連携（ログイン）</h2>
+
+<% if flash.now[:alert] %>
+  <div><%= flash.now[:alert] %></div>
+<% end %>
+
+<%= form_with url: login_path, method: :post, data: { turbo: false } do %>
+  <div>
+    <label>メールアドレス</label>
+    <%= email_field_tag :email, params[:email], required: true %>
+  </div>
+
+  <div>
+    <label>パスワード</label>
+    <%= password_field_tag :password, nil, required: true %>
+  </div>
+
+  <%= submit_tag "ログイン" %>
+<% end %>

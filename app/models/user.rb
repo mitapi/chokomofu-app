@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   validates :guest_uid, uniqueness: true, presence: true
 
+  # ニックネーム（新規登録時エラーメッセージ）
   validates :nickname,
     presence: { message: "ニックネームを入力してね" },
     length: { maximum: 10, message: "ニックネームは10文字以内で入力してね" },
@@ -19,8 +20,10 @@ class User < ApplicationRecord
     allow_blank: true,
     on: :update
 
+  # 地域（新規登録時エラーメッセージ）
   validates :region, presence: { message: "地域を選んでね" },on: :update
 
+  # 規約チェック（新規登録時エラーメッセージ）
   validate :terms_must_be_agreed, on: :update
 
   # terms用メソッド１
@@ -39,6 +42,19 @@ class User < ApplicationRecord
   # Rails標準のhas_secure_passwordを使用。
   # ゲストユーザーが存在するため、password必須バリデーションは条件付きで別途定義する。
   has_secure_password validations: false
+
+  # email
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    if: :password_user?
+
+  # password
+  validates :password,
+    presence: true,
+    length: { minimum: 8 },
+    confirmation: true,
+    if: :password_user?
 
   has_many :user_characters
   has_many :interactions
@@ -81,5 +97,9 @@ class User < ApplicationRecord
   def normalize_nickname
     return if nickname.nil?
     self.nickname = nickname.gsub(/\A([[:space:]\u3000])+|([[:space:]\u3000])+\z/u, "")
+  end
+
+  def password_user?
+    auth_kind.to_s == "password"
   end
 end

@@ -1,0 +1,21 @@
+<h2>アカウント連携</h2>
+
+<%= form_with model: @user, url: "/mypage/account", method: :patch do |f| %>
+
+  <div>
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "パスワード確認" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <%= f.submit "連携する" %>
+<% end %>
