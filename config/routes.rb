@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'top#index'
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
-  resource :account, only: [:edit, :update]
   resource :welcome, only: %i[show]
 
   resource :main, only: [:show] do
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile
     get   :howto
-    get   :account
+    get   :account, action: :edit_account
     patch :account, action: :update_account
   end
 

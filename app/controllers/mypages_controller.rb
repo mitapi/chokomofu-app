@@ -22,22 +22,22 @@ class MypagesController < ApplicationController
   end
 
   # データアカウント化
-  def account
-    @user = current_user
-    redirect_to mypage_path if @user.auth_kind == "password"
+  def edit_account
+    @account_user = current_user
+    redirect_to mypage_path if @account_user.auth_kind_password?
   end
 
   def update_account
-    @user = current_user
+    @account_user = current_user
+    return redirect_to mypage_path if @account_user.auth_kind_password?
 
-    if @user.auth_kind == "password"
-      redirect_to mypage_path and return
-    end
+    @account_user.assign_attributes(account_params.merge(auth_kind: :password))
 
-    if @user.update(account_params.merge(auth_kind: :password))
+    if @account_user.save(context: :upgrade)
       redirect_to mypage_path, notice: "アカウント連携が完了しました"
     else
-      render :account, status: :unprocessable_entity
+      Rails.logger.debug("[upgrade] errors=#{@account_user.errors.full_messages.inspect}")
+      render :edit_account, status: :unprocessable_entity
     end
   end
 

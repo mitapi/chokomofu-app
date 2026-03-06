@@ -45,28 +45,32 @@ class User < ApplicationRecord
 
   # email
   validates :email,
-    presence: true,
-    uniqueness: true,
-    if: :password_user?
+    presence: { message: "メールアドレスを入力してね" },
+    format: { with: URI::MailTo::EMAIL_REGEXP, message: "メールアドレスの形式がちがうよ" },
+    uniqueness: { case_sensitive: false, message: "このメールアドレスはすでに使われているよ" },
+    on: :upgrade
 
   # password
   validates :password,
-    presence: true,
-    length: { minimum: 8 },
-    confirmation: true,
-    if: :password_user?
+    presence: { message: "パスワードを入力してね" },
+    length: { minimum: 8, message: "パスワードは8文字以上にしてね" },
+    confirmation: { message: "パスワード（確認）が一致してないよ" },
+    on: :upgrade
+
+  # password_confirmation
+  validates :password_confirmation,
+    presence: { message: "確認用パスワードも入力してね" },
+    on: :upgrade
 
   has_many :user_characters
   has_many :interactions
   has_many :inquiries
   has_many :mofu_diaries, dependent: :destroy
 
-  enum :auth_kind, {
-    guest:     0,
-    password:  1,
-  }, default: :guest 
+  # regionと同じenumの書き方だとエラー出るので、auth_kindのみ書き方変更しました
+  enum :auth_kind, { guest: 0, password: 1 }, default: :guest, prefix: true
 
-   enum :region, {
+  enum region: {
     tokyo:   0,
     osaka:   1,
     nagoya:  2,
@@ -97,9 +101,5 @@ class User < ApplicationRecord
   def normalize_nickname
     return if nickname.nil?
     self.nickname = nickname.gsub(/\A([[:space:]\u3000])+|([[:space:]\u3000])+\z/u, "")
-  end
-
-  def password_user?
-    auth_kind.to_s == "password"
   end
 end
