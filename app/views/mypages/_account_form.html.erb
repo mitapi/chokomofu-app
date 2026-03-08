@@ -1,0 +1,59 @@
+<p class="text-sm leading-relaxed">
+  引き継ぎ情報を登録してからログインすることで、
+  機種変更や別の端末でも、ぽめまるとの思い出をそのまま続けられます。
+  <br>
+  登録した内容は、なくさないように気をつけてくださいね。
+</p>
+
+<!-- フォーム -->
+<%= form_with model: @account_user,
+  url: account_mypage_path,
+  method: :patch,
+  data: { turbo: false },
+  html: { novalidate: true } do |f| %>
+
+  <div class="space-y-8 mt-[40px]">
+
+    <div>
+      <div class="flex items-center justify-between gap-2">
+        <%= f.label :email, "メールアドレス",
+          class: "font-sm font-bold text-[#5b2d00]" %>
+        <%= render "shared/field_error", object: @account_user, attribute: :email %>
+      </div>
+
+      <%= f.text_field :email,
+        class: "mt-1 w-full rounded border border-gray-300 bg-white px-3 py-2 outline-none focus:ring focus:ring-yellow-200",
+        autocomplete: "email", inputmode: "email" %>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between gap-2">
+        <%= f.label :password, "パスワード（8文字以上）",
+          class: "font-sm font-bold text-[#5b2d00]" %>
+        <%= render "shared/field_error", object: @account_user, attribute: :password %>
+      </div>
+
+      <%= f.password_field :password,
+        class: "mt-1 w-full rounded border border-gray-300 bg-white px-3 py-2 outline-none focus:ring focus:ring-yellow-200",
+        autocomplete: "new-password" %>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between gap-2">
+        <%= f.label :password_confirmation, "パスワード（確認）",
+          class: "font-sm font-bold text-[#5b2d00]" %>
+        <%= render "shared/field_error", object: @account_user, attribute: :password_confirmation %>
+      </div>
+
+      <%= f.password_field :password_confirmation,
+        class: "mt-1 w-full rounded border border-gray-300 bg-white px-3 py-2 outline-none focus:ring focus:ring-yellow-200",
+        autocomplete: "new-password" %>
+    </div>
+
+    <div class="mt-12 flex justify-center">
+      <%= f.submit "連携する",
+        class: "font-bold rounded-md bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+    </div>
+
+  </div>
+<% end %>

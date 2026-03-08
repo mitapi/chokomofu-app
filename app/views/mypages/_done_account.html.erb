@@ -1,0 +1,29 @@
+<div class="space-y-8">
+  <div class="text-left text-[15px] leading-8 text-[#7a4b22]">
+    引き継ぎ設定が完了しました。<br>
+    登録した引き継ぎ情報で、機種変更や別の端末からも
+    ぽめまるとの思い出を続けられます。
+  </div>
+
+  <div class="space-y-6">
+    <div>
+      <p class="mb-2 text-[14px] font-bold text-[#7a4b22]">メールアドレス</p>
+        <div class="w-full rounded-[12px] border border-[#f3d77a] bg-white px-4 py-4 text-[15px] text-[#7a4b22]">
+          <%= @account_user.email %>
+        </div>
+    </div>
+
+    <div>
+      <p class="mb-2 text-[14px] font-bold text-[#7a4b22]">パスワード</p>
+        <div class="w-full rounded-[12px] border border-[#f3d77a] bg-white px-4 py-4 text-[15px] text-[#7a4b22]">
+          ••••••••
+        </div>
+    </div>
+  </div>
+
+  <div class="pt-4 text-center">
+    <%= link_to "変更する",
+      account_mypage_path(form: 1),
+      class: "font-bold rounded-md bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+  </div>
+</div>
