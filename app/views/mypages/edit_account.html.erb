@@ -17,61 +17,95 @@
   </section>
 
   <div class="px-12 pt-10 text-[#5b2d00]">
-    <p class="text-sm leading-relaxed">
-      引き継ぎ情報を登録してからログインすることで、
-      機種変更や別の端末でも、ぽめまるとの思い出をそのまま続けられます。
-      <br>
-      登録した内容は、なくさないように気をつけてくださいね。
-    </p>
 
-    <!-- フォーム -->
-    <%= form_with model: @account_user,
-          url: account_mypage_path,
-          method: :patch,
-          data: { turbo: false },
-          html: { novalidate: true } do |f| %>
+    <% if @account_page == "done" %>
+      <div class="space-y-8">
+        <div class="text-left text-[15px] leading-8 text-[#7a4b22]">
+          引き継ぎ設定が完了しました。<br>
+          登録した引き継ぎ情報で、機種変更や別の端末からも
+          ぽめまるとの思い出を続けられます。
+        </div>
 
-      <div class="space-y-8 mt-[40px]">
-
-        <div>
-          <div class="flex items-center justify-between gap-2">
-            <%= f.label :email, "メールアドレス", class: "text-sm font-bold" %>
-            <%= render "shared/field_error", object: @account_user, attribute: :email %>
+        <div class="space-y-6">
+          <div>
+            <p class="mb-2 text-[14px] font-bold text-[#7a4b22]">メールアドレス</p>
+            <div class="w-full rounded-[12px] border border-[#f3d77a] bg-white px-4 py-4 text-[15px] text-[#7a4b22]">
+              <%= @account_user.email %>
+            </div>
           </div>
 
-          <%= f.text_field :email,
-            class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
-            autocomplete: "email", inputmode: "email" %>
-        </div>
-
-        <div>
-          <div class="flex items-center justify-between gap-2">
-            <%= f.label :password, "パスワード（8文字以上）", class: "block text-sm font-bold" %>
-            <%= render "shared/field_error", object: @account_user, attribute: :password %>
+          <div>
+            <p class="mb-2 text-[14px] font-bold text-[#7a4b22]">パスワード</p>
+            <div class="w-full rounded-[12px] border border-[#f3d77a] bg-white px-4 py-4 text-[15px] text-[#7a4b22]">
+              ••••••••
+            </div>
           </div>
-
-          <%= f.password_field :password,
-            class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
-            autocomplete: "new-password" %>
         </div>
 
-        <div>
-          <div class="flex items-center justify-between gap-2">
-            <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-bold" %>
-            <%= render "shared/field_error", object: @account_user, attribute: :password_confirmation %>
-          </div>
-
-          <%= f.password_field :password_confirmation,
-            class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
-            autocomplete: "new-password" %>
+        <div class="pt-4 text-center">
+          <%= link_to "変更する",
+              account_mypage_path(form: 1),
+              class: "font-bold rounded-md bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
         </div>
-
-        <div class="mt-12 flex justify-center">
-          <%= f.submit "連携する",
-            class: "font-bold rounded-md bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
-        </div>
-
       </div>
+
+    <% else %>
+      <p class="text-sm leading-relaxed">
+        引き継ぎ情報を登録してからログインすることで、
+        機種変更や別の端末でも、ぽめまるとの思い出をそのまま続けられます。
+        <br>
+        登録した内容は、なくさないように気をつけてくださいね。
+      </p>
+
+      <!-- フォーム -->
+      <%= form_with model: @account_user,
+            url: account_mypage_path,
+            method: :patch,
+            data: { turbo: false },
+            html: { novalidate: true } do |f| %>
+
+        <div class="space-y-8 mt-[40px]">
+
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <%= f.label :email, "メールアドレス", class: "text-sm font-bold" %>
+              <%= render "shared/field_error", object: @account_user, attribute: :email %>
+            </div>
+
+            <%= f.text_field :email,
+              class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
+              autocomplete: "email", inputmode: "email" %>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <%= f.label :password, "パスワード（8文字以上）", class: "block text-sm font-bold" %>
+              <%= render "shared/field_error", object: @account_user, attribute: :password %>
+            </div>
+
+            <%= f.password_field :password,
+              class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
+              autocomplete: "new-password" %>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-bold" %>
+              <%= render "shared/field_error", object: @account_user, attribute: :password_confirmation %>
+            </div>
+
+            <%= f.password_field :password_confirmation,
+              class: "mt-1 w-full rounded-md border border-yellow-300/40 bg-white px-3 py-2",
+              autocomplete: "new-password" %>
+          </div>
+
+          <div class="mt-12 flex justify-center">
+            <%= f.submit "連携する",
+              class: "font-bold rounded-md bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" %>
+          </div>
+
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

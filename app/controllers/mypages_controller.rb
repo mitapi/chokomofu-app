@@ -24,19 +24,28 @@ class MypagesController < ApplicationController
   # データアカウント化
   def edit_account
     @account_user = current_user
-    redirect_to mypage_path if @account_user.auth_kind_password?
+
+    # 引き継ぎ設定済ならdone、そうでないならform
+    if params[:form] == "1"
+      @account_page = "form"
+    elsif @account_user.auth_kind_password?
+      @account_page = "done"
+    else
+      @account_page = "form"
+    end
   end
 
   def update_account
     @account_user = current_user
-    return redirect_to mypage_path if @account_user.auth_kind_password?
 
-    @account_user.assign_attributes(account_params.merge(auth_kind: :password))
+    @account_user.assign_attributes(account_params)
+    @account_user.auth_kind = :password
 
     if @account_user.save(context: :upgrade)
-      redirect_to mypage_path, notice: "アカウント連携が完了しました"
+      @account_page = "done"
+      render :edit_account, status: :ok
     else
-      Rails.logger.debug("[upgrade] errors=#{@account_user.errors.full_messages.inspect}")
+      @account_page = "form"
       render :edit_account, status: :unprocessable_entity
     end
   end
