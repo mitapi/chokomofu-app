@@ -44,5 +44,6 @@ Rails.application.routes.draw do
 
   get    "/login",  to: "sessions#new"
   post   "/login",  to: "sessions#create"
+  # 将来的にログアウト機能を追加する時用
   delete "/logout", to: "sessions#destroy"
 end

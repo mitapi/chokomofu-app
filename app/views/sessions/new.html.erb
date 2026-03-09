@@ -9,14 +9,17 @@
       これまでのぽめまるとの思い出を続けられます。
     </p>
 
-    <div class="mt-[40px]">
+    <div class="mt-[20px]">
       <% if flash.now[:alert] %>
-        <div class="rounded-lg bg-red-100 px-4 py-3 text-red-700">
+        <div class="mb-[20px] rounded-lg bg-red-100 px-4 py-3 text-red-700">
           <%= flash.now[:alert] %>
         </div>
       <% end %>
 
-      <%= form_with url: login_path, method: :post, data: { turbo: false } do %>
+      <%= form_with url: login_path,
+              method: :post,
+              data: { turbo: false },
+              html: { novalidate: true } do %>
 
         <div>
           <p class="font-bold text-[#7a4b22]">メールアドレス</p>

@@ -12,6 +12,16 @@ class ApplicationController < ActionController::Base
   private
 
   def ensure_current_user
+    # session[:user_id] がある？ → そのユーザーを current_user にする
+    if session[:user_id].present?
+      user = User.find_by(id: session[:user_id])
+      if user
+        @current_user = user
+        return
+      end
+    end
+
+    # session[:user_id]がなければ guest を探す / 作る
     uid = read_signed_uid
 
     if !uuid_valid?(uid)
@@ -20,7 +30,7 @@ class ApplicationController < ActionController::Base
 
     user = User.find_by(guest_uid: uid)
     unless user
-    user = User.create!(guest_uid: uid, auth_kind: :guest)
+      user = User.create!(guest_uid: uid, auth_kind: :guest)
     end
 
     refresh_cookie_once_per_day(uid)
@@ -97,7 +107,17 @@ class ApplicationController < ActionController::Base
 
   # nicknameとtermsがあれば/mainへ
   def onboarding_completed?
-    current_user.nickname.present? && current_user.terms_agreed_at.present? && current_user.region.present?
+    Rails.logger.info(
+      "[onboarding_completed?] current_user_id=#{current_user&.id} " \
+      "auth_kind=#{current_user&.auth_kind} " \
+      "nickname=#{current_user&.nickname.inspect} " \
+      "terms_agreed_at=#{current_user&.terms_agreed_at.inspect} " \
+      "region=#{current_user&.region.inspect}"
+    )
+
+    current_user.nickname.present? &&
+      current_user.terms_agreed_at.present? &&
+      current_user.region.present?
   end
 
   def redirect_if_onboarding_completed
