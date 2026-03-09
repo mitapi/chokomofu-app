@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :ensure_current_user
   helper_method :current_user, :text
+  helper_method :logged_in?
+  helper_method :onboarding_completed?
 
   COOKIE_NAME = :guest_uid
   COOKIE_REFRESH_MARKER = :guest_uid_refreshed_on
@@ -10,18 +12,25 @@ class ApplicationController < ActionController::Base
   private
 
   def ensure_current_user
+    # session[:user_id] がある？ → そのユーザーを current_user にする
+    if session[:user_id].present?
+      user = User.find_by(id: session[:user_id])
+      if user
+        @current_user = user
+        return
+      end
+    end
+
+    # session[:user_id]がなければ guest を探す / 作る
     uid = read_signed_uid
-    Rails.logger.debug(event: "whoami_current_uid", uid: uid) if Rails.env.development?
 
     if !uuid_valid?(uid)
       uid = SecureRandom.uuid
-      Rails.logger.info(event: "cookie_missing_or_invalid", action: "issued_new_uid", path: request.path, request_id: request.request_id)
     end
 
     user = User.find_by(guest_uid: uid)
     unless user
-    user = User.create!(guest_uid: uid, auth_kind: :guest)
-    Rails.logger.info(event: "user_missing_in_db", action: "recreated_user", path: request.path, request_id: request.request_id)
+      user = User.create!(guest_uid: uid, auth_kind: :guest)
     end
 
     refresh_cookie_once_per_day(uid)
@@ -37,6 +46,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user
+  end
+
+  def logged_in?
+    current_user&.auth_kind.to_s == "password"
   end
 
   # 値が空でなく、UUIDの正規表現にマッチするかを返す
@@ -94,7 +107,17 @@ class ApplicationController < ActionController::Base
 
   # nicknameとtermsがあれば/mainへ
   def onboarding_completed?
-    current_user.nickname.present? && current_user.terms_agreed_at.present? && current_user.region.present?
+    Rails.logger.info(
+      "[onboarding_completed?] current_user_id=#{current_user&.id} " \
+      "auth_kind=#{current_user&.auth_kind} " \
+      "nickname=#{current_user&.nickname.inspect} " \
+      "terms_agreed_at=#{current_user&.terms_agreed_at.inspect} " \
+      "region=#{current_user&.region.inspect}"
+    )
+
+    current_user.nickname.present? &&
+      current_user.terms_agreed_at.present? &&
+      current_user.region.present?
   end
 
   def redirect_if_onboarding_completed

@@ -7,21 +7,33 @@
     <%= image_tag "top-pic.png", alt: "ちょこっと♪ もふたいむ トップイラスト", class: "w-[450px]" %>
   </section>
 
-  <section class="flex justify-center items-center mt-[15px] relative">
+  <section class="flex flex-col justify-center items-center gap-[18px] mt-[20px] relative">
     <%= link_to welcome_path,
       aria:  { label: "はじめる（メインページへ）" },
       class: "group
               font-bold flex h-10 items-center justify-center
-              rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
+              rounded-md inline-block px-4 py-2 bg-amber-400 text-white hover:bg-orange-400" do %>
       <span class="block group-active:[transform:translate3d(0,1px,0)]">
         はじめる
       </span>
     <% end %>
+
+    <% unless onboarding_completed? %>
+      <%= link_to login_path,
+        aria:  { label: "アカウント引継ぎ" },
+        class: "group
+                font-bold text-sm flex items-center justify-center
+                rounded-md inline-block px-4 py-2 bg-[#D4A977] text-white hover:bg-[#C4935F]" do %>
+        <span class="block group-active:[transform:translate3d(0,1px,0)]">
+          アカウントの引継ぎはこちら
+        </span>
+      <% end %>
+    <% end %>
   </section>
 
-  <section class="flex justify-center items-center text-amber/700 text-sm">
+  <section class="flex justify-center items-center mt-[10px] text-amber/700 text-sm">
     © <%= Time.current.year %> ChokoMofu Project
   </section>
 
-  <section aria-hidden="true" class="h-[56px]"></section>
+  <section aria-hidden="true" class="h-[20px]"></section>
 </div>

@@ -45,7 +45,14 @@
           <p>ニックネーム：<b><%= @user.nickname %></b></p>
           <p>地域：<b><%= region_label(@user.region) %></b></p>
           <p>キャラクター：<span class="text-gray-400">—</span></p>
-          <p>引き継ぎ設定：<span class="text-gray-400">未設定</span></p>
+          <p>
+            引き継ぎ設定：
+            <% if current_user.auth_kind_password? %>
+              <span class="text-green-600"><b>設定済み</b></span>
+            <% else %>
+              <span class="text-gray-400"><b>未設定</b></span>
+            <% end %>
+          </p>
         </div>
       </div>
     </section>
@@ -58,12 +65,10 @@
 
       <div class="space-y-3">
         <!-- 引き継ぎ設定 -->
-        <button
-          disabled
-          class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-left text-gray-400 flex justify-between">
-          <span>引き継ぎ設定</span>
-          <span class="text-xs">準備中</span>
-        </button>
+        <!-- 遊び方 -->
+        <%= link_to "引き継ぎ設定",
+            account_mypage_path,
+            class: "block w-full rounded-lg border border-orange-300 bg-white px-4 py-3 text-left hover:border-orange-300 hover:bg-yellow-100" %>
 
         <!-- 遊び方 -->
         <%= link_to "このゲームの遊び方",

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'top#index'
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
-  resource :account, only: [:edit, :update]
   resource :welcome, only: %i[show]
 
   resource :main, only: [:show] do
@@ -12,6 +11,8 @@ Rails.application.routes.draw do
     get   :profile, action: :edit_profile
     patch :profile, action: :update_profile
     get   :howto
+    get   :account, action: :edit_account
+    patch :account, action: :update_account
   end
 
   resource :snack, only: [] do
@@ -28,9 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/onboarding", to: "onboardings#edit"
   get "welcome/guide", to: "welcomes#guide"
-  get "/account", to: "onboardings#edit"
   get "/howto", to: "howtos#show", as: :howto
 
   get "/terms", to: "static#terms"
@@ -42,4 +41,9 @@ Rails.application.routes.draw do
   get "/mofu_diaries/share/:share_token/og.png", to: "mofu_diaries#og", as: :og_mofu_diary
 
   post "/chat/choose", to: "chats#choose"
+
+  get    "/login",  to: "sessions#new"
+  post   "/login",  to: "sessions#create"
+  # 将来的にログアウト機能を追加する時用
+  delete "/logout", to: "sessions#destroy"
 end

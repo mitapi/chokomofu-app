@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_13_141347) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_27_094559) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -101,13 +101,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_13_141347) do
     t.integer "auth_kind", default: 0, null: false
     t.string "nickname"
     t.string "email"
-    t.string "crypted_password"
-    t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "terms_agreed_at"
     t.string "terms_version"
     t.integer "region"
+    t.string "password_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["guest_uid"], name: "index_users_on_guest_uid", unique: true
   end
