@@ -1,4 +1,4 @@
-class HowtoController < ApplicationController
+class HowtosController < ApplicationController
   def show
     @from = params[:from]
     @back_path =
