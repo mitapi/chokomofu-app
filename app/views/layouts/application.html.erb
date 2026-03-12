@@ -28,10 +28,23 @@
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="antialiased bg-cats font-sans grid min-h-screen place-items-center">
-    <main class="flex flex-col items-center justify-center max-w-[960px]">
-      <%= yield %>
-    </main>
-    <%= render('shared/footer') unless controller_path == 'top' && action_name == 'index' %>
+  <body class="antialiased bg-cats font-sans min-h-screen">
+    <% if controller_name == "mains" && action_name == "show" %>
+      <div class="flex min-h-screen items-start justify-center pt-2">
+        <div class="origin-top scale-[0.78] sm:scale-[0.9] md:scale-100">
+          <main class="flex flex-col items-center justify-center w-[600px]">
+            <%= yield %>
+            <%= render("shared/footer") %>
+          </main>
+        </div>
+      </div>
+    <% else %>
+      <div class="grid min-h-screen place-items-center">
+        <main class="flex flex-col items-center justify-center max-w-[960px]">
+          <%= yield %>
+        </main>
+        <%= render("shared/footer") unless controller_path == "top" && action_name == "index" %>
+      </div>
+    <% end %>
   </body>
 </html>
