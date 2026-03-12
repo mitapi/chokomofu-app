@@ -57,6 +57,14 @@
         </main>
       </div>
 
+    <% elsif controller_name == "welcomes" %>
+      <div class="min-h-screen flex flex-col items-center">
+        <main class="w-full md:max-w-[600px] flex-1 bg-slate-50 overflow-x-hidden">
+          <%= yield %>
+          <%= render("shared/footer") %>
+        </main>
+      </div>
+
     <% else %>
       <div class="min-h-screen">
         <main class="mx-auto w-full max-w-[960px] px-4 md:px-6">
