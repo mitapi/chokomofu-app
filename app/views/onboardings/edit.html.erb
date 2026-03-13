@@ -1,8 +1,17 @@
-<div class="bg-slate-50 min-h-screen flex flex-col w-[600px]">
-  <section class="bg-[#ffebb8] shadow-sm border-b border-yellow-300/40 flex font-bold justify-center items-center relative text-[30px] text-[#5b2d00] h-[75px] w-auto">
-    <%= "あなたのことを教えてね" %>
-  </section>
-  <section class="flex justify-center items-center max-w-md mx-auto relative">
-    <%= render 'form', user: @user %>
-  </section>
+<div class="min-h-screen flex flex-col items-center">
+  <div class="bg-slate-50 w-full md:max-w-[600px] flex flex-col overflow-x-hidden">
+
+    <section class="bg-[#ffebb8] shadow-sm border-b border-yellow-300/40 flex items-center justify-center relative h-[75px] w-full">
+      <h1 class="px-4 text-center text-[24px] md:text-[30px] font-bold text-[#5b2d00]">
+        あなたのことを教えてね
+      </h1>
+    </section>
+
+    <div class="w-full px-4 pt-8 pb-10">
+      <div class="mx-auto w-full max-w-[450px]">
+        <%= render "form", user: @user %>
+      </div>
+    </div>
+
+  </div>
 </div>
