@@ -93,15 +93,21 @@ class ApplicationController < ActionController::Base
 
   def current_weather_slot
     coords = current_user.region_coords
+    Rails.logger.info("[weather] region=#{current_user.region.inspect} coords=#{coords.inspect}")
+
     result = Weather::FetchCurrentWeather.new(
       lat: coords[:lat],
       lon: coords[:lon]
     ).call
 
+    Rails.logger.info("[weather] result=#{result.inspect}")
+    Rails.logger.info("[weather] slot=#{result&.slot.inspect}")
+
     result.slot
 
   rescue => e
-    Rails.logger.error(event: "current_weather_slot_failed", error: e.message)
+    Rails.logger.error("[weather] current_weather_slot_failed class=#{e.class} message=#{e.message}")
+    Rails.logger.error(e.backtrace.first(10).join("\n")) if e.backtrace
     :any
   end
 
