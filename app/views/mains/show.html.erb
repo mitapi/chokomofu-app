@@ -1,3 +1,8 @@
+<div class="text-xs text-red-600">
+  region: <%= current_user&.weather_region.inspect %><br>
+  raw_weather_slot: <%= @raw_weather_slot.inspect %><br>
+  weather_slot: <%= @weather_slot.inspect %>
+</div>
 <div class="bg-slate-50 flex flex-col w-[600px] h-[700px]">
   <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[700px]"
      data-controller="snack-base">
