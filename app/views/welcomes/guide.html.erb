@@ -35,15 +35,15 @@
                 </span>
               <% end %>
 
-              <%= link_to howto_path(from: "welcome"),
-                aria:  { label: "遊び方説明（howto)ページに遷移" },
-                class: "group
-                        font-bold flex h-10 items-center justify-center z-30
-                        rounded-md inline-block bg-amber-400 px-4 py-2 text-white hover:bg-orange-400" do %>
-                <span class="block group-active:[transform:translate3d(0,1px,0)]">
-                  遊び方ガイドを見てみる！
-                </span>
-              <% end %>
+              <!-- ⭐def give.rbに押せるボタンのコードあり、修正後はそちらに変更すること -->
+              <button
+                type="button"
+                disabled
+                aria-label="遊び方説明ページは準備中"
+                class="font-bold flex h-10 items-center justify-center rounded-md bg-gray-300 px-4 py-2 text-white cursor-not-allowed opacity-70"
+              >
+                遊び方ガイドを見てみる！（準備中）
+              </button>
             </div>
           </div>
 
