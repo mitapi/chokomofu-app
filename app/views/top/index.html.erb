@@ -1,37 +1,39 @@
-<div class="bg-slate-50 flex flex-col gap-[15px] w-[600px] h-[735px]">
-  <section class="flex justify-center items-center relative mt-[20px] h-[200px] w-auto ">
-    <%= image_tag "top-logo.png", alt: "ちょこっと♪ もふたいむ トップロゴ", class: "w-[450px]" %>
-  </section>
+<div class="bg-slate-50 flex flex-col justify-center items-center gap-[15px] w-[600px] h-[900px] md:h-[735px]">
+  <div>
+    <section class="flex justify-center items-center relative mt-[0px] md:mt-[20px] h-[200px] w-auto ">
+      <%= image_tag "top-logo.png", alt: "ちょこっと♪ もふたいむ トップロゴ", class: "w-[450px]" %>
+    </section>
 
-  <section class="flex justify-center items-center relative h-[300px] w-auto ">
-    <%= image_tag "top-pic.png", alt: "ちょこっと♪ もふたいむ トップイラスト", class: "w-[450px]" %>
-  </section>
+    <section class="flex justify-center items-center relative h-[300px] mt-[20px] md:mt-[0px] w-auto ">
+      <%= image_tag "top-pic.png", alt: "ちょこっと♪ もふたいむ トップイラスト", class: "w-[450px]" %>
+    </section>
 
-  <section class="flex flex-col justify-center items-center gap-[18px] mt-[10px] relative">
-    <%= link_to welcome_path,
-      aria:  { label: "はじめる（メインページへ）" },
-      class: "group
-              font-bold flex h-10 items-center justify-center
-              rounded-md inline-block px-4 py-2 bg-amber-400 text-white hover:bg-orange-400" do %>
-      <span class="block group-active:[transform:translate3d(0,1px,0)]">
-        はじめる
-      </span>
-    <% end %>
-
-    <% unless onboarding_completed? %>
-      <%= link_to login_path,
-        aria:  { label: "アカウント引継ぎ" },
+    <section class="flex flex-col justify-center items-center gap-[18px] mt-[40px] md:mt-[10px] relative">
+      <%= link_to welcome_path,
+        aria:  { label: "はじめる（メインページへ）" },
         class: "group
-                font-bold text-sm flex items-center justify-center
-                rounded-md inline-block px-4 py-2 bg-[#D4A977] text-white hover:bg-[#C4935F]" do %>
+                font-bold flex h-10 items-center justify-center
+                rounded-md inline-block px-4 py-2 bg-amber-400 text-white hover:bg-orange-400" do %>
         <span class="block group-active:[transform:translate3d(0,1px,0)]">
-          アカウントの引継ぎはこちら
+          はじめる
         </span>
       <% end %>
-    <% end %>
-  </section>
 
-  <section class="flex justify-center items-center mt-[10px] text-amber/700 text-sm">
-    © <%= Time.current.year %> ChokoMofu Project
-  </section>
+      <% unless onboarding_completed? %>
+        <%= link_to login_path,
+          aria:  { label: "アカウント引継ぎ" },
+          class: "group
+                  font-bold text-sm flex items-center justify-center
+                  rounded-md inline-block px-4 py-2 bg-[#D4A977] text-white hover:bg-[#C4935F]" do %>
+          <span class="block group-active:[transform:translate3d(0,1px,0)]">
+            アカウントの引継ぎはこちら
+          </span>
+        <% end %>
+      <% end %>
+    </section>
+
+    <section class="flex justify-center items-center mt-[10px] mb-[20px] md:mb-[0px]text-amber/700 text-sm">
+      © <%= Time.current.year %> ChokoMofu Project
+    </section>
+  </div>
 </div>
