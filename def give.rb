@@ -31,3 +31,15 @@
                   遊び方ガイドを見てみる！
                 </span>
               <% end %>
+
+
+# test\controllers\top_controller_test.rbにかいてたやつ
+
+require "test_helper"
+
+class TopControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get top_index_url
+    assert_response :success
+  end
+end
