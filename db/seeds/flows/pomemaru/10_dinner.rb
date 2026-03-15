@@ -2,7 +2,9 @@
 
 puts "[seeds] dinner: start"  # ← デバッグ用ログ
 
-pomemaru = Character.find_or_create_by!(name: "ぽめまる")
+pomemaru = Character.find_or_create_by!(key: "pomemaru") do |c|
+  c.name = "ぽめまる"
+end
 
 dinner_greet = upsert_conversation(
   code: "conv.greet.night.dinner",
