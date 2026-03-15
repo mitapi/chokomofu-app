@@ -30,7 +30,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Prepare test database
-        run: bin/rails db:prepare
+        run: bin/rails db:schema:load
 
       - name: Run RSpec
         run: bundle exec rspec
