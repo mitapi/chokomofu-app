@@ -2,7 +2,9 @@
 
 puts "[seeds] breaktime_noon02: start"  # ← デバッグ用ログ
 
-pomemaru = Character.find_or_create_by!(name: "ぽめまる")
+pomemaru = Character.find_or_create_by!(key: "pomemaru") do |c|
+  c.name = "ぽめまる"
+end
 
 breaktime_noon02_greet = upsert_conversation(
   code: "conv.greet.noon_02.breaktime",
