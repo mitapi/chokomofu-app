@@ -1,11 +1,18 @@
-<div class="bg-slate-50 flex flex-col w-[600px] h-[700px]">
+<div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
   <% if @empty || @conv.blank? || @character.blank? %>
     <%= render "empty" %>
   <% else %>
-    <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[700px]">
-      <%= image_tag "chat-bg.png", alt: "ちょこっと♪ もふたいむ /chat 背景", class: "w-full h-full object-cover object-[50%_90%] " %>
+    <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[900px] md:h-[700px]">
+      <%= image_tag window_image_path(
+            weather_slot: @weather_slot,
+            time_slot: @time_slot
+          ),
+          alt: "ちょこっと♪ もふたいむ /main 窓背景",
+          class: "absolute top-[-20px] md:top-[15px] left-[280px] md:left-[260px] object-cover object-top w-[250px] z-0" 
+      %>
+      <%= image_tag "chat-bg.png", alt: "ちょこっと♪ もふたいむ /chat 背景", class: "w-full h-full object-cover object-[50%_90%] z-10" %>
     
-      <section class="absolute flex h-[450px] inset-x-0 justify-center items-center pointer-events-none translate-y-[-55px] z-10">
+      <section class="absolute flex h-[450px] inset-x-0 justify-center items-center pointer-events-none translate-y-[10px] md:translate-y-[-55px] z-10">
         <div id="character" class="absolute flex translate-x-0 will-change-transform">
           <% dir  = character_dir_for(@character) %>
           <% expr = expression_for(@conv, character_dir: dir) %>
@@ -18,7 +25,7 @@
         </div>
       </section>
 
-      <section class="absolute flex h-[260px] inset-x-0 justify-center translate-y-[210px] z-20">
+      <section class="absolute flex h-[260px] inset-x-0 justify-center translate-y-[280px] md:translate-y-[210px] z-20">
         <div id="bubbles" class="flex flex-col justify-center items-center">
           <div data-controller="bubble-fade"
                class="opacity-0 translate-y-2 scale-95 transition-all duration-800 ease-in-out">
