@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_27_094559) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_22_082031) do
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_27_094559) do
     t.datetime "updated_at", null: false
     t.string "code"
     t.integer "role", default: 0, null: false
+    t.text "expression_keys"
     t.index ["character_id", "kind", "time_slot", "weather_slot"], name: "idx_on_character_id_kind_time_slot_weather_slot_92acd7b900"
     t.index ["character_id"], name: "index_conversations_on_character_id"
   end

@@ -1,15 +1,26 @@
 module ConversationsHelper
   REGISTRY = {
     "pomemaru" => {
-      allowed: %i[idle smile wink],
+      allowed: %i[
+        face_idle
+        face_happy
+        face_kirakira
+        face_hmm
+        face_surprise
+        face_memo_normal
+        face_memo_smile
+        face_eat_01
+        face_eat_02
+      ],
       map: {
-        "ate_breakfast"     => :smile,
-        "skipped_breakfast" => :wink
+        "breakfast"         => :face_idle,
+        "ate_breakfast"     => :face_happy,
+        "skipped_breakfast" => :face_surprise
       }
     }
   }.freeze
 
-  DEFAULT_ALLOWED = %i[idle].freeze
+  DEFAULT_ALLOWED = %i[face_idle].freeze
   DEFAULT_MAP     = {}.freeze
 
   CHAR_DIR_BY_NAME = {

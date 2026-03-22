@@ -15,6 +15,10 @@ late_night_greet = upsert_conversation(
     time_slot:    :late_night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_surprise",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT        
       ふわわ～……はっ！
       えへへ、ぽめ、ちょっとねむくなってきちゃったの。
@@ -35,6 +39,11 @@ late_night_branch_a = upsert_conversation(
     time_slot:    :late_night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_surprise",
+      "face_kirakira",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       うん……いっしょに寝たいな。
       %{nickname}しゃん、ぽめもおふとんに入れてほしいの。
@@ -57,6 +66,11 @@ late_night_branch_b = upsert_conversation(
     time_slot:    :late_night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_surprise",
+      "face_kirakira",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       そなのね、じゃあぽめは……
       このへんで、まるくなっておやすみしてるの。

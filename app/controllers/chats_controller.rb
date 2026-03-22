@@ -31,6 +31,13 @@ class ChatsController < ApplicationController
     @conv ||= fallback
     @character ||= Character.find(@conv.character_id)
     @choices = @conv.conversation_choices.order(:position)
+
+    @conversation_blocks = @conv.text.to_s
+      .split(/\n\s*\n/)
+      .map { |block| block % { nickname: current_user.nickname } }
+      .map(&:strip)
+      .reject(&:blank?)
+    @expression_keys = parse_expression_keys(@conv.expression_keys, @conversation_blocks.length)
   end
 
 
@@ -83,5 +90,26 @@ class ChatsController < ApplicationController
     @choices = []
     @empty = true
     render :show, status: :ok
+  end
+
+  def parse_expression_keys(raw_expression_keys, line_count)
+    keys =
+      if raw_expression_keys.is_a?(Array)
+        raw_expression_keys
+      elsif raw_expression_keys.present?
+        JSON.parse(raw_expression_keys)
+      else
+        []
+      end
+
+    keys = [] unless keys.is_a?(Array)
+
+    while keys.length < line_count
+      keys << "face_idle"
+    end
+
+    keys
+  rescue JSON::ParserError
+    Array.new(line_count, "face_idle")
   end
 end

@@ -15,6 +15,10 @@ breaktime_evening_greet = upsert_conversation(
     time_slot:    :evening,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_idle",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       おひさまが沈んできたの。
       今日もちょっとずつ夜に近づいてるのね。
@@ -34,6 +38,13 @@ breaktime_evening_branch_a = upsert_conversation(
     time_slot:    :evening,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_happy",
+      "face_eat_01",
+      "face_happy",
+      "face_surprise",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       やった〜！じゃあ、ぽめが伸びの先生するの。
       一緒にのびのび、するのね！
@@ -66,6 +77,15 @@ breaktime_evening_branch_b = upsert_conversation(
     time_slot:    :evening,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_hmm",
+      "face_kirakira",
+      "face_eat_01",
+      "face_eat_02",
+      "face_hmm",
+      "face_happy",
+      "face_kirakira"
+    ].to_json,
     text: <<~TEXT
       わん……とってもお疲れなのね。
       じゃあ今日はとくべつに、ぽめ吸い……する？？
