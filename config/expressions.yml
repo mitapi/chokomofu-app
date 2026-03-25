@@ -1,4 +1,4 @@
-shared: &shared
+default: &default
   pomemaru:
     face_idle:
       src: "character/pomemaru/idle.png"
@@ -26,7 +26,7 @@ shared: &shared
       width: 260
     face_eat_02:
       src: "character/pomemaru/eat_02.png"
-      width: 310
+      width: 260
     face_sleepy:
       src: "character/pomemaru/sleepy.png"
       width: 260
@@ -38,8 +38,10 @@ shared: &shared
       width: 260
 
 development:
-  <<: *shared
+  <<: *default
+
 test:
-  <<: *shared
+  <<: *default
+
 production:
-  <<: *shared
+  <<: *default

@@ -7,10 +7,12 @@ module ConversationsHelper
     CHAR_DIR_BY_NAME[character.name] || character.name.to_s.parameterize
   end
 
-  # config/expressions.ymlから表情画像を持ってくる
+  # config/initializers/expressions.rbから表情画像を持ってくる
   def expression_image_path(character_dir: "pomemaru", expression: :face_idle)
-    EXPRESSIONS.dig(:shared, character_dir.to_sym, expression.to_sym, :src) ||
-      EXPRESSIONS.dig(:shared, character_dir.to_sym, :face_idle, :src)
+    config = Rails.application.config_for(:expressions).deep_symbolize_keys
+
+    config.dig(character_dir.to_sym, expression.to_sym, :src) ||
+      "character/#{character_dir}/idle.png"
   end
 
   # ① ニックネームを差し込んだ「プレーンテキスト」を返す共通メソッド
