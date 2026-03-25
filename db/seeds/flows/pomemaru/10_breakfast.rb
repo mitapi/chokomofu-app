@@ -15,7 +15,9 @@ breakfast_greet = upsert_conversation(
     time_slot:    :morning,
     weather_slot: :any_weather,
     weight:       1,
-    expression_keys: "face_idle",
+    expression_keys: [
+      "face_happy"
+    ].to_json,
     text:         "%{nickname}しゃん、おはよ～！もう朝ゴハン、食べた？"
   }
 )

@@ -16,7 +16,7 @@ late_night_greet = upsert_conversation(
     weather_slot: :any_weather,
     weight:       1,
     expression_keys: [
-      "face_surprise",
+      "face_sleepy",
       "face_hmm"
     ].to_json,
     text: <<~TEXT        
@@ -40,9 +40,9 @@ late_night_branch_a = upsert_conversation(
     weather_slot: :any_weather,
     weight:       1,
     expression_keys: [
-      "face_surprise",
-      "face_kirakira",
-      "face_hmm"
+      "face_sleepy",
+      "face_in_bed",
+      "face_in_bed"
     ].to_json,
     text: <<~TEXT
       うん……いっしょに寝たいな。
@@ -67,9 +67,9 @@ late_night_branch_b = upsert_conversation(
     weather_slot: :any_weather,
     weight:       1,
     expression_keys: [
-      "face_surprise",
-      "face_kirakira",
-      "face_hmm"
+      "face_sleepy",
+      "face_smile",
+      "face_sleepy"
     ].to_json,
     text: <<~TEXT
       そなのね、じゃあぽめは……

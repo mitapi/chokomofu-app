@@ -1,28 +1,4 @@
 module ConversationsHelper
-  REGISTRY = {
-    "pomemaru" => {
-      allowed: %i[
-        face_idle
-        face_happy
-        face_kirakira
-        face_hmm
-        face_surprise
-        face_memo_normal
-        face_memo_smile
-        face_eat_01
-        face_eat_02
-      ],
-      map: {
-        "breakfast"         => :face_idle,
-        "ate_breakfast"     => :face_happy,
-        "skipped_breakfast" => :face_surprise
-      }
-    }
-  }.freeze
-
-  DEFAULT_ALLOWED = %i[face_idle].freeze
-  DEFAULT_MAP     = {}.freeze
-
   CHAR_DIR_BY_NAME = {
     "ぽめまる" => "pomemaru"
   }.freeze
@@ -31,23 +7,10 @@ module ConversationsHelper
     CHAR_DIR_BY_NAME[character.name] || character.name.to_s.parameterize
   end
 
-  def expression_for(conversation, character_dir: "pomemaru")
-    cfg = REGISTRY[character_dir] || {}
-    allowed = Array(cfg[:allowed] || DEFAULT_ALLOWED)
-    suffix_map = cfg[:map] || DEFAULT_MAP
-
-    code = conversation&.code.to_s
-    # ↓デバッグして、code内のドットを.splitが上手く認識できてないみたいなので.split(/[^[:alnum:]_]+/)に変更
-    last = code.split(/[^[:alnum:]_]+/).last
-
-    return last.to_sym if last && allowed.include?(last.to_sym)
-    return suffix_map[last] if suffix_map.key?(last)
-
-    :idle
-  end
-
-  def expression_image_path(character_dir: "pomemaru", expression: :idle)
-    "character/#{character_dir}/#{expression}.png"
+  # config/expressions.ymlから表情画像を持ってくる
+  def expression_image_path(character_dir: "pomemaru", expression: :face_idle)
+    EXPRESSIONS.dig(:shared, character_dir.to_sym, expression.to_sym, :src) ||
+      EXPRESSIONS.dig(:shared, character_dir.to_sym, :face_idle, :src)
   end
 
   # ① ニックネームを差し込んだ「プレーンテキスト」を返す共通メソッド
@@ -58,7 +21,7 @@ module ConversationsHelper
   # ② ふつうに全部まとめて表示したいとき用（今までどおり）
   def conversation_text_html(conv)
     text = conversation_text_body(conv)
-    imple_format(h(text))
+    simple_format(h(text))
   end
 
   # ③ Stimulus用に文章を区切る　split(/\n{2,}/)は２行以上の改行で区切るという意味
@@ -72,6 +35,6 @@ module ConversationsHelper
   end
 
   def render_text_with_nickname(text, user)
-    text.to_s % { nickname: user.nickname }
+    text.to_s % { nickname: user&.nickname.presence || "ゲスト" }
   end
 end

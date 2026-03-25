@@ -15,6 +15,9 @@ breaktime_noon02_greet = upsert_conversation(
     time_slot:    :noon_02,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_smile"
+    ].to_json,
     text: <<~TEXT
       %{nickname}しゃん、ぽめがきましたよ〜。
       もふもふを提供しにきたの。
@@ -31,6 +34,11 @@ breaktime_noon02_branch_a = upsert_conversation(
     time_slot:    :noon_02,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_kirakira",
+      "face_eat_02",
+      "face_sleepy"
+    ].to_json,
     text: <<~TEXT
       ぽめのこと、なでなでしてくれるの？
       なでなでだいすきなの！どぞ、どぞ♪
@@ -55,6 +63,14 @@ breaktime_noon02_branch_b = upsert_conversation(
     time_slot:    :noon_02,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_kirakira",
+      "face_eat_02",
+      "face_surprise",
+      "face_smile",
+      "face_kirakira",
+      "face_happy"
+    ].to_json,
     text: <<~TEXT
       えっ！！おやつ！？おやつくれるの～！？
       ぽめ、おやつだいすきなの！

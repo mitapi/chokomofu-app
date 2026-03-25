@@ -15,6 +15,9 @@ early_morning_greet = upsert_conversation(
     time_slot:    :early_morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_in_bed"
+    ].to_json,
     text: <<~TEXT
       すや……むにゃ……
     TEXT
@@ -30,6 +33,9 @@ early_morning_branch_a = upsert_conversation(
     time_slot:    :early_morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_in_bed"
+    ].to_json,
     text: <<~TEXT
       ぽめまるは気持ちよさそうに眠っています。
       まるくなって寝ている姿は、まるでわたあめのようです……
@@ -46,6 +52,10 @@ early_morning_branch_b = upsert_conversation(
     time_slot:    :early_morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_in_bed",
+      "face_in_bed"
+    ].to_json,
     text: <<~TEXT
       むにゃ……きょうのカリカリは、
       ミックスベジタブル味……てコト……？

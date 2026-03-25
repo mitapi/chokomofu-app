@@ -27,6 +27,15 @@ shared: &shared
     face_eat_02:
       src: "character/pomemaru/eat_02.png"
       width: 310
+    face_sleepy:
+      src: "character/pomemaru/sleepy.png"
+      width: 260
+    face_in_bed:
+      src: "character/pomemaru/in_bed.png"
+      width: 260
+    face_smile:
+      src: "character/pomemaru/smile.png"
+      width: 260
 
 development:
   <<: *shared

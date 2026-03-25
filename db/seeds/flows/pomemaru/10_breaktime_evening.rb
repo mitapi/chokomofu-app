@@ -16,7 +16,7 @@ breaktime_evening_greet = upsert_conversation(
     weather_slot: :any_weather,
     weight:       1,
     expression_keys: [
-      "face_idle",
+      "face_smile",
       "face_hmm"
     ].to_json,
     text: <<~TEXT
@@ -39,11 +39,11 @@ breaktime_evening_branch_a = upsert_conversation(
     weather_slot: :any_weather,
     weight:       1,
     expression_keys: [
+      "face_smile",
       "face_happy",
-      "face_eat_01",
+      "face_sleepy",
       "face_happy",
-      "face_surprise",
-      "face_hmm"
+      "face_kirakira"
     ].to_json,
     text: <<~TEXT
       やった〜！じゃあ、ぽめが伸びの先生するの。

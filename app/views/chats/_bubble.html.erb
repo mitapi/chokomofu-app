@@ -12,7 +12,6 @@
         data-expression-key="<%= @expression_keys[index] || 'face_idle' %>"
         class="<%= index.zero? ? '' : 'hidden' %> mb-2"
       >
-        <p style="color:red;">key: <%= @expression_keys[index] || 'face_idle' %></p>
         <%= simple_format(h(block)) %>
       </div>
     <% end %>
