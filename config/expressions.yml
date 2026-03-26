@@ -32,7 +32,7 @@ default: &default
       width: 260
     face_in_bed:
       src: "character/pomemaru/in_bed.png"
-      width: 260
+      width: 290
     face_smile:
       src: "character/pomemaru/smile.png"
       width: 260
