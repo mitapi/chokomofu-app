@@ -1,20 +1,20 @@
 #晴れ会話
 
-puts "[seeds] any_sunny_greet: start"  # ← デバッグ用ログ
+puts "[seeds] any_clear_greet: start"  # ← デバッグ用ログ
 
 pomemaru = Character.find_or_create_by!(key: "pomemaru") do |c|
   c.name = "ぽめまる"
 end
 
 DAY_SLOTS_01.each do |slot|
-  any_sunny_greet = upsert_conversation(
-    code: "conv.any_sunny_greet.#{slot}",
+  any_clear_greet = upsert_conversation(
+    code: "conv.any_clear_greet.#{slot}",
     attrs: {
       character_id: pomemaru.id,
       kind:         0,
       role:         0,
       time_slot:    slot,
-      weather_slot: :sunny,
+      weather_slot: :clear,
       weight:       1,
       expression_keys: [
         "face_kirakira",

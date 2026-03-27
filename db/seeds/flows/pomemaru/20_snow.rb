@@ -14,7 +14,7 @@ DAY_SLOTS_02.each do |slot|
       kind:         0,
       role:         0,
       time_slot:    slot,
-      weather_slot: :swow,
+      weather_slot: :snow,
       weight:       1,
       expression_keys: [
         "face_smile"
