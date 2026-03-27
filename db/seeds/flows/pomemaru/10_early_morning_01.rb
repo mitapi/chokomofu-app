@@ -1,13 +1,13 @@
 #ぽめまる就寝中、な会話（ぽめまる）
 
-puts "[seeds] early_morning: start"  # ← デバッグ用ログ
+puts "[seeds] early_morning_01: start"  # ← デバッグ用ログ
 
 pomemaru = Character.find_or_create_by!(key: "pomemaru") do |c|
   c.name = "ぽめまる"
 end
 
-early_morning_greet = upsert_conversation(
-  code: "conv.greet.early_morning.sleeping",
+early_morning_01_greet = upsert_conversation(
+  code: "conv.greet.early_morning_01.sleeping",
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
@@ -24,8 +24,8 @@ early_morning_greet = upsert_conversation(
   }
 )
 
-early_morning_branch_a = upsert_conversation(
-  code: "conv.greet.early_morning.let_sleep",
+early_morning_01_branch_a = upsert_conversation(
+  code: "conv.greet.early_morning_01.let_sleep",
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
@@ -43,8 +43,8 @@ early_morning_branch_a = upsert_conversation(
   }
 )
 
-early_morning_branch_b = upsert_conversation(
-  code: "conv.greet.early_morning.dreaming",
+early_morning_01_branch_b = upsert_conversation(
+  code: "conv.greet.early_morning_01.dreaming",
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
@@ -66,17 +66,17 @@ early_morning_branch_b = upsert_conversation(
 )
 
 upsert_choice(
-  conversation:      early_morning_greet,
+  conversation:      early_morning_01_greet,
   position:          1,
   label:             "そっとしておこう",
-  next_conversation: early_morning_branch_a
+  next_conversation: early_morning_01_branch_a
 )
 
 upsert_choice(
-  conversation:      early_morning_greet,
+  conversation:      early_morning_01_greet,
   position:          2,
   label:             "夢でも見てるのかな",
-  next_conversation: early_morning_branch_b
+  next_conversation: early_morning_01_branch_b
 )
 
-puts "[seeds] greetings: done (greet_id=#{early_morning_greet.id})"
+puts "[seeds] greetings: done (greet_id=#{early_morning_01_greet.id})"
