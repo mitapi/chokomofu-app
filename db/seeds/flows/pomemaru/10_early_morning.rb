@@ -29,7 +29,7 @@ early_morning_branch_a = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    role:         0,
+    role:         1,
     time_slot:    :early_morning,
     weather_slot: :any_weather,
     weight:       1,
@@ -48,7 +48,7 @@ early_morning_branch_b = upsert_conversation(
   attrs: {
     character_id: pomemaru.id,
     kind:         0,
-    role:         0,
+    role:         1,
     time_slot:    :early_morning,
     weather_slot: :any_weather,
     weight:       1,

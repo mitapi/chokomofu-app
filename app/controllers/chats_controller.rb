@@ -21,11 +21,7 @@ class ChatsController < ApplicationController
       if params[:conversation_id].to_s.match?(/\A\d+\z/)
         Conversation.find_by!(id: params[:conversation_id])
       else
-        scope
-          .left_joins(:conversation_choices)
-          .group("conversations.id")
-          .order(Arel.sql("COUNT(conversation_choices.id) DESC, RANDOM()"))
-          .first
+        pick_weighted(scope)
       end
 
     @conv ||= fallback
@@ -111,5 +107,21 @@ class ChatsController < ApplicationController
     keys
   rescue JSON::ParserError
     Array.new(line_count, "face_idle")
+  end
+
+  # スコープで絞られたものを対象にpoolに入れます
+  def pick_weighted(conversations)
+    pool = []
+
+    conversations.each do |conv|
+      weight = conv.weight.to_i
+      weight = 1 if weight <= 0
+
+      weight.times do
+        pool << conv
+      end
+    end
+
+    pool.sample
   end
 end

@@ -8,7 +8,7 @@ end
 
 DAY_SLOTS_01.each do |slot|
   pomemaru_singing = upsert_conversation(
-    code: "conv.pomemaru.singing",
+    code: "conv.pomemaru.singing.#{slot}",
     attrs: {
       character_id: pomemaru.id,
       kind:         0,
