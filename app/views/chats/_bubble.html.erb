@@ -6,9 +6,10 @@
         class: "mt-2 grid [grid-template-rows:1fr_auto] cursor-pointer
                 relative w-[550px]" do %>
 
-    <% conversation_lines(@conv).each_with_index do |block, index| %>
+    <% @conversation_blocks.each_with_index do |block, index| %>
       <div
         data-conversation-step-target="line"
+        data-expression-key="<%= @expression_keys[index] || 'face_idle' %>"
         class="<%= index.zero? ? '' : 'hidden' %> mb-2"
       >
         <%= simple_format(h(block)) %>

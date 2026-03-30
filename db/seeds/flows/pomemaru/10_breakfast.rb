@@ -15,6 +15,9 @@ breakfast_greet = upsert_conversation(
     time_slot:    :morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_happy"
+    ].to_json,
     text:         "%{nickname}しゃん、おはよ～！もう朝ゴハン、食べた？"
   }
 )
@@ -28,6 +31,11 @@ breakfast_branch_a = upsert_conversation(
     time_slot:    :morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_eat_02",
+      "face_kirakira",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       一日の始まりは、やっぱり朝ゴハンだよね♪
       ぽめもね、カリカリを食べたの！
@@ -51,6 +59,11 @@ breakfast_branch_b = upsert_conversation(
     time_slot:    :morning,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_surprise",
+      "face_eat_02",
+      "face_hmm"
+    ].to_json,
     text: <<~TEXT
       そなの！おなか空いちゃわない……？
       おなかが空いても大丈夫なように、ぽめの兵糧丸、分けてあげるの！

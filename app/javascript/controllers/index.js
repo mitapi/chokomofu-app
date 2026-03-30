@@ -28,3 +28,6 @@ application.register("snack-loading", SnackLoadingController)
 
 import DiaryModalController from "./diary_modal_controller"
 application.register("diary-modal", DiaryModalController)
+
+import CharacterExpressionController from "./character_expression_controller"
+application.register("character-expression", CharacterExpressionController)

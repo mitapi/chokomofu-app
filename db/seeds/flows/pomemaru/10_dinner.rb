@@ -15,6 +15,9 @@ dinner_greet = upsert_conversation(
     time_slot:    :night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_smile"
+    ].to_json,
     text:         "おなかすいた～！夜ごはん、夜ごはん♪"
   }
 )
@@ -28,6 +31,14 @@ dinner_branch_a = upsert_conversation(
     time_slot:    :night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_happy",
+      "face_kirakira",
+      "face_smile",
+      "face_smile",
+      "face_sleepy",
+      "face_kirakira"
+    ].to_json,
     text: <<~TEXT
       うん！ぽめ、今日はおしごとしてたらちょっと遅くなっちゃった。
       おなかぺこぺこなの～！
@@ -63,6 +74,13 @@ dinner_branch_b = upsert_conversation(
     time_slot:    :night,
     weather_slot: :any_weather,
     weight:       1,
+    expression_keys: [
+      "face_surprise",
+      "face_kirakira",
+      "face_smile",
+      "face_kirakira",
+      "face_happy"
+    ].to_json,
     text: <<~TEXT
       えっ……%{nickname}しゃんと、いっしょごはん……！？
 

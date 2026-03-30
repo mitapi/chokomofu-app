@@ -12,15 +12,22 @@
       %>
       <%= image_tag "chat-bg.png", alt: "ちょこっと♪ もふたいむ /chat 背景", class: "w-full h-full object-cover object-[50%_90%] z-10" %>
     
-      <section class="absolute flex h-[450px] inset-x-0 justify-center items-center pointer-events-none translate-y-[10px] md:translate-y-[-55px] z-10">
-        <div id="character" class="absolute flex translate-x-0 will-change-transform">
-          <% dir  = character_dir_for(@character) %>
-          <% expr = expression_for(@conv, character_dir: dir) %>
+      <% expression_map = expression_map_for(@character) %>
+      <% initial_key = @expression_keys.first || "face_idle" %>
 
+      <!-- ⭐data-actionはwindowsにイベントを飛ばす形にしました。（@windowなしだと表情画像が変化しないので） -->
+      <section
+        class="absolute flex h-[450px] inset-x-0 justify-center items-center pointer-events-none translate-y-[10px] md:translate-y-[-55px] z-10"
+        data-controller="character-expression"
+        data-character-expression-expressions-value="<%= expression_map.to_json %>"
+        data-action="conversation-step:change@window->character-expression#change"
+      >
+        <div id="character" class="absolute flex translate-x-0 will-change-transform">
           <%= image_tag(
-              expression_image_path(character_dir: dir, expression: expr),
-              alt: @character.name,
-              class: "w-[390px] h-[390px] md:w-[390px] md:h-[390px] object-contain",
+                expression_map[initial_key],
+                alt: @character.name,
+                class: "w-[450px] h-[390px] object-contain",
+                data: { character_expression_target: "image" }
               ) %>
         </div>
       </section>

@@ -32,9 +32,8 @@ export default class extends Controller {
     const currentLine = this.lineTargets[this.index]
     const expressionKey = currentLine?.dataset?.expressionKey
 
-    this.element.dispatchEvent(
+    window.dispatchEvent(
       new CustomEvent("conversation-step:change", {
-        bubbles: true,
         detail: { expressionKey }
       })
     )
@@ -62,10 +61,11 @@ export default class extends Controller {
   }
 
   emitStepChange() {
-    this.element.dispatchEvent(
+    window.dispatchEvent(
       new CustomEvent("conversation-step:change", {
-        bubbles: true,
-        detail: { expressionKey: this.lineTargets.find(el => !el.classList.contains("hidden"))?.dataset?.expressionKey }
+        detail: {
+          expressionKey: this.lineTargets.find(el => !el.classList.contains("hidden"))?.dataset?.expressionKey
+        }
       })
     )
   }

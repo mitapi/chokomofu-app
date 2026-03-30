@@ -1,17 +1,4 @@
 module ConversationsHelper
-  REGISTRY = {
-    "pomemaru" => {
-      allowed: %i[idle smile wink],
-      map: {
-        "ate_breakfast"     => :smile,
-        "skipped_breakfast" => :wink
-      }
-    }
-  }.freeze
-
-  DEFAULT_ALLOWED = %i[idle].freeze
-  DEFAULT_MAP     = {}.freeze
-
   CHAR_DIR_BY_NAME = {
     "ぽめまる" => "pomemaru"
   }.freeze
@@ -20,23 +7,12 @@ module ConversationsHelper
     CHAR_DIR_BY_NAME[character.name] || character.name.to_s.parameterize
   end
 
-  def expression_for(conversation, character_dir: "pomemaru")
-    cfg = REGISTRY[character_dir] || {}
-    allowed = Array(cfg[:allowed] || DEFAULT_ALLOWED)
-    suffix_map = cfg[:map] || DEFAULT_MAP
+  # config/initializers/expressions.rbから表情画像を持ってくる
+  def expression_image_path(character_dir: "pomemaru", expression: :face_idle)
+    config = Rails.application.config_for(:expressions).deep_symbolize_keys
 
-    code = conversation&.code.to_s
-    # ↓デバッグして、code内のドットを.splitが上手く認識できてないみたいなので.split(/[^[:alnum:]_]+/)に変更
-    last = code.split(/[^[:alnum:]_]+/).last
-
-    return last.to_sym if last && allowed.include?(last.to_sym)
-    return suffix_map[last] if suffix_map.key?(last)
-
-    :idle
-  end
-
-  def expression_image_path(character_dir: "pomemaru", expression: :idle)
-    "character/#{character_dir}/#{expression}.png"
+    config.dig(character_dir.to_sym, expression.to_sym, :src) ||
+      "character/#{character_dir}/idle.png"
   end
 
   # ① ニックネームを差し込んだ「プレーンテキスト」を返す共通メソッド
@@ -47,7 +23,7 @@ module ConversationsHelper
   # ② ふつうに全部まとめて表示したいとき用（今までどおり）
   def conversation_text_html(conv)
     text = conversation_text_body(conv)
-    imple_format(h(text))
+    simple_format(h(text))
   end
 
   # ③ Stimulus用に文章を区切る　split(/\n{2,}/)は２行以上の改行で区切るという意味
@@ -61,6 +37,6 @@ module ConversationsHelper
   end
 
   def render_text_with_nickname(text, user)
-    text.to_s % { nickname: user.nickname }
+    text.to_s % { nickname: user&.nickname.presence || "ゲスト" }
   end
 end
