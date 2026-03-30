@@ -17,7 +17,7 @@ DAY_SLOTS_02.each do |slot|
       weather_slot: :any_weather,
       weight:       1,
       expression_keys: [
-        "face_happy
+        "face_happy"
       ].to_json,
       text: <<~TEXT
         %{nickname}しゃん、ぽめが来ましたよ♪
@@ -33,7 +33,7 @@ DAY_SLOTS_02.each do |slot|
       kind:         0,
       role:         1,
       time_slot:    slot,
-      weather_slot: :rain,
+      weather_slot: :any_weather,
       weight:       1,
       expression_keys: [
         "face_kirakira",
@@ -69,7 +69,7 @@ DAY_SLOTS_02.each do |slot|
       kind:         0,
       role:         1,
       time_slot:    slot,
-      weather_slot: :rain,
+      weather_slot: :any_weather,
       weight:       1,
       expression_keys: [
         "face_smile",
@@ -106,7 +106,7 @@ DAY_SLOTS_02.each do |slot|
       kind:         0,
       role:         1,
       time_slot:    slot,
-      weather_slot: :rain,
+      weather_slot: :any_weather,
       weight:       1,
       expression_keys: [
         "face_hmm",
@@ -133,6 +133,7 @@ DAY_SLOTS_02.each do |slot|
 
         じゃあまずは「けづくろい」して、おてつだいの準備するの。
         くしくし、くしくし……
+      TEXT
     }
   )
 

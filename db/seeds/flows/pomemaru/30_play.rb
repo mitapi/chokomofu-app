@@ -17,7 +17,7 @@ DAY_SLOTS_04.each do |slot|
       weather_slot: :any_weather,
       weight:       1,
       expression_keys: [
-        "face_hmm
+        "face_hmm"
       ].to_json,
       text: <<~TEXT
         ねえねえ、%{nickname}しゃん。
