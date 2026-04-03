@@ -26,6 +26,6 @@ COPY . .
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/usr/bin/entrypoint.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 #CMDは、renderでpumaを起動しっぱなしにできるように追加しました
