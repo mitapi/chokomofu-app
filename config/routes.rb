@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/debug/remove_old_early_morning", to: "debug#remove_old_early_morning"
   root 'top#index'
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
