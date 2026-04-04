@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -euo pipefail
 
 # Rails が残しがちな PID を掃除（再起動時に大事）

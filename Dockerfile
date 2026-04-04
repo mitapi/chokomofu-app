@@ -27,5 +27,5 @@ COPY . .
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-CMD ["bash","-lc","bundle exec rails db:migrate && bundle exec puma -C config/puma.rb"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 #CMDは、renderでpumaを起動しっぱなしにできるように追加しました
