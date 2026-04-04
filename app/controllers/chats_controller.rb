@@ -34,6 +34,14 @@ class ChatsController < ApplicationController
       .map(&:strip)
       .reject(&:blank?)
     @expression_keys = parse_expression_keys(@conv.expression_keys, @conversation_blocks.length)
+
+    Rails.logger.info("[chat-picked] id=#{@conv.id} code=#{@conv.code}")
+    Rails.logger.info("[chat-picked] text=#{@conv.text.inspect}")
+    Rails.logger.info("[chat-picked] expression_keys=#{@conv.expression_keys.inspect}")
+    Rails.logger.info("[chat-picked] choices_count=#{@conv.conversation_choices.size}")
+
+    is_followup = ConversationChoice.exists?(next_conversation_id: @conv.id)
+    Rails.logger.info("[chat-picked] followup_target=#{is_followup}")
   end
 
 
@@ -123,5 +131,25 @@ class ChatsController < ApplicationController
     end
 
     pool.sample
+  end
+
+  # @expression_keys を必ず配列にする（TEXTのままだとキーを正しく読めなくてフォールバックする）
+  def parse_expression_keys(raw_value, block_count)
+    keys =
+      case raw_value
+      when Array
+        raw_value
+      when String
+        JSON.parse(raw_value)
+      else
+        []
+      end
+
+    keys = keys.map(&:to_s)
+    keys += ["face_idle"] * (block_count - keys.size)
+
+    keys.first(block_count)
+  rescue JSON::ParserError
+    ["face_idle"] * block_count
   end
 end
