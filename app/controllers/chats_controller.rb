@@ -12,10 +12,12 @@ class ChatsController < ApplicationController
 
     fallback = Conversation.find_by!(code: "conv.greet.morning.breakfast")
 
-    scope = Conversation
-      .where(character: @character, kind: :talk, role: :entry)
+    followup_ids = ConversationChoice.where.not(next_conversation_id: nil).select(:next_conversation_id)
+
+    scope = Conversation.where(character: @character, kind: :talk)
       .for_slot(@time_slot)
       .for_weather(@weather_slot)
+      .where.not(id: followup_ids)
 
     @conv =
       if params[:conversation_id].to_s.match?(/\A\d+\z/)
