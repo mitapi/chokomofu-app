@@ -24,6 +24,9 @@ RUN gem install foreman -N
 
 COPY . .
 
+RUN yarn build && yarn build:css
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
