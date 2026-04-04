@@ -28,4 +28,26 @@ class Conversation < ApplicationRecord
 
   scope :for_slot,    ->(slot)    { where(time_slot: [slot, :any]) }
   scope :for_weather, ->(w_slot)  { where(weather_slot: [w_slot, :any_weather]) }
+
+  private
+
+  # @expression_keys を必ず配列にする（TEXTのままだとキーを正しく読めなくてフォールバックする）
+  def parse_expression_keys(raw_value, block_count)
+    keys =
+      case raw_value
+      when Array
+        raw_value
+      when String
+        JSON.parse(raw_value)
+      else
+        []
+      end
+
+    keys = keys.map(&:to_s)
+    keys += ["face_idle"] * (block_count - keys.size)
+
+    keys.first(block_count)
+  rescue JSON::ParserError
+    ["face_idle"] * block_count
+  end
 end
