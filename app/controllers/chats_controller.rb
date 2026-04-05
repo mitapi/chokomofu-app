@@ -3,7 +3,7 @@ class ChatsController < ApplicationController
 
   def show
     slot = resolve_time_slot(params[:time_slot]).to_sym
-    @time_slot = slot
+    @time_slot = :early_morning #slot
     weather = current_weather_slot
     @weather_slot = weather.presence || :any_weather
 
