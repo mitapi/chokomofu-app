@@ -33,16 +33,21 @@ textarea:-webkit-autofill:focus {
 
 /* main画面キャラが呼吸しているようにみせる */
 @keyframes breathing {
-  0%, 100% {
-    transform: scale(1, 1);
+  0% {
+    transform: scaleY(1);
   }
-  50% {
-    transform: scale(1, 0.99);
+  40% {
+    transform: scaleY(1.015);
+  }
+  60% {
+    transform: scaleY(1.015);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
 
 .breathing-character {
   transform-origin: center bottom;
-  animation: breathing 3s ease-in-out infinite;
-  will-change: transform;
+  animation: breathing 5s ease-in-out infinite;
 }
