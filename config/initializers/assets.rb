@@ -4,6 +4,7 @@
 Rails.application.config.assets.version = "1.0"
 Rails.application.config.assets.paths << Rails.root.join("app/assets/builds")
 Rails.application.config.assets.precompile += %w[application.js application.css custom.css]
+Rails.application.config.assets.paths << Rails.root.join("app/assets/audio")
 
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path

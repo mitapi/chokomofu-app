@@ -29,6 +29,26 @@
   </head>
 
   <body class="antialiased bg-cats font-sans min-h-screen">
+    <% bgm_enabled_page = !(%w[top welcomes].include?(controller_name)) %>
+
+    <% if bgm_enabled_page %>
+      <div data-controller="bgm" class="fixed top-3 right-3 z-50">
+        <audio
+          data-bgm-target="audio"
+          src="<%= asset_path('main.mp3') %>"
+          loop
+          preload="auto"></audio>
+
+        <button
+          type="button"
+          data-bgm-target="button"
+          data-action="bgm#toggle"
+          class="rounded-full bg-amber-300/95 px-3 py-2 text-sm font-bold text-amber-900 shadow-md border border-amber-200">
+          ♪ OFF
+        </button>
+      </div>
+    <% end %>
+
     <% if controller_name == "top" && action_name == "index" %>
       <div class="flex min-h-screen items-center md:items-start justify-center overflow-hidden">
         <div class="w-[372px] h-[481px] md:w-[600px] md:h-auto flex items-center md:items-start justify-center">
