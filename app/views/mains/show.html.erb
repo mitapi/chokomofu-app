@@ -1,6 +1,7 @@
 <div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
   <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[900px] md:h-[700px]"
-     data-controller="snack-base">
+       data-controller="snack-base">
+    <%= render "shared/bgm_button" %>
     <%= image_tag window_image_path(
           weather_slot: @weather_slot,
           time_slot: @time_slot

@@ -48,15 +48,10 @@ textarea:-webkit-autofill:focus {
 }
 
 /* bgmボタンホバーで音量調整 */
-.bgm-panel {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+.bgm-on .group-hover\:opacity-100 {
+  opacity: 1;
 }
 
-.bgm-on:hover .bgm-panel {
-  opacity: 1;
+.bgm-on .group-hover\:pointer-events-auto {
   pointer-events: auto;
-  transform: translateY(0);
 }

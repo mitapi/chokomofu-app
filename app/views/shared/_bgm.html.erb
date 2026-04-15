@@ -1,0 +1,8 @@
+<%# data-turbo-permanentでターボ遷移後の再構築をなくす。id内で記述するのが重要 %>
+<div id="bgm-audio" data-controller="bgm" data-turbo-permanent>
+  <audio
+    data-bgm-target="audio"
+    src="<%= asset_path('main.mp3') %>"
+    loop
+    preload="auto"></audio>
+</div>

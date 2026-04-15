@@ -31,3 +31,6 @@ application.register("diary-modal", DiaryModalController)
 
 import CharacterExpressionController from "./character_expression_controller"
 application.register("character-expression", CharacterExpressionController)
+
+import BgmController from "./bgm_controller"
+application.register("bgm", BgmController)

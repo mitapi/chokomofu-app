@@ -1,0 +1,25 @@
+<% if controller_name == "mains" %>
+  <div data-controller="bgm" class="absolute top-5 left-5 z-50 bgm-wrap">
+    <button
+      type="button"
+      data-bgm-target="button"
+      data-action="bgm#toggle"
+      class="rounded-full bg-amber-300/95 px-3 py-2 text-sm font-bold text-amber-900 shadow-md border border-amber-200">
+      ♪ OFF
+    </button>
+
+    <div class="bgm-panel mt-2 bg-white/90 rounded-lg p-2 shadow">
+      <div class="flex items-center gap-2">
+        <span class="text-xs">🔊</span>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          data-bgm-target="volume"
+          data-action="input->bgm#changeVolume"
+          class="w-24 accent-amber-400">
+      </div>
+    </div>
+  </div>
+<% end %>
