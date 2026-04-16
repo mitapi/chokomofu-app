@@ -36,9 +36,6 @@ class ChatsController < ApplicationController
       .map(&:strip)
       .reject(&:blank?)
     @expression_keys = parse_expression_keys(@conv.expression_keys, @conversation_blocks.length)
-
-    Rails.logger.debug "[conversation] code=#{@conversation.code}"
-    Rails.logger.debug "[conversation] text=#{@conversation.text.inspect}"
   end
 
 
