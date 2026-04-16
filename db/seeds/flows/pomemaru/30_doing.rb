@@ -40,7 +40,8 @@ DAY_SLOTS_02.each do |slot|
         "face_happy",
         "face_happy",
         "face_hmm",
-        "face_smile"
+        "face_smile",
+        "face_kirakira"
       ].to_json,
       text: <<~TEXT
         %{nickname}しゃん……とっても、えらいの～～っ！！！
@@ -55,7 +56,9 @@ DAY_SLOTS_02.each do |slot|
         ……え、おひざに乗ってほしいの？
         ほんとにそれでいいの～？
 
-        あ、ぽめをモフモフしたいのね！ぽめ、ふわもこだから……ってコト♪
+        あ、ぽめをモフモフしたいのね！
+        ぽめ、ふわもこだから……ってコト♪
+
         ちょっとお疲れになったら、いつでもモフモフしてもいいのね♪
         たまに頭とかなでてくれると、うれしいの。
       TEXT

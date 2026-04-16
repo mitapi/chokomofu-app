@@ -74,7 +74,8 @@ DAY_SLOTS_04.each do |slot|
       expression_keys: [
         "face_hmm",
         "face_smile",
-        "face_smile"
+        "face_smile",
+        "face_hmm"
       ].to_json,
       text: <<~TEXT
         %{nickname}しゃん、これ、ぷい！ぷい！て音がするの。
@@ -86,6 +87,7 @@ DAY_SLOTS_04.each do |slot|
 
         このぬいぐるみさん、よく見るともるもるちゃんに似てる気もする……？
         もしかしてこのぬいぐるみさんは、ぽめのおともだちを見て作ったのかなあ。
+
         %{nickname}しゃんは、どう思う～？
       TEXT
     }

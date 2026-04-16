@@ -20,6 +20,7 @@ DAY_SLOTS_01.each do |slot|
         "face_kirakira",
         "face_kirakira",
         "face_smile",
+        "face_happy",
         "face_kirakira"
       ].to_json,
       text: <<~TEXT
@@ -35,7 +36,9 @@ DAY_SLOTS_01.each do |slot|
 
         %{nickname}しゃんも、ぽめといっしょにおさんぽ行こ♪
         ぽめのおともだちも、%{nickname}しゃんが来たら「こんにちは～」ってごあいさつしに来ると思うの。
-        そだ、みんなで一緒にポール遊びとかもしちゃう……？？わくわく……！
+
+        そだ、みんなで一緒にポール遊びとかもしちゃう……？？
+        わくわく……！
       TEXT
     }
   )
