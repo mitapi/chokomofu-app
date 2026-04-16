@@ -35,11 +35,11 @@ textarea:-webkit-autofill:focus {
 @keyframes breathing {
   0%, 100% {
     transform-origin: bottom;
-    transform: scaleY(1,1);
+    transform: scaleX(1,1) scaleY(1,1);
   }
   50% {
     transform-origin: bottom;
-    transform: scaleY(1.005);
+    transform: scaleX(1.003) scaleY(1.005);
   }
 }
 
