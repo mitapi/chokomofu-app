@@ -37,13 +37,8 @@ class ChatsController < ApplicationController
       .reject(&:blank?)
     @expression_keys = parse_expression_keys(@conv.expression_keys, @conversation_blocks.length)
 
-    Rails.logger.info("[chat-picked] id=#{@conv.id} code=#{@conv.code}")
-    Rails.logger.info("[chat-picked] text=#{@conv.text.inspect}")
-    Rails.logger.info("[chat-picked] expression_keys=#{@conv.expression_keys.inspect}")
-    Rails.logger.info("[chat-picked] choices_count=#{@conv.conversation_choices.size}")
-
-    is_followup = ConversationChoice.exists?(next_conversation_id: @conv.id)
-    Rails.logger.info("[chat-picked] followup_target=#{is_followup}")
+    Rails.logger.debug "[conversation] code=#{@conversation.code}"
+    Rails.logger.debug "[conversation] text=#{@conversation.text.inspect}"
   end
 
 
