@@ -21,7 +21,7 @@ export default class extends Controller {
     }
 
     // ★Turbo差し替え後でも確実に拾うため、document で受ける（安定版）
-    document.addEventListener("conversation-step:change", this._onStepChange)
+    window.addEventListener("conversation-step:change", this._onStepChange)
 
     // ✅ 前段 → 本編への切替
     this._preTimeoutId = window.setTimeout(() => {
@@ -130,7 +130,7 @@ export default class extends Controller {
     if (this._intervalId) window.clearInterval(this._intervalId)
     if (this._timeoutId) window.clearTimeout(this._timeoutId)
 
-    if (this._onStepChange) document.removeEventListener("conversation-step:change", this._onStepChange)
+    if (this._onStepChange) window.removeEventListener("conversation-step:change", this._onStepChange)
 
     window.dispatchEvent(new Event("snack:show-base"))
   }
