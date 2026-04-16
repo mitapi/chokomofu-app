@@ -1,5 +1,6 @@
-<div class="text-xs text-red-500">
+<div class="text-[10px] text-red-600 whitespace-pre-wrap">
   code: <%= @conv&.code %>
+  text: <%= @conv&.text.inspect %>
 </div>
 <div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
   <% if @empty || @conv.blank? || @character.blank? %>
