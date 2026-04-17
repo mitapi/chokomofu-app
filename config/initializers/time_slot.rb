@@ -2,7 +2,7 @@
 
 DAY_SLOTS_01 = %i[morning noon_01 noon_02 evening].freeze
 
-DAY_SLOTS_02 = %i[morning noon_01 noon_02 evening night late_night].freeze
+DAY_SLOTS_02 = %i[morning noon_01 noon_02 evening night].freeze
 
 DAY_SLOTS_03 = %i[noon_02 evening night].freeze
 
