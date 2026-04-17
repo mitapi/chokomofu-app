@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  if Rails.env.production?
-    get "/debug/reset_conversations/:token", to: "debug#reset_conversations"
-  end
   root 'top#index'
   resource :chat, only: %i[show] 
   resource :onboarding, only: [:edit, :update]
