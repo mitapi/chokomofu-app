@@ -19,8 +19,10 @@ DAY_SLOTS_01.each do |slot|
       expression_keys: [
         "face_hmm",
         "face_smile",
+        "face_smile",
         "face_happy",
-        "face_kirakira"
+        "face_kirakira",
+        "face_smile"
       ].to_json,
       text: <<~TEXT
         きょうは雲さんもくもくなのね。
@@ -28,6 +30,7 @@ DAY_SLOTS_01.each do |slot|
 
         今日ははおさんぽやめて、おうちでおしごとの続きするの。
         「ほしのけ」をふわふわまんまるにしていくのね。
+
         「ほしのけ」、キラキラでキレイでしょ～♪
         お空から落ちてくるんだけど、こないだいっぱい取れたのね！
 
@@ -37,6 +40,7 @@ DAY_SLOTS_01.each do |slot|
 
         わあ……、けっこう、キレイに作れたとおもうの！
         あんまりお天気よくない日でも、これ見たらキラキラで元気出る……かも♪
+
         ぽめからのプレゼント、大事にしてくれたらうれしいの。
       TEXT
     }

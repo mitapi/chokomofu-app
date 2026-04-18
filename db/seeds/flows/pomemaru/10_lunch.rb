@@ -35,7 +35,8 @@ lunch_branch_a = upsert_conversation(
       "face_hmm",
       "face_smile",
       "face_surprise",
-      "face_smile"
+      "face_smile",
+      "face_kirakira"
     ].to_json,
     text: <<~TEXT
       そなの！おなかいっぱいになった〜？
@@ -50,6 +51,7 @@ lunch_branch_a = upsert_conversation(
 
       そうだっ、もし食べすぎておねむになっちゃったら、
       ぽめが“ふみふみ”して起こしてあげるの！
+
       うどんをふみっ……ふみっ……ってするように、ね♪
     TEXT
   }
@@ -66,6 +68,7 @@ lunch_branch_b = upsert_conversation(
     weight:       1,
     expression_keys: [
       "face_surprise",
+      "face_surprise",
       "face_kirakira",
       "face_smile",
       "face_happy"
@@ -75,6 +78,7 @@ lunch_branch_b = upsert_conversation(
       ぐーって音も鳴っちゃうし……
 
       そだ！ぽめは考えまちた。
+
       おなかが鳴りそうになったら、
       ぽめが「ワン！」って鳴いてごまかしてあげるの！
       おなかの音なんて、いっかいでどっかいっちゃうんだから！
