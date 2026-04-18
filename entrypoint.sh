@@ -8,6 +8,13 @@ rm -f tmp/pids/server.pid
 # production をデフォルトに
 export RAILS_ENV="${RAILS_ENV:-production}"
 
+# デプロイ時にseedを走らせる（これがなくて前は本番だけseedが更新されなかった）
+echo "[boot] running db:migrate"
+bin/rails db:migrate
+
+echo "[boot] running db:seed"
+bin/rails db:seed
+
 # 最後にアプリを起動。CMD/引数があればそれを使い、無ければ Puma を起動
 if [ "$#" -gt 0 ]; then
   echo "[boot] exec: $*"
