@@ -15,16 +15,14 @@
 <% end %>
 
 <div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px] relative overflow-hidden">
-  <div class="absolute inset-0 flex items-start justify-center z-10 pointer-events-auto">
-    <div class="origin-top scale-[0.62] md:scale-100 pt-6">
+  <div class="absolute inset-0 z-10 pointer-events-auto">
+    <div class="absolute left-1/2 top-6 -translate-x-1/2 origin-top scale-[0.62] md:scale-100">
       <div class="w-[520px]">
         <div class="text-base font-bold ml-5">
           <%= "#{@mofu_diary.user.nickname}さんの、 #{@mofu_diary.title}" %>
         </div>
 
         <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
-
-        <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
 
         <div class="mt-3 flex justify-center">
           <%= link_to "さあ、ちょこもふを始めてみよう♪", root_path,
