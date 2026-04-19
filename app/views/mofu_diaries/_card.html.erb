@@ -1,29 +1,38 @@
-<div class="relative flex items-center justify-center">
+<div class="relative w-full">
   <%= image_tag "diary/frame.png",
-    class: "w-full h-[360px] md:h-[450px] select-none pointer-events-none block" %>
+    class: "block w-full h-auto select-none pointer-events-none" %>
 
-  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 pb-3 md:px-5 md:pb-4">
-    <div class="flex justify-center">
-      <%= image_tag diary_illust_image_path(mofu_diary),
-            alt: "ぽめまる",
-            class: "w-[240px] md:w-[400px]" %>
+  <!-- タイトル -->
+  <div class="absolute top-[36%] left-1/2 -translate-x-1/2 w-[78%] text-center">
+    <div class="text-[13px] md:text-[18px] font-bold leading-snug whitespace-nowrap">
+      <%= "#{mofu_diary.user.nickname}さんの、 #{mofu_diary.title}" %>
     </div>
+  </div>
 
-    <div class="text-[12px] md:text-[15px] leading-relaxed mt-4 md:mt-8">
+  <!-- イラスト -->
+  <div class="absolute bottom-[20%] right-[7%] w-[44%] md:w-[48%]">
+    <%= image_tag diary_illust_image_path(mofu_diary),
+          alt: "ぽめまる",
+          class: "w-full h-auto" %>
+  </div>
+
+  <!-- 本文 -->
+  <div class="absolute bottom-[12%] left-1/2 -translate-x-1/2 w-[62%] text-center">
+    <div class="text-[11px] md:text-[15px] leading-relaxed">
       <%= mofu_diary.line1 %><br>
       <%= mofu_diary.line2 %>
     </div>
+  </div>
 
-    <div class="flex items-center justify-between mt-2 md:mt-3 text-[10px] md:text-xs opacity-70 w-full">
-      <div>
-        <%= mofu_diary.date %>
-      </div>
+  <!-- 日付 -->
+  <div class="absolute bottom-[12%] left-[16%] text-[10px] md:text-xs opacity-70">
+    <%= mofu_diary.date %>
+  </div>
 
-      <div class="flex gap-2">
-        <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
-          <%= image_tag p, alt: "天気", class: "w-[24px] h-[13px] md:w-[30px] md:h-[16px] drop-shadow-sm" %>
-        <% end %>
-      </div>
-    </div>
+  <!-- 天気 -->
+  <div class="absolute bottom-[11.5%] right-[12%] opacity-70">
+    <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
+      <%= image_tag p, alt: "天気", class: "w-[24px] h-[13px] md:w-[30px] md:h-[16px] drop-shadow-sm" %>
+    <% end %>
   </div>
 </div>
