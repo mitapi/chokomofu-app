@@ -14,17 +14,21 @@
   <meta property="og:image:type" content="image/png">
 <% end %>
 
-<div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px] items-center px-4 py-6">
-  <div class="w-full max-w-[520px]">
-    <div class="text-base font-bold ml-5 mb-2">
-      <%= "#{@mofu_diary.user.nickname}さんの、 #{@mofu_diary.title}" %>
+<div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
+  <div class="flex flex-col w-[600px] h-[865px] md:h-[665px] px-4 py-6 items-center">
+    <div class="w-full max-w-[520px]">
+      <div class="text-base font-bold ml-5 mb-2">
+        <%= "#{@mofu_diary.user.nickname}さんの、 #{@mofu_diary.title}" %>
+      </div>
+
+      <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
+
+      <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
     </div>
 
-    <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
-
-    <% share_url = share_mofu_diary_url(share_token: @mofu_diary.share_token) %>
+    <div class="mt-4">
+      <%= link_to "さあ、ちょこもふを始めてみよう♪", root_path,
+        class: "rounded-md inline-block bg-amber-400 px-4 py-2 font-bold text-white hover:bg-orange-400" %>
+    </div>
   </div>
-
-  <%= link_to "さあ、ちょこもふを始めてみよう♪", root_path,
-    class: "mt-4 rounded-md inline-block bg-amber-400 px-4 py-2 font-bold text-white hover:bg-orange-400" %>
 </div>
