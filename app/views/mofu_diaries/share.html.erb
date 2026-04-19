@@ -14,9 +14,9 @@
   <meta property="og:image:type" content="image/png">
 <% end %>
 
-<div class="w-full min-h-[100dvh] bg-slate-50 flex flex-col items-center px-3 py-4 md:px-4 md:py-6">
+<div class="bg-slate-50 flex flex-col w-[600px] min-h-[700px] md:h-[700px] items-center px-4 py-6">
   <div class="w-full max-w-[520px]">
-    <div class="text-sm md:text-base font-bold ml-3 md:ml-5 mb-2">
+    <div class="text-base font-bold ml-5 mb-2">
       <%= "#{@mofu_diary.user.nickname}さんの、 #{@mofu_diary.title}" %>
     </div>
 
@@ -26,5 +26,5 @@
   </div>
 
   <%= link_to "さあ、ちょこもふを始めてみよう♪", root_path,
-    class: "mt-4 rounded-md inline-block bg-amber-400 px-4 py-2 font-bold text-white hover:bg-orange-400 text-sm md:text-base" %>
+    class: "mt-4 rounded-md inline-block bg-amber-400 px-4 py-2 font-bold text-white hover:bg-orange-400" %>
 </div>
