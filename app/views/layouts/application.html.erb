@@ -64,8 +64,8 @@
       </div>
 
     <% elsif controller_name == "mofu_diaries" && action_name == "share" %>
-      <div class="flex justify-center bg-slate-50">
-        <main class="w-full max-w-[600px] bg-slate-50">
+      <div class="min-h-[100dvh] bg-slate-50 flex items-start md:items-center justify-center overflow-hidden md:overflow-y-auto">
+        <main class="w-[600px] bg-slate-50 origin-top scale-[0.62] md:scale-100">
           <%= yield %>
           <%= render "shared/footer" %>
         </main>
