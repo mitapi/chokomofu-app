@@ -1,33 +1,27 @@
-<div class="relative mx-auto w-[300px] md:w-[520px]">
-  <!-- フレーム画像 -->
+<div class="relative flex items-center justify-center">
   <%= image_tag "diary/frame.png",
-    class: "block w-[300px] md:w-[520px] h-auto select-none pointer-events-none" %>
+    class: "w-full h-[450px] select-none pointer-events-none block" %>
 
-  <div class="absolute inset-0 flex flex-col items-center justify-center px-5 md:px-6 pb-3 md:pb-4">
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 pb-3">
     <div class="flex justify-center">
       <%= image_tag diary_illust_image_path(mofu_diary),
             alt: "ぽめまる",
-            class: "w-[180px] md:w-[400px]" %>
+            class: "w-[400px]" %>
     </div>
 
-    <!-- テキスト -->
-    <div class="mt-4 md:mt-5 w-[180px] md:w-[320px] text-[12px] md:text-[15px] leading-relaxed">
+    <div class="text-[15px] leading-relaxed mt-8">
       <%= mofu_diary.line1 %><br>
       <%= mofu_diary.line2 %>
     </div>
 
-    <!-- 下部情報 -->
-    <div class="mt-3 flex w-[180px] md:w-[320px] items-center justify-between text-[10px] md:text-xs opacity-70">
+    <div class="flex items-center justify-between mt-3 text-xs opacity-70 w-full">
       <div>
-        <!-- diary_id=<%= mofu_diary.id %> -->
-        <!-- user_id=<%= mofu_diary.user_id %> -->
         <%= mofu_diary.date %>
       </div>
 
-      <!-- スタンプ -->
       <div class="flex gap-2">
         <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
-          <%= image_tag p, alt: "天気", class: "w-[20px] h-[12px] md:w-[30px] md:h-[16px] drop-shadow-sm" %>
+          <%= image_tag p, alt: "天気", class: "w-[30px] h-[16px] drop-shadow-sm" %>
         <% end %>
       </div>
     </div>
