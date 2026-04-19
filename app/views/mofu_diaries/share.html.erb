@@ -19,7 +19,7 @@
   <div class="absolute inset-0 flex flex-col items-center justify-center p-4 z-10 pointer-events-auto">
     <div class="relative w-full max-w-[520px] mx-auto">
       <!-- タイトル -->
-      <div class="text-base font-bold ml-5">
+      <div class="text-base font-bold text-center w-[300px] md:w-[520px] mx-auto px-2">
         <%= "#{@mofu_diary.user.nickname}さんの、 #{@mofu_diary.title}" %>
       </div>
       <%= render "mofu_diaries/card", mofu_diary: @mofu_diary %>
