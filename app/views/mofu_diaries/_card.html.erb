@@ -1,27 +1,27 @@
 <div class="relative flex items-center justify-center">
   <%= image_tag "diary/frame.png",
-    class: "w-full h-[450px] select-none pointer-events-none block" %>
+    class: "w-full h-[360px] md:h-[450px] select-none pointer-events-none block" %>
 
-  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 pb-3">
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 pb-3 md:px-5 md:pb-4">
     <div class="flex justify-center">
       <%= image_tag diary_illust_image_path(mofu_diary),
             alt: "ぽめまる",
-            class: "w-[400px]" %>
+            class: "w-[240px] md:w-[400px]" %>
     </div>
 
-    <div class="text-[15px] leading-relaxed mt-8">
+    <div class="text-[12px] md:text-[15px] leading-relaxed mt-4 md:mt-8">
       <%= mofu_diary.line1 %><br>
       <%= mofu_diary.line2 %>
     </div>
 
-    <div class="flex items-center justify-between mt-3 text-xs opacity-70 w-full">
+    <div class="flex items-center justify-between mt-2 md:mt-3 text-[10px] md:text-xs opacity-70 w-full">
       <div>
         <%= mofu_diary.date %>
       </div>
 
       <div class="flex gap-2">
         <% if (p = weather_stamp_path(mofu_diary.weather_slot)) %>
-          <%= image_tag p, alt: "天気", class: "w-[30px] h-[16px] drop-shadow-sm" %>
+          <%= image_tag p, alt: "天気", class: "w-[24px] h-[13px] md:w-[30px] md:h-[16px] drop-shadow-sm" %>
         <% end %>
       </div>
     </div>
