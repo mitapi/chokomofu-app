@@ -1,7 +1,3 @@
-<div class="absolute top-2 left-2 z-[999] rounded bg-white/90 px-2 py-1 text-[10px] text-red-600 shadow">
-  id: <%= @conv&.id %><br>
-  code: <%= @conv&.code %>
-</div>
 <div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
   <% if @empty || @conv.blank? || @character.blank? %>
     <%= render "empty" %>

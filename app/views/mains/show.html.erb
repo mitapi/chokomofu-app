@@ -1,3 +1,11 @@
+<% if @weather_debug.present? %>
+  <div class="fixed bottom-4 right-4 z-50 rounded-lg bg-black/80 text-white text-xs p-3">
+    <div>region: <%= @weather_debug[:region].inspect %></div>
+    <div>lat: <%= @weather_debug[:lat].inspect %></div>
+    <div>lon: <%= @weather_debug[:lon].inspect %></div>
+    <div>weather_slot: <%= @weather_debug[:weather_slot].inspect %></div>
+  </div>
+<% end %>
 <div class="bg-slate-50 flex flex-col w-[600px] h-[900px] md:h-[700px]">
   <div class="flex justify-center items-center relative w-auto z-0 overflow-hidden w-[600px] h-[900px] md:h-[700px]"
        data-controller="snack-base">
