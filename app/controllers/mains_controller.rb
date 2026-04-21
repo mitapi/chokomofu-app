@@ -10,7 +10,8 @@ class MainsController < ApplicationController
     @weather_slot   = current_weather_slot
 
     @character = Character.first!  #あとで選択したキャラを出せるように書き換える！
-
+    
+    # URLの後ろに ?debug_weather=1 を入れることでデバッグできる
     if params[:debug_weather] == "1"
       coords = current_user.region_coords
 
