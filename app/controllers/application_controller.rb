@@ -92,35 +92,26 @@ class ApplicationController < ActionController::Base
   end
 
   def current_weather_slot
-    # region が未設定のユーザー（guest や onboarding 前）では、天気APIを呼んでも座標が取得できず無駄なリクエストになるため、
-    # 早期 return してフォールバック値を返す
-    return :any_weather if current_user.region.blank?
+    Rails.cache.fetch("weather_slot:#{current_user.region}", expires_in: 30.minutes) do
+      begin
+        coords = current_user.region_coords
 
-    # 天気APIは回数制限があるため、地域ごとにキャッシュする
-    # （/main を開くたびに API を叩かないようにする）
-    Rails.cache.fetch("weather_slot:#{current_user.region}", expires_in: 1.hour) do
-      coords = current_user.region_coords
+        result = Weather::FetchCurrentWeather.new(
+          lat: coords[:lat],
+          lon: coords[:lon]
+        ).call
 
-      result = Weather::FetchCurrentWeather.new(
-        lat: coords[:lat],
-        lon: coords[:lon]
-      ).call
+        result.slot
 
-      result.slot
+      rescue => e
+        Rails.logger.error(
+          event: "current_weather_slot_failed",
+          error: e.message
+        )
+
+        :any_weather
+      end
     end
-
-  rescue => e
-    Rails.logger.error(event: "current_weather_slot_failed", error: e.message)
-
-    # API失敗時もキャッシュを書き込む
-    # （失敗のたびにAPIを再試行すると、短時間で429制限に当たるため）
-    Rails.cache.write(
-      "weather_slot:#{current_user.region}",
-      :any_weather,
-      expires_in: 30.minutes
-    )
-
-    :any_weather
   end
 
   # nicknameとtermsがあれば/mainへ

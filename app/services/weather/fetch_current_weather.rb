@@ -10,10 +10,15 @@ class Weather::FetchCurrentWeather
   end
 
   def call
-    data = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do  #(注１)
-      fetch_from_api
+    data = Rails.cache.read(cache_key)
+
+    unless data
+      data = fetch_from_api
+
+      # 成功時だけキャッシュ
+      Rails.cache.write(cache_key, data, expires_in: 30.minutes) if data.present?
     end
-    
+
     Result.new(slot: map_weather_slot(data))
 
   rescue => e
