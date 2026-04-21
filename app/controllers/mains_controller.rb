@@ -12,12 +12,12 @@ class MainsController < ApplicationController
     @character = Character.first!  #あとで選択したキャラを出せるように書き換える！
 
     if params[:debug_weather] == "1"
-      lat, lon = current_user.region_coords
+      coords = current_user.region_coords
 
       @weather_debug = {
         region: current_user.region,
-        lat: lat,
-        lon: lon,
+        lat: coords[:lat],
+        lon: coords[:lon],
         weather_slot: @weather_slot
       }
     end
