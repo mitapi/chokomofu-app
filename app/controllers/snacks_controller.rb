@@ -63,10 +63,15 @@ class SnacksController < ApplicationController
       turbo_stream.update(
         "snack_result",
         partial: "snacks/result",
-        locals: { character: character, snack_type: snack_key, lines: lines, limited: false }
+        locals: {
+          character: character,
+          snack_type: snack_key,
+          lines: lines,
+          limited: false
+        }
       ),
-      turbo_stream.replace(
-      "menu_panel",
+      turbo_stream.update(
+        "menu_panel",
         partial: "snacks/picker",
         locals: {
           snacks: Interaction.snack_types.keys,
