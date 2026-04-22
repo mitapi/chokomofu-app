@@ -17,6 +17,9 @@ export default class extends Controller {
       this.volumeTarget.value = volume
     }
 
+    this.handleVisibilityChange = this.handleVisibilityChange.bind(this)
+    document.addEventListener("visibilitychange", this.handleVisibilityChange)
+
     this.syncState()
 
     if (this.enabled) {
@@ -24,6 +27,10 @@ export default class extends Controller {
     } else {
       this.pause()
     }
+  }
+
+  disconnect() {
+    document.removeEventListener("visibilitychange", this.handleVisibilityChange)
   }
 
   toggle() {
@@ -49,8 +56,15 @@ export default class extends Controller {
     localStorage.setItem("bgmVolume", String(volume))
   }
 
+  handleVisibilityChange() {
+    if (document.hidden) {
+      this.pause()
+    }
+  }
+
   play() {
     if (!this.audio) return
+    if (!this.enabled) return
     if (!this.audio.paused) return
 
     this.audio.play().catch(() => {})
