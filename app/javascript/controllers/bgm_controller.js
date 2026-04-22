@@ -59,6 +59,8 @@ export default class extends Controller {
   handleVisibilityChange() {
     if (document.hidden) {
       this.pause()
+    } else if (this.enabled) {
+      this.play()
     }
   }
 
