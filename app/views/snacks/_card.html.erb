@@ -13,23 +13,27 @@
     <span class="text-[#a58855] text-sm">？</span>
   <% end %>
 
-  <%# ★あげる（カード全体クリック） %>
+  <%# ★あげる %>
   <div class="flex flex-col items-center gap-1">
     <%= image_tag "snacks/icon-#{snack}.png",
           alt: snack,
-          class: "w-[100px] h-[100px]" %>
+          class: "w-[100px] h-[100px] #{'opacity-50' if snack_limited}" %>
+
     <%= button_to give_snack_path(snack_type: snack),
           method: :post,
+          disabled: snack_limited,
           form: {
-            data: {
-              controller: "snack-loading",
-              action: "turbo:submit-start->snack-loading#start turbo:submit-end->snack-loading#end snack:show-base@window->snack-loading#end"
-            }
+            data: (
+              snack_limited ? {} : {
+                controller: "snack-loading",
+                action: "turbo:submit-start->snack-loading#start turbo:submit-end->snack-loading#end snack:show-base@window->snack-loading#end"
+              }
+            )
           },
-          class: "p-0 border-0 bg-transparent" do %>
+          class: "p-0 border-0 bg-transparent disabled:cursor-not-allowed" do %>
       <div
         data-snack-loading-target="text"
-        class="rounded-xl bg-[#fffbf5] hover:bg-[#f5efe6] px-3 py-1 shadow-sm">
+        class="rounded-xl px-3 py-1 shadow-sm #{snack_limited ? 'bg-stone-200 text-stone-500' : 'bg-[#fffbf5] hover:bg-[#f5efe6]'}">
         あげる
       </div>
     <% end %>

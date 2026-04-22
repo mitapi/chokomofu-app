@@ -1,3 +1,6 @@
 <turbo-frame id="menu_panel">
-  <%= render "snacks/picker", snacks: @snacks %>
+  <%= render "snacks/picker",
+      snacks: @snacks,
+      snack_limited: @snack_limited,
+      today_snack_count: @today_snack_count %>
 </turbo-frame>

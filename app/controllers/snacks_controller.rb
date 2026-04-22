@@ -1,9 +1,21 @@
 class SnacksController < ApplicationController
   def picker
     @snacks = Interaction.snack_types.keys
-    render :picker
+
+    user = current_user
+    character = Character.first! # 後で選択中キャラに差し替え
+
+    @today_snack_count = Interaction
+      .where(user: user, character_id: character.id, kind: :snack)
+      .where(happened_at: Time.zone.today.all_day)
+      .count
+
+    @snack_limited = @today_snack_count >= 3
+
+   render :picker
   end
 
+  # 念のためサーバー側のチェックとして残します
   def give
     snack_key = params[:snack_type].to_s
     unless Interaction.snack_types.key?(snack_key)
@@ -12,6 +24,22 @@ class SnacksController < ApplicationController
 
     user = current_user
     character = Character.first! # 後で選択中キャラに差し替え
+
+    today_count = Interaction
+      .where(user: user, character_id: character.id, kind: :snack)
+      .where(happened_at: Time.zone.today.all_day)
+      .count
+
+    if today_count >= 3
+      lines = [
+        { text: "おなかいっぱいだよ", image: "face_idle" }
+      ]
+      return render turbo_stream: turbo_stream.update(
+        "snack_result",
+        partial: "snacks/result",
+        locals: { character: character, snack_type: snack_key, lines: lines, limited: true }
+      )
+    end
 
     Interaction.create!(
       user: user,
