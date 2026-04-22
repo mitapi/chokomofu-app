@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.enabled = localStorage.getItem("bgm") !== "off"
+    this.needsInteraction = false
 
     const savedVolume = parseFloat(localStorage.getItem("bgmVolume"))
     const volume = Number.isFinite(savedVolume) ? savedVolume : 0.1
@@ -34,6 +35,11 @@ export default class extends Controller {
   }
 
   toggle() {
+    if (this.enabled && this.needsInteraction) {
+      this.play()
+      return
+    }
+
     this.enabled = !this.enabled
     localStorage.setItem("bgm", this.enabled ? "on" : "off")
 
@@ -41,9 +47,9 @@ export default class extends Controller {
       this.play()
     } else {
       this.pause()
+      this.needsInteraction = false
+      this.syncState()
     }
-
-    this.syncState()
   }
 
   changeVolume() {
@@ -64,12 +70,19 @@ export default class extends Controller {
     }
   }
 
-  play() {
+  async play() {
     if (!this.audio) return
     if (!this.enabled) return
     if (!this.audio.paused) return
 
-    this.audio.play().catch(() => {})
+    try {
+      await this.audio.play()
+      this.needsInteraction = false
+    } catch (_) {
+      this.needsInteraction = true
+    }
+
+    this.syncState()
   }
 
   pause() {
@@ -79,7 +92,13 @@ export default class extends Controller {
 
   syncState() {
     if (this.hasButtonTarget) {
-      this.buttonTarget.textContent = this.enabled ? "♪ ON" : "♪ OFF"
+      if (!this.enabled) {
+        this.buttonTarget.textContent = "♪ OFF"
+      } else if (this.needsInteraction) {
+        this.buttonTarget.textContent = "♪ TAP"
+      } else {
+        this.buttonTarget.textContent = "♪ ON"
+      }
     }
 
     this.element.classList.toggle("bgm-on", this.enabled)
