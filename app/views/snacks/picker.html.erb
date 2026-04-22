@@ -1,6 +1,6 @@
-<turbo-frame id="menu_panel">
+<%= turbo_frame_tag "menu_panel" do %>
   <%= render "snacks/picker",
-      snacks: @snacks,
-      snack_limited: @snack_limited,
-      today_snack_count: @today_snack_count %>
-</turbo-frame>
+      snacks: local_assigns.fetch(:snacks, @snacks),
+      snack_limited: local_assigns.fetch(:snack_limited, @snack_limited),
+      today_snack_count: local_assigns.fetch(:today_snack_count, @today_snack_count) %>
+<% end %>

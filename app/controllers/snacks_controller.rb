@@ -23,7 +23,7 @@ class SnacksController < ApplicationController
     end
 
     user = current_user
-    character = Character.first! # 後で選択中キャラに差し替え
+    character = Character.first!
 
     today_count = Interaction
       .where(user: user, character_id: character.id, kind: :snack)
@@ -34,6 +34,7 @@ class SnacksController < ApplicationController
       lines = [
         { text: "おなかいっぱいだよ", image: "face_idle" }
       ]
+
       return render turbo_stream: turbo_stream.update(
         "snack_result",
         partial: "snacks/result",
@@ -51,11 +52,29 @@ class SnacksController < ApplicationController
 
     lines = SnackMessageBuilder.new(user: current_user, snack_type: snack_key).lines
 
-    render turbo_stream: turbo_stream.update(
-      "snack_result",
-      partial: "snacks/result",
-      locals: { character: character, snack_type: snack_key, lines: lines, limited: false }
-    )
+    today_snack_count = Interaction
+      .where(user: user, character_id: character.id, kind: :snack)
+      .where(happened_at: Time.zone.today.all_day)
+      .count
+
+    snack_limited = today_snack_count >= 3
+
+    render turbo_stream: [
+      turbo_stream.update(
+        "snack_result",
+        partial: "snacks/result",
+        locals: { character: character, snack_type: snack_key, lines: lines, limited: false }
+      ),
+      turbo_stream.replace(
+      "menu_panel",
+        partial: "snacks/picker",
+        locals: {
+          snacks: Interaction.snack_types.keys,
+          snack_limited: snack_limited,
+          today_snack_count: today_snack_count
+        }
+      )
+    ]
   end
 
   def tip
